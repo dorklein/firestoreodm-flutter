@@ -96,7 +96,6 @@ class CollectionData with Names {
     required DartObject annotation,
     required GlobalData globalData,
   }) {
-    print('annotation: ${annotation}');
     // TODO find a way to test validation
 
     final name = annotation.getField('name')!.toStringValue();

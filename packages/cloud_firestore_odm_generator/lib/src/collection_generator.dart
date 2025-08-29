@@ -102,7 +102,6 @@ class CollectionGenerator
     Element2 element,
   ) async {
     final library = await buildStep.inputLibrary;
-    print('element: ${element}');
     final collectionAnnotations = collectionChecker.annotationsOf(element).map((annotation) {
       return CollectionData.fromAnnotation(
         annotatedElement: element,
@@ -139,8 +138,6 @@ const _sentinel = _Sentinel();
 
   @override
   Iterable<Object> generateForData(GlobalData globalData, CollectionGraph data) sync* {
-    print('data: ${data.allCollections.map((e) => e.collectionReferenceInterfaceName)}');
-
     for (final collection in data.allCollections) {
       yield CollectionReferenceTemplate(collection);
       yield DocumentReferenceTemplate(collection);

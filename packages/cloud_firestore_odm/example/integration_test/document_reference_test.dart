@@ -35,19 +35,13 @@ void main() {
 
         await collection.doc('123').set(createMovie(title: 'title'));
 
-        expect(
-          await collection.doc('123').get().then((e) => e.exists),
-          true,
-        );
+        expect(await collection.doc('123').get().then((e) => e.exists), true);
 
         await FirebaseFirestore.instance.runTransaction((transaction) async {
           collection.doc('123').transactionDelete(transaction);
         });
 
-        expect(
-          await collection.doc('123').get().then((e) => e.exists),
-          false,
-        );
+        expect(await collection.doc('123').get().then((e) => e.exists), false);
       });
 
       test('batch', () async {
@@ -86,11 +80,7 @@ void main() {
             collection.doc(movieToSet).get().then((e) => e.data),
             collection.doc(movieToDelete).get().then((e) => e.exists),
           ]),
-          [
-            updatedTitle,
-            isA<Movie>().having((e) => e.title, newTitle, newTitle),
-            false,
-          ],
+          [updatedTitle, isA<Movie>().having((e) => e.title, newTitle, newTitle), false],
         );
       });
 
@@ -99,24 +89,21 @@ void main() {
 
         await collection.doc('123').set(createMovie(title: 'title'));
 
-        expect(
-          await collection.doc('123').get().then((e) => e.exists),
-          true,
-        );
+        expect(await collection.doc('123').get().then((e) => e.exists), true);
 
         await collection.doc('123').delete();
 
-        expect(
-          await collection.doc('123').get().then((e) => e.exists),
-          false,
-        );
+        expect(await collection.doc('123').get().then((e) => e.exists), false);
       });
 
       test('reference', () async {
         expect(
           MovieCollectionReference().doc('123').reference,
-          isA<DocumentReference<Movie>>()
-              .having((e) => e.path, 'path', 'firestore-example-app/123'),
+          isA<DocumentReference<Movie>>().having(
+            (e) => e.path,
+            'path',
+            'firestore-example-app/123',
+          ),
         );
 
         expect(
@@ -138,11 +125,9 @@ void main() {
 
           expect(
             await collection.doc('123').get(const GetOptions(source: Source.cache)),
-            isA<MovieDocumentSnapshot>().having((e) => e.data?.title, 'data.title', 'title').having(
-                  (e) => e.metadata.isFromCache,
-                  'metadata.isFromCache',
-                  true,
-                ),
+            isA<MovieDocumentSnapshot>()
+                .having((e) => e.data?.title, 'data.title', 'title')
+                .having((e) => e.metadata.isFromCache, 'metadata.isFromCache', true),
           );
         });
       });
@@ -156,8 +141,6 @@ void main() {
           (transaction) => collection.doc('123').transactionGet(transaction),
         );
 
-        print('result.data ${result.data}');
-        print('result.data ${result.data}');
         expect(result.id, '123');
         expect(result.data?.title, 'title');
       });
@@ -188,7 +171,9 @@ void main() {
         test('allows modifying a single property of an object', () async {
           final ref = await initializeTest(moviesRef);
 
-          await ref.doc('123').set(
+          await ref
+              .doc('123')
+              .set(
                 Movie(
                   genre: [],
                   likes: 42,
@@ -245,10 +230,7 @@ void main() {
           );
 
           await FirebaseFirestore.instance.runTransaction((transaction) async {
-            ref.doc('123').transactionSet(
-                  transaction,
-                  createMovie(title: 'Foo'),
-                );
+            ref.doc('123').transactionSet(transaction, createMovie(title: 'Foo'));
           });
 
           expect(
@@ -291,7 +273,9 @@ void main() {
         test('allows modifying only one property of an object', () async {
           final ref = await initializeTest(moviesRef);
 
-          await ref.doc('123').set(
+          await ref
+              .doc('123')
+              .set(
                 Movie(
                   genre: [],
                   likes: 42,
@@ -316,9 +300,7 @@ void main() {
                 .having((e) => e.year, 'year', 0),
           );
 
-          await ref.doc('123').update(
-            genre: ['genre'],
-          );
+          await ref.doc('123').update(genre: ['genre']);
 
           expect(
             await ref.doc('123').get().then((e) => e.data),
@@ -336,7 +318,9 @@ void main() {
         test('can set a property to null', () async {
           final ref = await initializeTest(moviesRef);
 
-          await ref.doc('123').set(
+          await ref
+              .doc('123')
+              .set(
                 Movie(
                   genre: [],
                   likes: 42,
@@ -361,7 +345,9 @@ void main() {
                 .having((e) => e.year, 'year', 0),
           );
 
-          await ref.doc('123').update(
+          await ref
+              .doc('123')
+              .update(
                 // ignore: avoid_redundant_argument_values, false positive
                 genre: null,
               );
@@ -400,14 +386,8 @@ void main() {
 
         await collection.doc('123').set(createMovie(title: 'Foo'));
 
-        expect(
-          await collection.doc().get().then((d) => d.exists),
-          false,
-        );
-        expect(
-          await collection.doc('123').get().then((d) => d.exists),
-          true,
-        );
+        expect(await collection.doc().get().then((d) => d.exists), false);
+        expect(await collection.doc('123').get().then((d) => d.exists), true);
       });
     });
 
@@ -417,37 +397,29 @@ void main() {
 
         await collection.doc('123').set(OptionalJson(42));
 
-        expect(
-          await collection.doc('123').get().then((value) => value.data?.value),
-          42,
-        );
+        expect(await collection.doc('123').get().then((value) => value.data?.value), 42);
       });
 
       test(
-          'if fromJson/toJson are specified, use them even if the model is annotated by JsonSerializable',
-          () async {
-        final collection = await initializeTest(mixedJsonRef);
+        'if fromJson/toJson are specified, use them even if the model is annotated by JsonSerializable',
+        () async {
+          final collection = await initializeTest(mixedJsonRef);
 
-        await collection.doc('123').set(MixedJson(42));
+          await collection.doc('123').set(MixedJson(42));
 
-        final rawSnapshot = await FirebaseFirestore.instance.collection('root').doc('123').get();
+          final rawSnapshot = await FirebaseFirestore.instance.collection('root').doc('123').get();
 
-        expect(rawSnapshot.data(), {'foo': 42});
-        expect(
-          await collection.doc('123').get().then((value) => value.data?.value),
-          42,
-        );
-      });
+          expect(rawSnapshot.data(), {'foo': 42});
+          expect(await collection.doc('123').get().then((value) => value.data?.value), 42);
+        },
+      );
 
       test('overrides ==', () {
         expect(
           MovieCollectionReference().doc('123'),
           MovieCollectionReference(FirebaseFirestore.instance).doc('123'),
         );
-        expect(
-          MovieCollectionReference().doc('123'),
-          isNot(MovieCollectionReference().doc('456')),
-        );
+        expect(MovieCollectionReference().doc('123'), isNot(MovieCollectionReference().doc('456')));
 
         expect(
           MovieCollectionReference(customFirestore).doc('123'),
