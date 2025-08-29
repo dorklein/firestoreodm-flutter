@@ -1,3 +1,6 @@
+## 1.3.0
+- **CHORE**: upgraded packages to support analyzer ^8 and min sdk to 3.8.0
+
 ## 1.2.0
 - **FIX**: `set`, `batchSet` and `transacrtionSet` methods would keep the `@ID() id` in the object in DB. 
 - **CHORE**: Update cloud_firestore to ^6.0.0
