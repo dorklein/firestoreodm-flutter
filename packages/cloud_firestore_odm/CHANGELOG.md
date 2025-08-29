@@ -1,3 +1,6 @@
+## 1.2.0
+- **CHORE**: Update cloud_firestore to ^6.0.0
+
 ## 1.1.0
 
 - **FIX**: Resolve compatibility issues with Freezed 3.0.0 and above

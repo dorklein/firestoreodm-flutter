@@ -110,6 +110,24 @@ class MyModel {...}
 
 Once installed, read the documentation on [defining models](./docs/defining-models.md).
 
+
+## Development
+### Testing
+To run tests, you should have chromedriver install on your system.
+```shell
+./scripts/run-tests.sh
+```
+Note: make sure in `packages/cloud_firestore_odm_generator/pubspec.yaml` to replace
+```
+cloud_firestore_odm: {VERSION}
+```
+with 
+```
+cloud_firestore_odm:
+  path: ../cloud_firestore_odm
+```
+This is required for the tests to run. Set back to correct version before deploying.
+
 ## Issues and feedback
 
 Please file FlutterFire specific issues, bugs, or feature requests in our [issue tracker](https://github.com/firebaseextended/firestoreodm-flutter/issues/new).

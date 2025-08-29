@@ -312,7 +312,11 @@ class _$EnumsDocumentReference
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
 
-    transaction.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    transaction.set(castedReference, json, options);
   }
 
   void batchSet(
@@ -338,7 +342,11 @@ class _$EnumsDocumentReference
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
 
-    batch.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    batch.set(castedReference, json, options);
   }
 
   Future<void> update({
@@ -1303,25 +1311,37 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$EnumsPerFieldToJson.id(startAt as String)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$EnumsPerFieldToJson.id(startAfter as String)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$EnumsPerFieldToJson.id(endAt as String)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$EnumsPerFieldToJson.id(endBefore as String)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1376,25 +1396,37 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$EnumsPerFieldToJson.enumValue(startAt as TestEnum)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$EnumsPerFieldToJson.enumValue(startAfter as TestEnum)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$EnumsPerFieldToJson.enumValue(endAt as TestEnum)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$EnumsPerFieldToJson.enumValue(endBefore as TestEnum)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1449,25 +1481,37 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$EnumsPerFieldToJson.nullableEnumValue(startAt as TestEnum?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$EnumsPerFieldToJson.nullableEnumValue(startAfter as TestEnum?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$EnumsPerFieldToJson.nullableEnumValue(endAt as TestEnum?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$EnumsPerFieldToJson.nullableEnumValue(endBefore as TestEnum?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1522,25 +1566,37 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$EnumsPerFieldToJson.enumList(startAt as List<TestEnum>)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$EnumsPerFieldToJson.enumList(startAfter as List<TestEnum>)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$EnumsPerFieldToJson.enumList(endAt as List<TestEnum>)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$EnumsPerFieldToJson.enumList(endBefore as List<TestEnum>)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1595,25 +1651,37 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$EnumsPerFieldToJson.nullableEnumList(startAt as List<TestEnum>?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$EnumsPerFieldToJson.nullableEnumList(startAfter as List<TestEnum>?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$EnumsPerFieldToJson.nullableEnumList(endAt as List<TestEnum>?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$EnumsPerFieldToJson.nullableEnumList(endBefore as List<TestEnum>?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }

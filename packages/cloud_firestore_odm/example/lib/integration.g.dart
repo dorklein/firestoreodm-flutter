@@ -272,7 +272,11 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    transaction.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    transaction.set(castedReference, json, options);
   }
 
   void batchSet(
@@ -290,7 +294,11 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    batch.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    batch.set(castedReference, json, options);
   }
 
   Future<void> update({
@@ -942,25 +950,37 @@ class _$AdvancedJsonQuery
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$AdvancedJsonPerFieldToJson.firstName(startAt as String?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$AdvancedJsonPerFieldToJson.firstName(startAfter as String?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$AdvancedJsonPerFieldToJson.firstName(endAt as String?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$AdvancedJsonPerFieldToJson.firstName(endBefore as String?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1015,25 +1035,37 @@ class _$AdvancedJsonQuery
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$AdvancedJsonPerFieldToJson.lastName(startAt as String?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$AdvancedJsonPerFieldToJson.lastName(startAfter as String?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$AdvancedJsonPerFieldToJson.lastName(endAt as String?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$AdvancedJsonPerFieldToJson.lastName(endBefore as String?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1406,7 +1438,11 @@ class _$_PrivateAdvancedJsonDocumentReference
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    transaction.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    transaction.set(castedReference, json, options);
   }
 
   void batchSet(
@@ -1424,7 +1460,11 @@ class _$_PrivateAdvancedJsonDocumentReference
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    batch.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    batch.set(castedReference, json, options);
   }
 
   Future<void> update({
@@ -2088,25 +2128,37 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAt as String?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAfter as String?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(endAt as String?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(endBefore as String?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -2162,25 +2214,37 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAt as String?)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAfter as String?)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(endAt as String?)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(endBefore as String?)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }

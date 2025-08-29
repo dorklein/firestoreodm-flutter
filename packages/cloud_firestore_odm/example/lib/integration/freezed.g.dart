@@ -269,7 +269,11 @@ class _$PersonDocumentReference
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    transaction.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    transaction.set(castedReference, json, options);
   }
 
   void batchSet(
@@ -287,7 +291,11 @@ class _$PersonDocumentReference
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
 
-    batch.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    batch.set(castedReference, json, options);
   }
 
   Future<void> update({
@@ -928,25 +936,37 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$PersonPerFieldToJson.firstName(startAt as String)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$PersonPerFieldToJson.firstName(startAfter as String)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$PersonPerFieldToJson.firstName(endAt as String)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$PersonPerFieldToJson.firstName(endBefore as String)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1001,25 +1021,37 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$PersonPerFieldToJson.lastName(startAt as String)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$PersonPerFieldToJson.lastName(startAfter as String)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$PersonPerFieldToJson.lastName(endAt as String)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$PersonPerFieldToJson.lastName(endBefore as String)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -1366,7 +1398,11 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
         _$PublicRedirected2FieldMap['value']!: valueFieldValue,
     };
 
-    transaction.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    transaction.set(castedReference, json, options);
   }
 
   void batchSet(
@@ -1381,7 +1417,11 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
         _$PublicRedirected2FieldMap['value']!: valueFieldValue,
     };
 
-    batch.set(reference, json, options);
+    final castedReference = reference.withConverter<Map<String, dynamic>>(
+      fromFirestore: (snapshot, options) => throw UnimplementedError(),
+      toFirestore: (value, options) => value,
+    );
+    batch.set(castedReference, json, options);
   }
 
   Future<void> update({
@@ -1930,25 +1970,37 @@ class _$PublicRedirectedQuery
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [
+          ...queryCursor.startAt,
+          _$PublicRedirected2PerFieldToJson.value(startAt as String)
+        ],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [
+          ...queryCursor.startAfter,
+          _$PublicRedirected2PerFieldToJson.value(startAfter as String)
+        ],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [
+          ...queryCursor.endAt,
+          _$PublicRedirected2PerFieldToJson.value(endAt as String)
+        ],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [
+          ...queryCursor.endBefore,
+          _$PublicRedirected2PerFieldToJson.value(endBefore as String)
+        ],
         endBeforeDocumentSnapshot: null,
       );
     }

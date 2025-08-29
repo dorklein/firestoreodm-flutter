@@ -1,3 +1,7 @@
+## 1.2.0
+- **FIX**: `set`, `batchSet` and `transacrtionSet` methods would keep the `@ID() id` in the object in DB. 
+- **CHORE**: Update cloud_firestore to ^6.0.0
+
 ## 1.1.0
 
 - **FIX**: Resolve compatibility issues with Freezed 3.0.0 and above

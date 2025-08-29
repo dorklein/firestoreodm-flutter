@@ -49,16 +49,12 @@ void main() {
       expect(b.data?.id, '456');
     });
 
-    test(
-        'When using @Id, set/update do not insert an "id" property in the document',
-        () async {
+    test('When using @Id, set/update do not insert an "id" property in the document', () async {
       final collection = await initializeTest(MovieCollectionReference());
 
       await collection.doc('123').set(createMovie(title: 'a', id: '42'));
 
-      final snapshot = await FirebaseFirestore.instance
-          .doc(collection.doc('123').path)
-          .get();
+      final snapshot = await FirebaseFirestore.instance.doc(collection.doc('123').path).get();
 
       expect(snapshot.data()?.containsKey('id'), false);
     });
@@ -67,8 +63,7 @@ void main() {
       test('reference', () async {
         expect(
           MovieCollectionReference().reference,
-          isA<CollectionReference<Movie>>()
-              .having((e) => e.path, 'path', 'firestore-example-app'),
+          isA<CollectionReference<Movie>>().having((e) => e.path, 'path', 'firestore-example-app'),
         );
 
         expect(
@@ -137,14 +132,12 @@ void main() {
           expect(
             await stream.next,
             isA<MovieQuerySnapshot>().having((e) => e.docs, 'doc', [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((e) => e.data.title, 'data.title', 'title'),
+              isA<MovieQueryDocumentSnapshot>().having((e) => e.data.title, 'data.title', 'title'),
             ]),
           );
         });
 
-        test('emits an error if decoding fails, but keeps listening to updates',
-            () async {
+        test('emits an error if decoding fails, but keeps listening to updates', () async {
           final collection = await initializeTest(MovieCollectionReference());
 
           await FirebaseFirestore.instance
@@ -185,8 +178,7 @@ void main() {
       });
 
       group('doc', () {
-        test('generates a custom ID for documents if none is specified',
-            () async {
+        test('generates a custom ID for documents if none is specified', () async {
           final collection = await initializeTest(MovieCollectionReference());
 
           final doc = collection.doc();
@@ -200,10 +192,7 @@ void main() {
         test('can specify a custom ID to obtain an existing doc', () async {
           final collection = await initializeTest(MovieCollectionReference());
 
-          await FirebaseFirestore.instance
-              .collection('firestore-example-app')
-              .doc('123')
-              .set(
+          await FirebaseFirestore.instance.collection('firestore-example-app').doc('123').set(
                 MovieCollectionReference.toFirestore(
                   createMovie(title: 'title'),
                   null,
@@ -217,8 +206,7 @@ void main() {
 
           expect(
             await doc.get(),
-            isA<MovieDocumentSnapshot>()
-                .having((e) => e.data?.title, 'data.title', 'title'),
+            isA<MovieDocumentSnapshot>().having((e) => e.data?.title, 'data.title', 'title'),
           );
         });
       });
@@ -256,16 +244,14 @@ void main() {
           stream,
           emits(
             isA<MovieQuerySnapshot>().having((e) => e.docs, 'doc', [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((e) => e.data.title, 'data.title', 'Foo'),
+              isA<MovieQueryDocumentSnapshot>().having((e) => e.data.title, 'data.title', 'Foo'),
             ]),
           ),
         );
 
         expect(
           await newDoc.get(),
-          isA<MovieDocumentSnapshot>()
-              .having((e) => e.data?.title, 'data.title', 'Foo'),
+          isA<MovieDocumentSnapshot>().having((e) => e.data?.title, 'data.title', 'Foo'),
         );
       });
 
@@ -282,10 +268,8 @@ void main() {
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'A'),
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'B'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'A'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
             ],
           );
         });
@@ -299,16 +283,13 @@ void main() {
 
           final bSnap = await b.get();
 
-          final querySnap =
-              await collection.orderByTitle(endAtDocument: bSnap).get();
+          final querySnap = await collection.orderByTitle(endAtDocument: bSnap).get();
 
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'A'),
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'B'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'A'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
             ],
           );
         });
@@ -327,10 +308,8 @@ void main() {
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'A'),
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'B'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'A'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
             ],
           );
         });
@@ -344,14 +323,12 @@ void main() {
 
           final bSnap = await b.get();
 
-          final querySnap =
-              await collection.orderByTitle(endBeforeDocument: bSnap).get();
+          final querySnap = await collection.orderByTitle(endBeforeDocument: bSnap).get();
 
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'A'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'A'),
             ],
           );
         });
@@ -455,20 +432,15 @@ void main() {
             ),
           );
 
-          final querySnap = await collection
-              .whereGenre(arrayContains: 'bar')
-              .orderByTitle()
-              .get();
+          final querySnap = await collection.whereGenre(arrayContains: 'bar').orderByTitle().get();
 
           expect(
             querySnap.docs.map((e) => e.data.title),
             ['B', 'C'],
           );
 
-          final querySnap2 = await collection
-              .whereTags(arrayContains: 'serious')
-              .orderByTitle()
-              .get();
+          final querySnap2 =
+              await collection.whereTags(arrayContains: 'serious').orderByTitle().get();
 
           expect(
             querySnap2.docs.map((e) => e.data.title),
@@ -506,8 +478,7 @@ void main() {
           await collection.doc('B').set(createMovie(title: 'title'));
           await collection.doc('C').set(createMovie(title: 'title'));
 
-          final querySnap =
-              await collection.orderByDocumentId(startAt: 'B').get();
+          final querySnap = await collection.orderByDocumentId(startAt: 'B').get();
 
           expect(
             querySnap.docs,
@@ -525,8 +496,7 @@ void main() {
           await collection.doc('B').set(createMovie(title: 'title'));
           await collection.doc('C').set(createMovie(title: 'title'));
 
-          final querySnap =
-              await collection.whereDocumentId(isEqualTo: 'B').get();
+          final querySnap = await collection.whereDocumentId(isEqualTo: 'B').get();
 
           expect(
             querySnap.docs,
@@ -539,15 +509,11 @@ void main() {
 
       group('where', () {
         test('supports field renaming', () async {
-          final collection =
-              await initializeTest(AdvancedJsonCollectionReference());
+          final collection = await initializeTest(AdvancedJsonCollectionReference());
 
-          await collection
-              .add(AdvancedJson(firstName: 'John', lastName: 'Doe'));
-          await collection
-              .add(AdvancedJson(firstName: 'John', lastName: 'Smith'));
-          await collection
-              .add(AdvancedJson(firstName: 'Mike', lastName: 'Doe'));
+          await collection.add(AdvancedJson(firstName: 'John', lastName: 'Doe'));
+          await collection.add(AdvancedJson(firstName: 'John', lastName: 'Smith'));
+          await collection.add(AdvancedJson(firstName: 'Mike', lastName: 'Doe'));
 
           expect(
             await collection.reference
@@ -589,16 +555,12 @@ void main() {
 
       group('orderBy', () {
         test('supports field renaming', () async {
-          final collection =
-              await initializeTest(AdvancedJsonCollectionReference());
+          final collection = await initializeTest(AdvancedJsonCollectionReference());
 
           await collection.add(AdvancedJson(firstName: 'A', lastName: 'A'));
-          await collection
-              .add(AdvancedJson(firstName: 'John', lastName: 'Doe'));
-          await collection
-              .add(AdvancedJson(firstName: 'John', lastName: 'Smith'));
-          await collection
-              .add(AdvancedJson(firstName: 'Mike', lastName: 'Doe'));
+          await collection.add(AdvancedJson(firstName: 'John', lastName: 'Doe'));
+          await collection.add(AdvancedJson(firstName: 'John', lastName: 'Smith'));
+          await collection.add(AdvancedJson(firstName: 'Mike', lastName: 'Doe'));
 
           expect(
             await collection.reference
@@ -646,10 +608,8 @@ void main() {
             expect(
               querySnap.docs,
               [
-                isA<MovieQueryDocumentSnapshot>()
-                    .having((d) => d.data.title, 'data.title', 'B'),
-                isA<MovieQueryDocumentSnapshot>()
-                    .having((d) => d.data.title, 'data.title', 'C'),
+                isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
+                isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'C'),
               ],
             );
           },
@@ -668,10 +628,8 @@ void main() {
             await collection.add(createMovie(title: 'C', likes: 1));
             await collection.add(createMovie(title: 'C', likes: 2));
 
-            final querySnap = await collection
-                .orderByTitle(startAt: 'B')
-                .orderByLikes(startAt: 2)
-                .get();
+            final querySnap =
+                await collection.orderByTitle(startAt: 'B').orderByLikes(startAt: 2).get();
 
             expect(
               querySnap.docs,
@@ -700,16 +658,13 @@ void main() {
 
           final bSnap = await b.get();
 
-          final querySnap =
-              await collection.orderByTitle(startAtDocument: bSnap).get();
+          final querySnap = await collection.orderByTitle(startAtDocument: bSnap).get();
 
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'B'),
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'C'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'C'),
             ],
           );
         });
@@ -723,14 +678,12 @@ void main() {
           await collection.add(createMovie(title: 'B'));
           await collection.add(createMovie(title: 'C'));
 
-          final querySnap =
-              await collection.orderByTitle(startAfter: 'B').get();
+          final querySnap = await collection.orderByTitle(startAfter: 'B').get();
 
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'C'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'C'),
             ],
           );
         });
@@ -744,14 +697,12 @@ void main() {
 
           final bSnap = await b.get();
 
-          final querySnap =
-              await collection.orderByTitle(startAfterDocument: bSnap).get();
+          final querySnap = await collection.orderByTitle(startAfterDocument: bSnap).get();
 
           expect(
             querySnap.docs,
             [
-              isA<MovieQueryDocumentSnapshot>()
-                  .having((d) => d.data.title, 'data.title', 'C'),
+              isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'C'),
             ],
           );
         });
@@ -769,10 +720,8 @@ void main() {
         expect(
           querySnap.docs,
           [
-            isA<MovieQueryDocumentSnapshot>()
-                .having((d) => d.data.title, 'data.title', 'A'),
-            isA<MovieQueryDocumentSnapshot>()
-                .having((d) => d.data.title, 'data.title', 'B'),
+            isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'A'),
+            isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
           ],
         );
       });
@@ -789,10 +738,8 @@ void main() {
         expect(
           querySnap.docs,
           [
-            isA<MovieQueryDocumentSnapshot>()
-                .having((d) => d.data.title, 'data.title', 'B'),
-            isA<MovieQueryDocumentSnapshot>()
-                .having((d) => d.data.title, 'data.title', 'C'),
+            isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'B'),
+            isA<MovieQueryDocumentSnapshot>().having((d) => d.data.title, 'data.title', 'C'),
           ],
         );
       });
@@ -956,9 +903,7 @@ void main() {
       test('overrides ==', () {
         expect(
           MovieCollectionReference().doc('123').comments,
-          MovieCollectionReference(FirebaseFirestore.instance)
-              .doc('123')
-              .comments,
+          MovieCollectionReference(FirebaseFirestore.instance).doc('123').comments,
         );
         expect(
           MovieCollectionReference().doc('123').comments,
@@ -985,11 +930,10 @@ void main() {
       await collection.add(Enums(id: 'B', enumValue: TestEnum.two));
       await collection.add(Enums(id: 'C', enumValue: TestEnum.two));
 
-      final querySnap =
-          await collection.whereEnumValue(isEqualTo: TestEnum.two).get();
+      final querySnap = await collection.whereEnumValue(isEqualTo: TestEnum.two).get();
 
       expect(
-        querySnap.docs.map((e) => e.data.id),
+        (querySnap.docs.map((e) => e.data.id).toList()..sort()),
         ['B', 'C'],
       );
     });
@@ -1001,12 +945,10 @@ void main() {
       await collection.add(Enums(id: 'B', nullableEnumValue: TestEnum.two));
       await collection.add(Enums(id: 'C', nullableEnumValue: TestEnum.two));
 
-      final querySnap = await collection
-          .whereNullableEnumValue(isEqualTo: TestEnum.two)
-          .get();
+      final querySnap = await collection.whereNullableEnumValue(isEqualTo: TestEnum.two).get();
 
       expect(
-        querySnap.docs.map((e) => e.data.id),
+        (querySnap.docs.map((e) => e.data.id).toList()..sort()),
         ['B', 'C'],
       );
     });
@@ -1014,18 +956,14 @@ void main() {
     test('enumList', () async {
       final collection = await initializeTest(EnumsCollectionReference());
 
-      await collection
-          .add(Enums(id: 'A', enumList: [TestEnum.one, TestEnum.three]));
-      await collection
-          .add(Enums(id: 'B', enumList: [TestEnum.two, TestEnum.three]));
-      await collection
-          .add(Enums(id: 'C', enumList: [TestEnum.two, TestEnum.three]));
+      await collection.add(Enums(id: 'A', enumList: [TestEnum.one, TestEnum.three]));
+      await collection.add(Enums(id: 'B', enumList: [TestEnum.two, TestEnum.three]));
+      await collection.add(Enums(id: 'C', enumList: [TestEnum.two, TestEnum.three]));
 
-      final querySnap =
-          await collection.whereEnumList(arrayContains: TestEnum.two).get();
+      final querySnap = await collection.whereEnumList(arrayContains: TestEnum.two).get();
 
       expect(
-        querySnap.docs.map((e) => e.data.id),
+        (querySnap.docs.map((e) => e.data.id).toList()..sort()),
         ['B', 'C'],
       );
     });
@@ -1043,12 +981,10 @@ void main() {
         Enums(id: 'C', nullableEnumList: [TestEnum.two, TestEnum.three]),
       );
 
-      final querySnap = await collection
-          .whereNullableEnumList(arrayContains: TestEnum.two)
-          .get();
+      final querySnap = await collection.whereNullableEnumList(arrayContains: TestEnum.two).get();
 
       expect(
-        querySnap.docs.map((e) => e.data.id),
+        (querySnap.docs.map((e) => e.data.id).toList()..sort()),
         ['B', 'C'],
       );
     });

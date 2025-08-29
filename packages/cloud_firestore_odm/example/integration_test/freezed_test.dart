@@ -2,12 +2,21 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm_example/integration/freezed.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'common.dart';
+import 'firebase_options.dart';
 
 void main() {
+  setUpAll(() async {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+  });
   test('supports field renaming', () async {
     final collection = await initializeTest(PersonCollectionReference());
 
@@ -55,12 +64,13 @@ void main() {
     await aRef.update(firstName: 'A2', lastName: 'B2');
 
     expect(
-      await aRef.reference
-          .withConverter<Map<String, dynamic>>(
-            fromFirestore: (value, _) => value.data()!,
-            toFirestore: (value, _) => value,
-          )
-          .get(),
+      (await aRef.reference
+              .withConverter<Map<String, dynamic>>(
+                fromFirestore: (value, _) => value.data()!,
+                toFirestore: (value, _) => value,
+              )
+              .get())
+          .data(),
       {
         'first_name': 'A2',
         'LAST_NAME': 'B2',

@@ -21,8 +21,7 @@ void main() {
         final snapshot = await collection.get();
 
         expect(snapshot.docs, [
-          isA<ExplicitPathQueryDocumentSnapshot>()
-              .having((e) => e.data.value, 'data.value', 42),
+          isA<ExplicitPathQueryDocumentSnapshot>().having((e) => e.data.value, 'data.value', 42),
         ]);
       });
 
@@ -36,8 +35,7 @@ void main() {
         final snapshot = await collection.get();
 
         expect(snapshot.docs, [
-          isA<ExplicitSubPathQueryDocumentSnapshot>()
-              .having((e) => e.data.value, 'data.value', 42),
+          isA<ExplicitSubPathQueryDocumentSnapshot>().having((e) => e.data.value, 'data.value', 42),
         ]);
       });
     });
@@ -53,15 +51,12 @@ void main() {
         final snapshot = await collection.get();
 
         expect(snapshot.docs, [
-          isA<AsCamelCaseQueryDocumentSnapshot>()
-              .having((e) => e.data.value, 'data.value', 42),
+          isA<AsCamelCaseQueryDocumentSnapshot>().having((e) => e.data.value, 'data.value', 42),
         ]);
       });
 
-      test('can be manually specified through the Collection annotation',
-          () async {
-        final collection =
-            await initializeTest(rootRef.doc('123').thisIsACustomName);
+      test('can be manually specified through the Collection annotation', () async {
+        final collection = await initializeTest(rootRef.doc('123').thisIsACustomName);
 
         await FirebaseFirestore.instance
             .collection('root/123/custom-sub-name')
@@ -70,18 +65,15 @@ void main() {
         final snapshot = await collection.get();
 
         expect(snapshot.docs, [
-          isA<CustomSubNameQueryDocumentSnapshot>()
-              .having((e) => e.data.value, 'data.value', 42),
+          isA<CustomSubNameQueryDocumentSnapshot>().having((e) => e.data.value, 'data.value', 42),
         ]);
       });
     });
   });
 
   group('collection class prefix', () {
-    test('can be manually specified through the Collection annotation',
-        () async {
-      final collection =
-          await initializeTest(rootRef.doc('123').customClassPrefix);
+    test('can be manually specified through the Collection annotation', () async {
+      final collection = await initializeTest(rootRef.doc('123').customClassPrefix);
 
       await FirebaseFirestore.instance
           .collection('root/123/custom-class-prefix')
@@ -90,8 +82,7 @@ void main() {
       final snapshot = await collection.get();
 
       expect(snapshot.docs, [
-        isA<ThisIsACustomPrefixDocumentSnapshot>()
-            .having((e) => e.data?.value, 'data.value', 42),
+        isA<ThisIsACustomPrefixDocumentSnapshot>().having((e) => e.data?.value, 'data.value', 42),
       ]);
     });
   });

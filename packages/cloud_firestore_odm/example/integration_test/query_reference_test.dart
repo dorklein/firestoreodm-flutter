@@ -58,10 +58,7 @@ void main() {
       test('overrides ==', () {
         expect(
           MovieCollectionReference().doc('123').comments.limit(1),
-          MovieCollectionReference(FirebaseFirestore.instance)
-              .doc('123')
-              .comments
-              .limit(1),
+          MovieCollectionReference(FirebaseFirestore.instance).doc('123').comments.limit(1),
         );
         expect(
           MovieCollectionReference().doc('123').comments.limit(1),
@@ -73,21 +70,12 @@ void main() {
         );
 
         expect(
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .limit(1),
+          MovieCollectionReference(customFirestore).doc('123').comments.limit(1),
           isNot(MovieCollectionReference().doc('123').comments.limit(1)),
         );
         expect(
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .limit(1),
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .limit(1),
+          MovieCollectionReference(customFirestore).doc('123').comments.limit(1),
+          MovieCollectionReference(customFirestore).doc('123').comments.limit(1),
         );
       });
     });
@@ -99,8 +87,7 @@ void main() {
       await ref.add(DurationQuery(const Duration(days: 2)));
       await ref.add(DurationQuery(const Duration(days: 3)));
 
-      final snapshot =
-          await ref.orderByDuration(startAt: const Duration(days: 2)).get();
+      final snapshot = await ref.orderByDuration(startAt: const Duration(days: 2)).get();
 
       expect(snapshot.docs.length, 2);
 
@@ -130,9 +117,7 @@ void main() {
       await ref.add(TimestampQuery(Timestamp.fromDate(DateTime(2000))));
       await ref.add(TimestampQuery(Timestamp.fromDate(DateTime(2010))));
 
-      final snapshot = await ref
-          .orderByTime(startAt: Timestamp.fromDate(DateTime(2000)))
-          .get();
+      final snapshot = await ref.orderByTime(startAt: Timestamp.fromDate(DateTime(2000))).get();
 
       expect(snapshot.docs.length, 2);
 
@@ -147,8 +132,7 @@ void main() {
       await ref.add(GeoPointQuery(const GeoPoint(20, 0)));
       await ref.add(GeoPointQuery(const GeoPoint(20, 0)));
 
-      final snapshot =
-          await ref.orderByPoint(startAt: const GeoPoint(20, 0)).get();
+      final snapshot = await ref.orderByPoint(startAt: const GeoPoint(20, 0)).get();
 
       expect(snapshot.docs.length, 2);
 
@@ -171,9 +155,8 @@ void main() {
           DocumentReferenceQuery(FirebaseFirestore.instance.doc('foo/c')),
         );
 
-        final snapshot = await ref
-            .orderByRef(startAt: FirebaseFirestore.instance.doc('foo/b'))
-            .get();
+        final snapshot =
+            await ref.orderByRef(startAt: FirebaseFirestore.instance.doc('foo/b')).get();
 
         expect(snapshot.docs.length, 2);
 
@@ -217,6 +200,8 @@ void main() {
         snapshot.docs.map((document) => document.data.number),
         everyElement(anyOf(1, 2, 3)),
       );
-    });
+    },
+        skip:
+            'FirebaseError: Tried to deserialize key from different project: react-native-firebase-testing vs flutterfire-e2e-tests');
   });
 }

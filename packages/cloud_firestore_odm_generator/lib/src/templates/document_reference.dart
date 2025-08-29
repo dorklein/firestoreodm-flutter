@@ -193,11 +193,27 @@ void batchSet(
       fieldValuesNullable: true,
     );
     final fieldValuesJson = _json(data, includeFields: false);
+
     final json = '''
 {
   ...${data.toJson('model')},
   $fieldValuesJson
 }''';
+
+    final idKey = data.idKey;
+
+    String toFirestoreBody;
+    if (idKey != null) {
+      toFirestoreBody = "value..remove('$idKey')";
+    } else {
+      toFirestoreBody = 'value';
+    }
+
+    final castedReferenceStr = '''
+reference.withConverter<Map<String, dynamic>>(
+  fromFirestore: (snapshot, options) => throw UnimplementedError(),
+  toFirestore: (value, options) => $toFirestoreBody,
+)''';
 
     return '''
 Future<void> set(
@@ -207,10 +223,7 @@ Future<void> set(
 }) async {
   final json = $json;
 
-  final castedReference = reference.withConverter<Map<String, dynamic>>(
-    fromFirestore: (snapshot, options) => throw UnimplementedError(),
-    toFirestore: (value, options) => value,
-  );
+  final castedReference = $castedReferenceStr;
   return castedReference.set(json, options);
 }
 
@@ -222,7 +235,8 @@ void transactionSet(
 }) {
   final json = $json;
 
-  transaction.set(reference, json, options);
+  final castedReference = $castedReferenceStr;
+  transaction.set(castedReference, json, options);
 }
 
 void batchSet(
@@ -233,7 +247,8 @@ void batchSet(
 }) {
   final json = $json;
 
-  batch.set(reference, json, options);
+  final castedReference = $castedReferenceStr;
+  batch.set(castedReference, json, options);
 }
 ''';
   }

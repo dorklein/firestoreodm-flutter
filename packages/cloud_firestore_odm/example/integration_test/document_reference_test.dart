@@ -137,12 +137,8 @@ void main() {
           await collection.doc('123').get();
 
           expect(
-            await collection
-                .doc('123')
-                .get(const GetOptions(source: Source.cache)),
-            isA<MovieDocumentSnapshot>()
-                .having((e) => e.data?.title, 'data.title', 'title')
-                .having(
+            await collection.doc('123').get(const GetOptions(source: Source.cache)),
+            isA<MovieDocumentSnapshot>().having((e) => e.data?.title, 'data.title', 'title').having(
                   (e) => e.metadata.isFromCache,
                   'metadata.isFromCache',
                   true,
@@ -160,6 +156,8 @@ void main() {
           (transaction) => collection.doc('123').transactionGet(transaction),
         );
 
+        print('result.data ${result.data}');
+        print('result.data ${result.data}');
         expect(result.id, '123');
         expect(result.data?.title, 'title');
       });
@@ -172,8 +170,7 @@ void main() {
 
           expect(
             await stream.next,
-            isA<MovieDocumentSnapshot>()
-                .having((e) => e.exists, 'exists', false),
+            isA<MovieDocumentSnapshot>().having((e) => e.exists, 'exists', false),
           );
 
           await collection.doc('123').set(createMovie(title: 'title'));
@@ -256,9 +253,7 @@ void main() {
 
           expect(
             await ref.doc('123').get().then((e) => e.data),
-            isA<Movie>()
-                .having((e) => e.rated, 'rated', '')
-                .having((e) => e.title, 'title', 'Foo'),
+            isA<Movie>().having((e) => e.rated, 'rated', '').having((e) => e.title, 'title', 'Foo'),
           );
         });
       });
@@ -286,12 +281,9 @@ void main() {
           );
         });
 
-        test('asserts that we cannot specify both FieldValue and normal value',
-            () async {
+        test('asserts that we cannot specify both FieldValue and normal value', () async {
           expect(
-            () => moviesRef
-                .doc('123')
-                .update(likes: 10, likesFieldValue: FieldValue.increment(10)),
+            () => moviesRef.doc('123').update(likes: 10, likesFieldValue: FieldValue.increment(10)),
             throwsAssertionError,
           );
         });
@@ -420,9 +412,7 @@ void main() {
     });
 
     group('root document reference', () {
-      test(
-          'can make fromJson optional if model is annotated by JsonSerializable',
-          () async {
+      test('can make fromJson optional if model is annotated by JsonSerializable', () async {
         final collection = await initializeTest(optionalJsonRef);
 
         await collection.doc('123').set(OptionalJson(42));
@@ -440,10 +430,7 @@ void main() {
 
         await collection.doc('123').set(MixedJson(42));
 
-        final rawSnapshot = await FirebaseFirestore.instance
-            .collection('root')
-            .doc('123')
-            .get();
+        final rawSnapshot = await FirebaseFirestore.instance.collection('root').doc('123').get();
 
         expect(rawSnapshot.data(), {'foo': 42});
         expect(
@@ -477,10 +464,7 @@ void main() {
       test('overrides ==', () {
         expect(
           MovieCollectionReference().doc('123').comments.doc('123'),
-          MovieCollectionReference(FirebaseFirestore.instance)
-              .doc('123')
-              .comments
-              .doc('123'),
+          MovieCollectionReference(FirebaseFirestore.instance).doc('123').comments.doc('123'),
         );
         expect(
           MovieCollectionReference().doc('123').comments.doc('123'),
@@ -492,21 +476,12 @@ void main() {
         );
 
         expect(
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .doc('123'),
+          MovieCollectionReference(customFirestore).doc('123').comments.doc('123'),
           isNot(MovieCollectionReference().doc('123').comments.doc('123')),
         );
         expect(
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .doc('123'),
-          MovieCollectionReference(customFirestore)
-              .doc('123')
-              .comments
-              .doc('123'),
+          MovieCollectionReference(customFirestore).doc('123').comments.doc('123'),
+          MovieCollectionReference(customFirestore).doc('123').comments.doc('123'),
         );
       });
     });

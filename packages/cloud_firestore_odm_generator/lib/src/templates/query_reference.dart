@@ -149,6 +149,12 @@ class ${data.queryReferenceImplName}
         if (field.name == 'fieldPath') '${field.type} fieldPath,',
       ].join();
 
+      String withToJson(String arg) {
+        return field.name == 'documentId' || field.name == 'fieldPath'
+            ? arg
+            : '${data.perFieldToJson(field.name)}($arg as ${field.type})';
+      }
+
       buffer.writeln(
         '''
   @override
@@ -193,25 +199,25 @@ class ${data.queryReferenceImplName}
 
     if (startAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAt: [...queryCursor.startAt, startAt],
+        startAt: [...queryCursor.startAt, ${withToJson('startAt')}],
         startAtDocumentSnapshot: null,
       );
     }
     if (startAfter != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        startAfter: [...queryCursor.startAfter, startAfter],
+        startAfter: [...queryCursor.startAfter, ${withToJson('startAfter')}],
         startAfterDocumentSnapshot: null,
       );
     }
     if (endAt != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endAt: [...queryCursor.endAt, endAt],
+        endAt: [...queryCursor.endAt, ${withToJson('endAt')}],
         endAtDocumentSnapshot: null,
       );
     }
     if (endBefore != _sentinel) {
       queryCursor = queryCursor.copyWith(
-        endBefore: [...queryCursor.endBefore, endBefore],
+        endBefore: [...queryCursor.endBefore, ${withToJson('endBefore')}],
         endBeforeDocumentSnapshot: null,
       );
     }
@@ -238,14 +244,12 @@ class ${data.queryReferenceImplName}
         (match) => match.group(0)!.toUpperCase(),
       );
 
-      final nullableType =
-          field.type.nullabilitySuffix == NullabilitySuffix.question
-              ? '${field.type}'
-              : '${field.type}?';
+      final nullableType = field.type.nullabilitySuffix == NullabilitySuffix.question
+          ? '${field.type}'
+          : '${field.type}?';
 
       final nullableWhereType = _WherePrototype.plain(nullableType);
-      final sentinelObjectWhereType =
-          _WherePrototype.plain('Object?', '_sentinel');
+      final sentinelObjectWhereType = _WherePrototype.plain('Object?', '_sentinel');
       final objectWhereType = _WherePrototype.plain('Object?');
 
       final perFieldToJson = data.perFieldToJson(field.name);
@@ -322,10 +326,7 @@ class ${data.queryReferenceImplName}
             map: (name) {
               final itemType = field.name == 'fieldPath'
                   ? field.type.toString()
-                  : (field.type as InterfaceType)
-                      .typeArguments
-                      .first
-                      .toString();
+                  : (field.type as InterfaceType).typeArguments.first.toString();
               final cast = itemType != 'Object?' ? ' as $itemType' : '';
 
               var transform = '$name != null ? ($perFieldToJson(';
@@ -339,8 +340,7 @@ class ${data.queryReferenceImplName}
           ),
           'arrayContainsAny': _WhereMapper(
             prototype: nullableWhereType,
-            map: (name) =>
-                '$name != null ? $perFieldToJson($name) as Iterable<Object>? : null',
+            map: (name) => '$name != null ? $perFieldToJson($name) as Iterable<Object>? : null',
           ),
         } else if (!field.type.isSupportedIterable) ...{
           'whereIn': inMapper,
@@ -354,8 +354,7 @@ class ${data.queryReferenceImplName}
         ),
       };
 
-      final prototype =
-          operators.entries.map((e) => e.value.prototype.call(e.key)).join();
+      final prototype = operators.entries.map((e) => e.value.prototype.call(e.key)).join();
 
       final parameters = operators.entries.map((entry) {
         final key = entry.key;

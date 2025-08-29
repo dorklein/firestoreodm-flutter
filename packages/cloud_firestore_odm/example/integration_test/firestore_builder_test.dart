@@ -23,8 +23,7 @@ void main() {
 
               return ListView(
                 children: [
-                  for (final doc in snapshot.requireData.docs)
-                    Text(doc.data.title),
+                  for (final doc in snapshot.requireData.docs) Text(doc.data.title),
                 ],
               );
             },
@@ -49,7 +48,7 @@ void main() {
       );
     }
 
-    group('$FirestoreBuilder', () {
+    group('FirestoreBuilder', () {
       testWidgets('listens to documents', (tester) async {
         final collection = await initializeTest(MovieCollectionReference());
 
@@ -69,8 +68,7 @@ void main() {
         expect(find.text('Foo'), findsOneWidget);
       });
 
-      testWidgets('emits errored snapshot when failed to decode a value',
-          (tester) async {
+      testWidgets('emits errored snapshot when failed to decode a value', (tester) async {
         final collection = await initializeTest(MovieCollectionReference());
 
         await FirebaseFirestore.instance
@@ -146,8 +144,7 @@ void main() {
         expect(find.text('A'), findsOneWidget);
         expect(find.text('B'), findsOneWidget);
       });
-      testWidgets(
-          'does not go back to loading if rebuilding the widget with the same query',
+      testWidgets('does not go back to loading if rebuilding the widget with the same query',
           (tester) async {
         final collection = await initializeTest(MovieCollectionReference());
 
