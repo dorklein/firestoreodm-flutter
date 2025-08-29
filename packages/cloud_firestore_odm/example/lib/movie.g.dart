@@ -26,9 +26,8 @@ abstract class MovieCollectionReference
     implements
         MovieQuery,
         FirestoreCollectionReference<Movie, MovieQuerySnapshot> {
-  factory MovieCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$MovieCollectionReference;
+  factory MovieCollectionReference([FirebaseFirestore? firestore]) =
+      _$MovieCollectionReference;
 
   static Movie fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -37,10 +36,7 @@ abstract class MovieCollectionReference
     return _$MovieFromJson({'id': snapshot.id, ...?snapshot.data()});
   }
 
-  static Map<String, Object?> toFirestore(
-    Movie value,
-    SetOptions? options,
-  ) {
+  static Map<String, Object?> toFirestore(Movie value, SetOptions? options) {
     return {..._$MovieToJson(value)}..remove('id');
   }
 
@@ -61,16 +57,17 @@ class _$MovieCollectionReference extends _$MovieQuery
     firestore ??= FirebaseFirestore.instance;
 
     return _$MovieCollectionReference._(
-      firestore.collection('firestore-example-app').withConverter(
+      firestore
+          .collection('firestore-example-app')
+          .withConverter(
             fromFirestore: MovieCollectionReference.fromFirestore,
             toFirestore: MovieCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$MovieCollectionReference._(
-    CollectionReference<Movie> reference,
-  ) : super(reference, $referenceWithoutCursor: reference);
+  _$MovieCollectionReference._(CollectionReference<Movie> reference)
+    : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -84,9 +81,7 @@ class _$MovieCollectionReference extends _$MovieQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return MovieDocumentReference(
-      reference.doc(id),
-    );
+    return MovieDocumentReference(reference.doc(id));
   }
 
   @override
@@ -311,13 +306,20 @@ class _$MovieDocumentReference
       ..._$MovieToJson(model),
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -345,13 +347,20 @@ class _$MovieDocumentReference
       ..._$MovieToJson(model),
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -379,13 +388,20 @@ class _$MovieDocumentReference
       ..._$MovieToJson(model),
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -448,34 +464,53 @@ class _$MovieDocumentReference
     );
     final json = {
       if (poster != _sentinel)
-        _$MovieFieldMap['poster']!:
-            _$MoviePerFieldToJson.poster(poster as String),
+        _$MovieFieldMap['poster']!: _$MoviePerFieldToJson.poster(
+          poster as String,
+        ),
+
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likes != _sentinel)
         _$MovieFieldMap['likes']!: _$MoviePerFieldToJson.likes(likes as int),
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (title != _sentinel)
         _$MovieFieldMap['title']!: _$MoviePerFieldToJson.title(title as String),
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (year != _sentinel)
         _$MovieFieldMap['year']!: _$MoviePerFieldToJson.year(year as int),
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtime != _sentinel)
-        _$MovieFieldMap['runtime']!:
-            _$MoviePerFieldToJson.runtime(runtime as String),
+        _$MovieFieldMap['runtime']!: _$MoviePerFieldToJson.runtime(
+          runtime as String,
+        ),
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (rated != _sentinel)
         _$MovieFieldMap['rated']!: _$MoviePerFieldToJson.rated(rated as String),
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genre != _sentinel)
-        _$MovieFieldMap['genre']!:
-            _$MoviePerFieldToJson.genre(genre as List<String>?),
+        _$MovieFieldMap['genre']!: _$MoviePerFieldToJson.genre(
+          genre as List<String>?,
+        ),
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tags != _sentinel)
-        _$MovieFieldMap['tags']!:
-            _$MoviePerFieldToJson.tags(tags as Set<String>?),
+        _$MovieFieldMap['tags']!: _$MoviePerFieldToJson.tags(
+          tags as Set<String>?,
+        ),
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -535,34 +570,53 @@ class _$MovieDocumentReference
     );
     final json = {
       if (poster != _sentinel)
-        _$MovieFieldMap['poster']!:
-            _$MoviePerFieldToJson.poster(poster as String),
+        _$MovieFieldMap['poster']!: _$MoviePerFieldToJson.poster(
+          poster as String,
+        ),
+
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likes != _sentinel)
         _$MovieFieldMap['likes']!: _$MoviePerFieldToJson.likes(likes as int),
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (title != _sentinel)
         _$MovieFieldMap['title']!: _$MoviePerFieldToJson.title(title as String),
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (year != _sentinel)
         _$MovieFieldMap['year']!: _$MoviePerFieldToJson.year(year as int),
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtime != _sentinel)
-        _$MovieFieldMap['runtime']!:
-            _$MoviePerFieldToJson.runtime(runtime as String),
+        _$MovieFieldMap['runtime']!: _$MoviePerFieldToJson.runtime(
+          runtime as String,
+        ),
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (rated != _sentinel)
         _$MovieFieldMap['rated']!: _$MoviePerFieldToJson.rated(rated as String),
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genre != _sentinel)
-        _$MovieFieldMap['genre']!:
-            _$MoviePerFieldToJson.genre(genre as List<String>?),
+        _$MovieFieldMap['genre']!: _$MoviePerFieldToJson.genre(
+          genre as List<String>?,
+        ),
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tags != _sentinel)
-        _$MovieFieldMap['tags']!:
-            _$MoviePerFieldToJson.tags(tags as Set<String>?),
+        _$MovieFieldMap['tags']!: _$MoviePerFieldToJson.tags(
+          tags as Set<String>?,
+        ),
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -622,34 +676,53 @@ class _$MovieDocumentReference
     );
     final json = {
       if (poster != _sentinel)
-        _$MovieFieldMap['poster']!:
-            _$MoviePerFieldToJson.poster(poster as String),
+        _$MovieFieldMap['poster']!: _$MoviePerFieldToJson.poster(
+          poster as String,
+        ),
+
       if (posterFieldValue != null)
         _$MovieFieldMap['poster']!: posterFieldValue,
+
       if (likes != _sentinel)
         _$MovieFieldMap['likes']!: _$MoviePerFieldToJson.likes(likes as int),
+
       if (likesFieldValue != null) _$MovieFieldMap['likes']!: likesFieldValue,
+
       if (title != _sentinel)
         _$MovieFieldMap['title']!: _$MoviePerFieldToJson.title(title as String),
+
       if (titleFieldValue != null) _$MovieFieldMap['title']!: titleFieldValue,
+
       if (year != _sentinel)
         _$MovieFieldMap['year']!: _$MoviePerFieldToJson.year(year as int),
+
       if (yearFieldValue != null) _$MovieFieldMap['year']!: yearFieldValue,
+
       if (runtime != _sentinel)
-        _$MovieFieldMap['runtime']!:
-            _$MoviePerFieldToJson.runtime(runtime as String),
+        _$MovieFieldMap['runtime']!: _$MoviePerFieldToJson.runtime(
+          runtime as String,
+        ),
+
       if (runtimeFieldValue != null)
         _$MovieFieldMap['runtime']!: runtimeFieldValue,
+
       if (rated != _sentinel)
         _$MovieFieldMap['rated']!: _$MoviePerFieldToJson.rated(rated as String),
+
       if (ratedFieldValue != null) _$MovieFieldMap['rated']!: ratedFieldValue,
+
       if (genre != _sentinel)
-        _$MovieFieldMap['genre']!:
-            _$MoviePerFieldToJson.genre(genre as List<String>?),
+        _$MovieFieldMap['genre']!: _$MoviePerFieldToJson.genre(
+          genre as List<String>?,
+        ),
+
       if (genreFieldValue != null) _$MovieFieldMap['genre']!: genreFieldValue,
+
       if (tags != _sentinel)
-        _$MovieFieldMap['tags']!:
-            _$MoviePerFieldToJson.tags(tags as Set<String>?),
+        _$MovieFieldMap['tags']!: _$MoviePerFieldToJson.tags(
+          tags as Set<String>?,
+        ),
+
       if (tagsFieldValue != null) _$MovieFieldMap['tags']!: tagsFieldValue,
     };
 
@@ -964,9 +1037,9 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     required Query<Movie> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
@@ -1027,7 +1100,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1059,7 +1133,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1103,7 +1178,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.poster(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.poster(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1147,7 +1223,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.likes(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.likes(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1191,7 +1268,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.title(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.title(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1235,7 +1313,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.year(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.year(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1279,7 +1358,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.runtime(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.runtime(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1323,7 +1403,8 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$MoviePerFieldToJson.rated(e)),
         whereNotIn: whereNotIn?.map((e) => _$MoviePerFieldToJson.rated(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1363,17 +1444,19 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             ? _$MoviePerFieldToJson.genre(isGreaterThan as List<String>?)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$MoviePerFieldToJson
-                .genre(isGreaterThanOrEqualTo as List<String>?)
+            ? _$MoviePerFieldToJson.genre(
+                isGreaterThanOrEqualTo as List<String>?,
+              )
             : null,
         arrayContains: arrayContains != null
             ? (_$MoviePerFieldToJson.genre([arrayContains as String]) as List?)!
-                .single
+                  .single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$MoviePerFieldToJson.genre(arrayContainsAny) as Iterable<Object>?
             : null,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1417,12 +1500,13 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
             : null,
         arrayContains: arrayContains != null
             ? (_$MoviePerFieldToJson.tags({arrayContains as String}) as List?)!
-                .single
+                  .single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$MoviePerFieldToJson.tags(arrayContainsAny) as Iterable<Object>?
             : null,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1443,8 +1527,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1516,8 +1602,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1589,8 +1677,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['poster']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['poster']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1622,7 +1712,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.poster(startAt as String)
+          _$MoviePerFieldToJson.poster(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1631,7 +1721,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.poster(startAfter as String)
+          _$MoviePerFieldToJson.poster(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1640,7 +1730,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.poster(endAt as String)
+          _$MoviePerFieldToJson.poster(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1649,7 +1739,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.poster(endBefore as String)
+          _$MoviePerFieldToJson.poster(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1674,8 +1764,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['likes']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['likes']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1707,7 +1799,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.likes(startAt as int)
+          _$MoviePerFieldToJson.likes(startAt as int),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1716,7 +1808,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.likes(startAfter as int)
+          _$MoviePerFieldToJson.likes(startAfter as int),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1725,7 +1817,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.likes(endAt as int)
+          _$MoviePerFieldToJson.likes(endAt as int),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1734,7 +1826,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.likes(endBefore as int)
+          _$MoviePerFieldToJson.likes(endBefore as int),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1759,8 +1851,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['title']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['title']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1792,7 +1886,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.title(startAt as String)
+          _$MoviePerFieldToJson.title(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1801,7 +1895,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.title(startAfter as String)
+          _$MoviePerFieldToJson.title(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1810,7 +1904,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.title(endAt as String)
+          _$MoviePerFieldToJson.title(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1819,7 +1913,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.title(endBefore as String)
+          _$MoviePerFieldToJson.title(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1844,8 +1938,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['year']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['year']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1877,7 +1973,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.year(startAt as int)
+          _$MoviePerFieldToJson.year(startAt as int),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1886,7 +1982,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.year(startAfter as int)
+          _$MoviePerFieldToJson.year(startAfter as int),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1901,7 +1997,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.year(endBefore as int)
+          _$MoviePerFieldToJson.year(endBefore as int),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1926,8 +2022,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['runtime']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['runtime']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1959,7 +2057,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.runtime(startAt as String)
+          _$MoviePerFieldToJson.runtime(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1968,7 +2066,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.runtime(startAfter as String)
+          _$MoviePerFieldToJson.runtime(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1977,7 +2075,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.runtime(endAt as String)
+          _$MoviePerFieldToJson.runtime(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1986,7 +2084,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.runtime(endBefore as String)
+          _$MoviePerFieldToJson.runtime(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2011,8 +2109,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['rated']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['rated']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2044,7 +2144,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.rated(startAt as String)
+          _$MoviePerFieldToJson.rated(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -2053,7 +2153,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.rated(startAfter as String)
+          _$MoviePerFieldToJson.rated(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -2062,7 +2162,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.rated(endAt as String)
+          _$MoviePerFieldToJson.rated(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -2071,7 +2171,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.rated(endBefore as String)
+          _$MoviePerFieldToJson.rated(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2096,8 +2196,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['genre']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['genre']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2129,7 +2231,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.genre(startAt as List<String>?)
+          _$MoviePerFieldToJson.genre(startAt as List<String>?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -2138,7 +2240,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.genre(startAfter as List<String>?)
+          _$MoviePerFieldToJson.genre(startAfter as List<String>?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -2147,7 +2249,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.genre(endAt as List<String>?)
+          _$MoviePerFieldToJson.genre(endAt as List<String>?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -2156,7 +2258,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.genre(endBefore as List<String>?)
+          _$MoviePerFieldToJson.genre(endBefore as List<String>?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2181,8 +2283,10 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
     MovieDocumentSnapshot? endBeforeDocument,
     MovieDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$MovieFieldMap['tags']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$MovieFieldMap['tags']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2214,7 +2318,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$MoviePerFieldToJson.tags(startAt as Set<String>?)
+          _$MoviePerFieldToJson.tags(startAt as Set<String>?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -2223,7 +2327,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$MoviePerFieldToJson.tags(startAfter as Set<String>?)
+          _$MoviePerFieldToJson.tags(startAfter as Set<String>?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -2232,7 +2336,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$MoviePerFieldToJson.tags(endAt as Set<String>?)
+          _$MoviePerFieldToJson.tags(endAt as Set<String>?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -2241,7 +2345,7 @@ class _$MovieQuery extends QueryReference<Movie, MovieQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$MoviePerFieldToJson.tags(endBefore as Set<String>?)
+          _$MoviePerFieldToJson.tags(endBefore as Set<String>?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2273,9 +2377,7 @@ class MovieDocumentSnapshot extends FirestoreDocumentSnapshot<Movie> {
 
   @override
   MovieDocumentReference get reference {
-    return MovieDocumentReference(
-      snapshot.reference,
-    );
+    return MovieDocumentReference(snapshot.reference);
   }
 
   @override
@@ -2284,33 +2386,20 @@ class MovieDocumentSnapshot extends FirestoreDocumentSnapshot<Movie> {
 
 class MovieQuerySnapshot
     extends FirestoreQuerySnapshot<Movie, MovieQueryDocumentSnapshot> {
-  MovieQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+  MovieQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
-  factory MovieQuerySnapshot._fromQuerySnapshot(
-    QuerySnapshot<Movie> snapshot,
-  ) {
+  factory MovieQuerySnapshot._fromQuerySnapshot(QuerySnapshot<Movie> snapshot) {
     final docs = snapshot.docs.map(MovieQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        MovieDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, MovieDocumentSnapshot._);
     }).toList();
 
-    return MovieQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return MovieQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<MovieDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     MovieDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -2354,9 +2443,8 @@ abstract class CommentCollectionReference
     implements
         CommentQuery,
         FirestoreCollectionReference<Comment, CommentQuerySnapshot> {
-  factory CommentCollectionReference(
-    DocumentReference<Movie> parent,
-  ) = _$CommentCollectionReference;
+  factory CommentCollectionReference(DocumentReference<Movie> parent) =
+      _$CommentCollectionReference;
 
   static Comment fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -2365,10 +2453,7 @@ abstract class CommentCollectionReference
     return _$CommentFromJson(snapshot.data()!);
   }
 
-  static Map<String, Object?> toFirestore(
-    Comment value,
-    SetOptions? options,
-  ) {
+  static Map<String, Object?> toFirestore(Comment value, SetOptions? options) {
     return _$CommentToJson(value);
   }
 
@@ -2388,12 +2473,12 @@ abstract class CommentCollectionReference
 
 class _$CommentCollectionReference extends _$CommentQuery
     implements CommentCollectionReference {
-  factory _$CommentCollectionReference(
-    DocumentReference<Movie> parent,
-  ) {
+  factory _$CommentCollectionReference(DocumentReference<Movie> parent) {
     return _$CommentCollectionReference._(
       MovieDocumentReference(parent),
-      parent.collection('comments').withConverter(
+      parent
+          .collection('comments')
+          .withConverter(
             fromFirestore: CommentCollectionReference.fromFirestore,
             toFirestore: CommentCollectionReference.toFirestore,
           ),
@@ -2420,9 +2505,7 @@ class _$CommentCollectionReference extends _$CommentQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return CommentDocumentReference(
-      reference.doc(id),
-    );
+    return CommentDocumentReference(reference.doc(id));
   }
 
   @override
@@ -2589,6 +2672,7 @@ class _$CommentDocumentReference
       ..._$CommentToJson(model),
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2611,6 +2695,7 @@ class _$CommentDocumentReference
       ..._$CommentToJson(model),
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2633,6 +2718,7 @@ class _$CommentDocumentReference
       ..._$CommentToJson(model),
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2660,13 +2746,18 @@ class _$CommentDocumentReference
     );
     final json = {
       if (authorName != _sentinel)
-        _$CommentFieldMap['authorName']!:
-            _$CommentPerFieldToJson.authorName(authorName as String),
+        _$CommentFieldMap['authorName']!: _$CommentPerFieldToJson.authorName(
+          authorName as String,
+        ),
+
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (message != _sentinel)
-        _$CommentFieldMap['message']!:
-            _$CommentPerFieldToJson.message(message as String),
+        _$CommentFieldMap['message']!: _$CommentPerFieldToJson.message(
+          message as String,
+        ),
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2691,13 +2782,18 @@ class _$CommentDocumentReference
     );
     final json = {
       if (authorName != _sentinel)
-        _$CommentFieldMap['authorName']!:
-            _$CommentPerFieldToJson.authorName(authorName as String),
+        _$CommentFieldMap['authorName']!: _$CommentPerFieldToJson.authorName(
+          authorName as String,
+        ),
+
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (message != _sentinel)
-        _$CommentFieldMap['message']!:
-            _$CommentPerFieldToJson.message(message as String),
+        _$CommentFieldMap['message']!: _$CommentPerFieldToJson.message(
+          message as String,
+        ),
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2722,13 +2818,18 @@ class _$CommentDocumentReference
     );
     final json = {
       if (authorName != _sentinel)
-        _$CommentFieldMap['authorName']!:
-            _$CommentPerFieldToJson.authorName(authorName as String),
+        _$CommentFieldMap['authorName']!: _$CommentPerFieldToJson.authorName(
+          authorName as String,
+        ),
+
       if (authorNameFieldValue != null)
         _$CommentFieldMap['authorName']!: authorNameFieldValue,
+
       if (message != _sentinel)
-        _$CommentFieldMap['message']!:
-            _$CommentPerFieldToJson.message(message as String),
+        _$CommentFieldMap['message']!: _$CommentPerFieldToJson.message(
+          message as String,
+        ),
+
       if (messageFieldValue != null)
         _$CommentFieldMap['message']!: messageFieldValue,
     };
@@ -2901,9 +3002,9 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
     required Query<Comment> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
@@ -2964,7 +3065,8 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -2996,7 +3098,8 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -3036,13 +3139,16 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
             ? _$CommentPerFieldToJson.authorName(isGreaterThan as String)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$CommentPerFieldToJson
-                .authorName(isGreaterThanOrEqualTo as String)
+            ? _$CommentPerFieldToJson.authorName(
+                isGreaterThanOrEqualTo as String,
+              )
             : null,
         whereIn: whereIn?.map((e) => _$CommentPerFieldToJson.authorName(e)),
-        whereNotIn:
-            whereNotIn?.map((e) => _$CommentPerFieldToJson.authorName(e)),
-        isNull: isNull ??
+        whereNotIn: whereNotIn?.map(
+          (e) => _$CommentPerFieldToJson.authorName(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -3086,7 +3192,8 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$CommentPerFieldToJson.message(e)),
         whereNotIn: whereNotIn?.map((e) => _$CommentPerFieldToJson.message(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -3107,8 +3214,10 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
     CommentDocumentSnapshot? endBeforeDocument,
     CommentDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -3180,8 +3289,10 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
     CommentDocumentSnapshot? endBeforeDocument,
     CommentDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -3253,8 +3364,10 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
     CommentDocumentSnapshot? endBeforeDocument,
     CommentDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$CommentFieldMap['authorName']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$CommentFieldMap['authorName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -3286,7 +3399,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$CommentPerFieldToJson.authorName(startAt as String)
+          _$CommentPerFieldToJson.authorName(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -3295,7 +3408,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$CommentPerFieldToJson.authorName(startAfter as String)
+          _$CommentPerFieldToJson.authorName(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -3304,7 +3417,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$CommentPerFieldToJson.authorName(endAt as String)
+          _$CommentPerFieldToJson.authorName(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -3313,7 +3426,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$CommentPerFieldToJson.authorName(endBefore as String)
+          _$CommentPerFieldToJson.authorName(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -3338,8 +3451,10 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
     CommentDocumentSnapshot? endBeforeDocument,
     CommentDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$CommentFieldMap['message']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$CommentFieldMap['message']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -3371,7 +3486,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$CommentPerFieldToJson.message(startAt as String)
+          _$CommentPerFieldToJson.message(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -3380,7 +3495,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$CommentPerFieldToJson.message(startAfter as String)
+          _$CommentPerFieldToJson.message(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -3389,7 +3504,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$CommentPerFieldToJson.message(endAt as String)
+          _$CommentPerFieldToJson.message(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -3398,7 +3513,7 @@ class _$CommentQuery extends QueryReference<Comment, CommentQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$CommentPerFieldToJson.message(endBefore as String)
+          _$CommentPerFieldToJson.message(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -3430,9 +3545,7 @@ class CommentDocumentSnapshot extends FirestoreDocumentSnapshot<Comment> {
 
   @override
   CommentDocumentReference get reference {
-    return CommentDocumentReference(
-      snapshot.reference,
-    );
+    return CommentDocumentReference(snapshot.reference);
   }
 
   @override
@@ -3441,11 +3554,7 @@ class CommentDocumentSnapshot extends FirestoreDocumentSnapshot<Comment> {
 
 class CommentQuerySnapshot
     extends FirestoreQuerySnapshot<Comment, CommentQueryDocumentSnapshot> {
-  CommentQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+  CommentQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory CommentQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<Comment> snapshot,
@@ -3453,21 +3562,14 @@ class CommentQuerySnapshot
     final docs = snapshot.docs.map(CommentQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        CommentDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, CommentDocumentSnapshot._);
     }).toList();
 
-    return CommentQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return CommentQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<CommentDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     CommentDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -3519,17 +3621,16 @@ void _$assertMovie(Movie instance) {
 // **************************************************************************
 
 Movie _$MovieFromJson(Map<String, dynamic> json) => Movie(
-      genre:
-          (json['genre'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toSet(),
-      likes: (json['likes'] as num).toInt(),
-      poster: json['poster'] as String,
-      rated: json['rated'] as String,
-      runtime: json['runtime'] as String,
-      title: json['title'] as String,
-      year: (json['year'] as num).toInt(),
-      id: json['id'] as String,
-    );
+  genre: (json['genre'] as List<dynamic>?)?.map((e) => e as String).toList(),
+  tags: (json['tags'] as List<dynamic>?)?.map((e) => e as String).toSet(),
+  likes: (json['likes'] as num).toInt(),
+  poster: json['poster'] as String,
+  rated: json['rated'] as String,
+  runtime: json['runtime'] as String,
+  title: json['title'] as String,
+  year: (json['year'] as num).toInt(),
+  id: json['id'] as String,
+);
 
 const _$MovieFieldMap = <String, String>{
   'id': 'id',
@@ -3566,21 +3667,21 @@ abstract class _$MoviePerFieldToJson {
 }
 
 Map<String, dynamic> _$MovieToJson(Movie instance) => <String, dynamic>{
-      'id': instance.id,
-      'poster': instance.poster,
-      'likes': instance.likes,
-      'title': instance.title,
-      'year': instance.year,
-      'runtime': instance.runtime,
-      'rated': instance.rated,
-      'genre': instance.genre,
-      'tags': instance.tags?.toList(),
-    };
+  'id': instance.id,
+  'poster': instance.poster,
+  'likes': instance.likes,
+  'title': instance.title,
+  'year': instance.year,
+  'runtime': instance.runtime,
+  'rated': instance.rated,
+  'genre': instance.genre,
+  'tags': instance.tags?.toList(),
+};
 
 Comment _$CommentFromJson(Map<String, dynamic> json) => Comment(
-      authorName: json['authorName'] as String,
-      message: json['message'] as String,
-    );
+  authorName: json['authorName'] as String,
+  message: json['message'] as String,
+);
 
 const _$CommentFieldMap = <String, String>{
   'authorName': 'authorName',
@@ -3596,6 +3697,6 @@ abstract class _$CommentPerFieldToJson {
 }
 
 Map<String, dynamic> _$CommentToJson(Comment instance) => <String, dynamic>{
-      'authorName': instance.authorName,
-      'message': instance.message,
-    };
+  'authorName': instance.authorName,
+  'message': instance.message,
+};

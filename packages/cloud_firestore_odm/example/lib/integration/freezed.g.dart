@@ -26,9 +26,8 @@ abstract class PersonCollectionReference
     implements
         PersonQuery,
         FirestoreCollectionReference<Person, PersonQuerySnapshot> {
-  factory PersonCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$PersonCollectionReference;
+  factory PersonCollectionReference([FirebaseFirestore? firestore]) =
+      _$PersonCollectionReference;
 
   static Person fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -37,10 +36,7 @@ abstract class PersonCollectionReference
     return Person.fromJson(snapshot.data()!);
   }
 
-  static Map<String, Object?> toFirestore(
-    Person value,
-    SetOptions? options,
-  ) {
+  static Map<String, Object?> toFirestore(Person value, SetOptions? options) {
     return value.toJson();
   }
 
@@ -61,16 +57,17 @@ class _$PersonCollectionReference extends _$PersonQuery
     firestore ??= FirebaseFirestore.instance;
 
     return _$PersonCollectionReference._(
-      firestore.collection('freezed-test').withConverter(
+      firestore
+          .collection('freezed-test')
+          .withConverter(
             fromFirestore: PersonCollectionReference.fromFirestore,
             toFirestore: PersonCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$PersonCollectionReference._(
-    CollectionReference<Person> reference,
-  ) : super(reference, $referenceWithoutCursor: reference);
+  _$PersonCollectionReference._(CollectionReference<Person> reference)
+    : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -84,9 +81,7 @@ class _$PersonCollectionReference extends _$PersonQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return PersonDocumentReference(
-      reference.doc(id),
-    );
+    return PersonDocumentReference(reference.doc(id));
   }
 
   @override
@@ -243,6 +238,7 @@ class _$PersonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -265,6 +261,7 @@ class _$PersonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -287,6 +284,7 @@ class _$PersonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -314,13 +312,18 @@ class _$PersonDocumentReference
     );
     final json = {
       if (firstName != _sentinel)
-        _$PersonFieldMap['firstName']!:
-            _$PersonPerFieldToJson.firstName(firstName as String),
+        _$PersonFieldMap['firstName']!: _$PersonPerFieldToJson.firstName(
+          firstName as String,
+        ),
+
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$PersonFieldMap['lastName']!:
-            _$PersonPerFieldToJson.lastName(lastName as String),
+        _$PersonFieldMap['lastName']!: _$PersonPerFieldToJson.lastName(
+          lastName as String,
+        ),
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -345,13 +348,18 @@ class _$PersonDocumentReference
     );
     final json = {
       if (firstName != _sentinel)
-        _$PersonFieldMap['firstName']!:
-            _$PersonPerFieldToJson.firstName(firstName as String),
+        _$PersonFieldMap['firstName']!: _$PersonPerFieldToJson.firstName(
+          firstName as String,
+        ),
+
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$PersonFieldMap['lastName']!:
-            _$PersonPerFieldToJson.lastName(lastName as String),
+        _$PersonFieldMap['lastName']!: _$PersonPerFieldToJson.lastName(
+          lastName as String,
+        ),
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -376,13 +384,18 @@ class _$PersonDocumentReference
     );
     final json = {
       if (firstName != _sentinel)
-        _$PersonFieldMap['firstName']!:
-            _$PersonPerFieldToJson.firstName(firstName as String),
+        _$PersonFieldMap['firstName']!: _$PersonPerFieldToJson.firstName(
+          firstName as String,
+        ),
+
       if (firstNameFieldValue != null)
         _$PersonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$PersonFieldMap['lastName']!:
-            _$PersonPerFieldToJson.lastName(lastName as String),
+        _$PersonFieldMap['lastName']!: _$PersonPerFieldToJson.lastName(
+          lastName as String,
+        ),
+
       if (lastNameFieldValue != null)
         _$PersonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -555,9 +568,9 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
     required Query<Person> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
@@ -618,7 +631,8 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -650,7 +664,8 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -694,7 +709,8 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$PersonPerFieldToJson.firstName(e)),
         whereNotIn: whereNotIn?.map((e) => _$PersonPerFieldToJson.firstName(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -738,7 +754,8 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$PersonPerFieldToJson.lastName(e)),
         whereNotIn: whereNotIn?.map((e) => _$PersonPerFieldToJson.lastName(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -759,8 +776,10 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
     PersonDocumentSnapshot? endBeforeDocument,
     PersonDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -832,8 +851,10 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
     PersonDocumentSnapshot? endBeforeDocument,
     PersonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -905,8 +926,10 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
     PersonDocumentSnapshot? endBeforeDocument,
     PersonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$PersonFieldMap['firstName']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$PersonFieldMap['firstName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -938,7 +961,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$PersonPerFieldToJson.firstName(startAt as String)
+          _$PersonPerFieldToJson.firstName(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -947,7 +970,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$PersonPerFieldToJson.firstName(startAfter as String)
+          _$PersonPerFieldToJson.firstName(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -956,7 +979,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$PersonPerFieldToJson.firstName(endAt as String)
+          _$PersonPerFieldToJson.firstName(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -965,7 +988,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$PersonPerFieldToJson.firstName(endBefore as String)
+          _$PersonPerFieldToJson.firstName(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -990,8 +1013,10 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
     PersonDocumentSnapshot? endBeforeDocument,
     PersonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$PersonFieldMap['lastName']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$PersonFieldMap['lastName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1023,7 +1048,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$PersonPerFieldToJson.lastName(startAt as String)
+          _$PersonPerFieldToJson.lastName(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1032,7 +1057,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$PersonPerFieldToJson.lastName(startAfter as String)
+          _$PersonPerFieldToJson.lastName(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1041,7 +1066,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$PersonPerFieldToJson.lastName(endAt as String)
+          _$PersonPerFieldToJson.lastName(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1050,7 +1075,7 @@ class _$PersonQuery extends QueryReference<Person, PersonQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$PersonPerFieldToJson.lastName(endBefore as String)
+          _$PersonPerFieldToJson.lastName(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1082,9 +1107,7 @@ class PersonDocumentSnapshot extends FirestoreDocumentSnapshot<Person> {
 
   @override
   PersonDocumentReference get reference {
-    return PersonDocumentReference(
-      snapshot.reference,
-    );
+    return PersonDocumentReference(snapshot.reference);
   }
 
   @override
@@ -1093,11 +1116,7 @@ class PersonDocumentSnapshot extends FirestoreDocumentSnapshot<Person> {
 
 class PersonQuerySnapshot
     extends FirestoreQuerySnapshot<Person, PersonQueryDocumentSnapshot> {
-  PersonQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+  PersonQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory PersonQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<Person> snapshot,
@@ -1105,21 +1124,14 @@ class PersonQuerySnapshot
     final docs = snapshot.docs.map(PersonQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        PersonDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, PersonDocumentSnapshot._);
     }).toList();
 
-    return PersonQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return PersonQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<PersonDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     PersonDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -1162,11 +1174,12 @@ class PersonQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Person>
 abstract class PublicRedirectedCollectionReference
     implements
         PublicRedirectedQuery,
-        FirestoreCollectionReference<PublicRedirected,
-            PublicRedirectedQuerySnapshot> {
-  factory PublicRedirectedCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$PublicRedirectedCollectionReference;
+        FirestoreCollectionReference<
+          PublicRedirected,
+          PublicRedirectedQuerySnapshot
+        > {
+  factory PublicRedirectedCollectionReference([FirebaseFirestore? firestore]) =
+      _$PublicRedirectedCollectionReference;
 
   static PublicRedirected fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -1195,12 +1208,15 @@ abstract class PublicRedirectedCollectionReference
 
 class _$PublicRedirectedCollectionReference extends _$PublicRedirectedQuery
     implements PublicRedirectedCollectionReference {
-  factory _$PublicRedirectedCollectionReference(
-      [FirebaseFirestore? firestore]) {
+  factory _$PublicRedirectedCollectionReference([
+    FirebaseFirestore? firestore,
+  ]) {
     firestore ??= FirebaseFirestore.instance;
 
     return _$PublicRedirectedCollectionReference._(
-      firestore.collection('freezed-test').withConverter(
+      firestore
+          .collection('freezed-test')
+          .withConverter(
             fromFirestore: PublicRedirectedCollectionReference.fromFirestore,
             toFirestore: PublicRedirectedCollectionReference.toFirestore,
           ),
@@ -1223,9 +1239,7 @@ class _$PublicRedirectedCollectionReference extends _$PublicRedirectedQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return PublicRedirectedDocumentReference(
-      reference.doc(id),
-    );
+    return PublicRedirectedDocumentReference(reference.doc(id));
   }
 
   @override
@@ -1247,11 +1261,14 @@ class _$PublicRedirectedCollectionReference extends _$PublicRedirectedQuery
 }
 
 abstract class PublicRedirectedDocumentReference
-    extends FirestoreDocumentReference<PublicRedirected,
-        PublicRedirectedDocumentSnapshot> {
+    extends
+        FirestoreDocumentReference<
+          PublicRedirected,
+          PublicRedirectedDocumentSnapshot
+        > {
   factory PublicRedirectedDocumentReference(
-          DocumentReference<PublicRedirected> reference) =
-      _$PublicRedirectedDocumentReference;
+    DocumentReference<PublicRedirected> reference,
+  ) = _$PublicRedirectedDocumentReference;
 
   DocumentReference<PublicRedirected> get reference;
 
@@ -1315,10 +1332,7 @@ abstract class PublicRedirectedDocumentReference
   /// document data.
   ///
   /// If no document exists yet, the update will fail.
-  Future<void> update({
-    String value,
-    FieldValue valueFieldValue,
-  });
+  Future<void> update({String value, FieldValue valueFieldValue});
 
   /// Updates fields in the current document using the transaction API.
   ///
@@ -1339,8 +1353,12 @@ abstract class PublicRedirectedDocumentReference
   });
 }
 
-class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
-        PublicRedirected, PublicRedirectedDocumentSnapshot>
+class _$PublicRedirectedDocumentReference
+    extends
+        FirestoreDocumentReference<
+          PublicRedirected,
+          PublicRedirectedDocumentSnapshot
+        >
     implements PublicRedirectedDocumentReference {
   _$PublicRedirectedDocumentReference(this.reference);
 
@@ -1364,7 +1382,8 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
 
   @override
   Future<PublicRedirectedDocumentSnapshot> transactionGet(
-      Transaction transaction) {
+    Transaction transaction,
+  ) {
     return transaction.get(reference).then(PublicRedirectedDocumentSnapshot._);
   }
 
@@ -1434,8 +1453,9 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (value != _sentinel)
-        _$PublicRedirected2FieldMap['value']!:
-            _$PublicRedirected2PerFieldToJson.value(value as String),
+        _$PublicRedirected2FieldMap['value']!: _$PublicRedirected2PerFieldToJson
+            .value(value as String),
+
       if (valueFieldValue != null)
         _$PublicRedirected2FieldMap['value']!: valueFieldValue,
     };
@@ -1454,8 +1474,9 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (value != _sentinel)
-        _$PublicRedirected2FieldMap['value']!:
-            _$PublicRedirected2PerFieldToJson.value(value as String),
+        _$PublicRedirected2FieldMap['value']!: _$PublicRedirected2PerFieldToJson
+            .value(value as String),
+
       if (valueFieldValue != null)
         _$PublicRedirected2FieldMap['value']!: valueFieldValue,
     };
@@ -1474,8 +1495,9 @@ class _$PublicRedirectedDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (value != _sentinel)
-        _$PublicRedirected2FieldMap['value']!:
-            _$PublicRedirected2PerFieldToJson.value(value as String),
+        _$PublicRedirected2FieldMap['value']!: _$PublicRedirected2PerFieldToJson
+            .value(value as String),
+
       if (valueFieldValue != null)
         _$PublicRedirected2FieldMap['value']!: valueFieldValue,
     };
@@ -1625,17 +1647,17 @@ class _$PublicRedirectedQuery
     required Query<PublicRedirected> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
   @override
   Stream<PublicRedirectedQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference
-        .snapshots()
-        .map(PublicRedirectedQuerySnapshot._fromQuerySnapshot);
+    return reference.snapshots().map(
+      PublicRedirectedQuerySnapshot._fromQuerySnapshot,
+    );
   }
 
   @override
@@ -1692,7 +1714,8 @@ class _$PublicRedirectedQuery
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1724,7 +1747,8 @@ class _$PublicRedirectedQuery
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1758,21 +1782,26 @@ class _$PublicRedirectedQuery
             ? _$PublicRedirected2PerFieldToJson.value(isLessThan as String)
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$PublicRedirected2PerFieldToJson
-                .value(isLessThanOrEqualTo as String)
+            ? _$PublicRedirected2PerFieldToJson.value(
+                isLessThanOrEqualTo as String,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
             ? _$PublicRedirected2PerFieldToJson.value(isGreaterThan as String)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$PublicRedirected2PerFieldToJson
-                .value(isGreaterThanOrEqualTo as String)
+            ? _$PublicRedirected2PerFieldToJson.value(
+                isGreaterThanOrEqualTo as String,
+              )
             : null,
-        whereIn:
-            whereIn?.map((e) => _$PublicRedirected2PerFieldToJson.value(e)),
-        whereNotIn:
-            whereNotIn?.map((e) => _$PublicRedirected2PerFieldToJson.value(e)),
-        isNull: isNull ??
+        whereIn: whereIn?.map(
+          (e) => _$PublicRedirected2PerFieldToJson.value(e),
+        ),
+        whereNotIn: whereNotIn?.map(
+          (e) => _$PublicRedirected2PerFieldToJson.value(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1793,8 +1822,10 @@ class _$PublicRedirectedQuery
     PublicRedirectedDocumentSnapshot? endBeforeDocument,
     PublicRedirectedDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1866,8 +1897,10 @@ class _$PublicRedirectedQuery
     PublicRedirectedDocumentSnapshot? endBeforeDocument,
     PublicRedirectedDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1939,8 +1972,10 @@ class _$PublicRedirectedQuery
     PublicRedirectedDocumentSnapshot? endBeforeDocument,
     PublicRedirectedDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$PublicRedirected2FieldMap['value']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$PublicRedirected2FieldMap['value']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1972,7 +2007,7 @@ class _$PublicRedirectedQuery
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$PublicRedirected2PerFieldToJson.value(startAt as String)
+          _$PublicRedirected2PerFieldToJson.value(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1981,7 +2016,7 @@ class _$PublicRedirectedQuery
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$PublicRedirected2PerFieldToJson.value(startAfter as String)
+          _$PublicRedirected2PerFieldToJson.value(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1990,7 +2025,7 @@ class _$PublicRedirectedQuery
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$PublicRedirected2PerFieldToJson.value(endAt as String)
+          _$PublicRedirected2PerFieldToJson.value(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1999,7 +2034,7 @@ class _$PublicRedirectedQuery
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$PublicRedirected2PerFieldToJson.value(endBefore as String)
+          _$PublicRedirected2PerFieldToJson.value(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2032,48 +2067,40 @@ class PublicRedirectedDocumentSnapshot
 
   @override
   PublicRedirectedDocumentReference get reference {
-    return PublicRedirectedDocumentReference(
-      snapshot.reference,
-    );
+    return PublicRedirectedDocumentReference(snapshot.reference);
   }
 
   @override
   final PublicRedirected? data;
 }
 
-class PublicRedirectedQuerySnapshot extends FirestoreQuerySnapshot<
-    PublicRedirected, PublicRedirectedQueryDocumentSnapshot> {
-  PublicRedirectedQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+class PublicRedirectedQuerySnapshot
+    extends
+        FirestoreQuerySnapshot<
+          PublicRedirected,
+          PublicRedirectedQueryDocumentSnapshot
+        > {
+  PublicRedirectedQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory PublicRedirectedQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<PublicRedirected> snapshot,
   ) {
-    final docs =
-        snapshot.docs.map(PublicRedirectedQueryDocumentSnapshot._).toList();
+    final docs = snapshot.docs
+        .map(PublicRedirectedQueryDocumentSnapshot._)
+        .toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        PublicRedirectedDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, PublicRedirectedDocumentSnapshot._);
     }).toList();
 
-    return PublicRedirectedQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return PublicRedirectedQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<PublicRedirectedDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     PublicRedirectedDocumentSnapshot Function(DocumentSnapshot<T> doc)
-        decodeDoc,
+    decodeDoc,
   ) {
     return FirestoreDocumentChange<PublicRedirectedDocumentSnapshot>(
       type: docChange.type,
@@ -2090,14 +2117,14 @@ class PublicRedirectedQuerySnapshot extends FirestoreQuerySnapshot<
 
   @override
   final List<FirestoreDocumentChange<PublicRedirectedDocumentSnapshot>>
-      docChanges;
+  docChanges;
 }
 
 class PublicRedirectedQueryDocumentSnapshot
     extends FirestoreQueryDocumentSnapshot<PublicRedirected>
     implements PublicRedirectedDocumentSnapshot {
   PublicRedirectedQueryDocumentSnapshot._(this.snapshot)
-      : data = snapshot.data();
+    : data = snapshot.data();
 
   @override
   final QueryDocumentSnapshot<PublicRedirected> snapshot;
@@ -2116,9 +2143,9 @@ class PublicRedirectedQueryDocumentSnapshot
 // **************************************************************************
 
 _Person _$PersonFromJson(Map<String, dynamic> json) => _Person(
-      firstName: json['first_name'] as String,
-      lastName: json['LAST_NAME'] as String,
-    );
+  firstName: json['first_name'] as String,
+  lastName: json['LAST_NAME'] as String,
+);
 
 const _$PersonFieldMap = <String, String>{
   'firstName': 'first_name',
@@ -2134,18 +2161,14 @@ abstract class _$PersonPerFieldToJson {
 }
 
 Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
-      'first_name': instance.firstName,
-      'LAST_NAME': instance.lastName,
-    };
+  'first_name': instance.firstName,
+  'LAST_NAME': instance.lastName,
+};
 
 PublicRedirected2 _$PublicRedirected2FromJson(Map<String, dynamic> json) =>
-    PublicRedirected2(
-      value: json['value'] as String,
-    );
+    PublicRedirected2(value: json['value'] as String);
 
-const _$PublicRedirected2FieldMap = <String, String>{
-  'value': 'value',
-};
+const _$PublicRedirected2FieldMap = <String, String>{'value': 'value'};
 
 // ignore: unused_element
 abstract class _$PublicRedirected2PerFieldToJson {
@@ -2154,6 +2177,4 @@ abstract class _$PublicRedirected2PerFieldToJson {
 }
 
 Map<String, dynamic> _$PublicRedirected2ToJson(PublicRedirected2 instance) =>
-    <String, dynamic>{
-      'value': instance.value,
-    };
+    <String, dynamic>{'value': instance.value};

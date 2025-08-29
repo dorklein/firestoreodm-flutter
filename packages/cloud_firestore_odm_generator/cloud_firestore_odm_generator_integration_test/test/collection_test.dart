@@ -36,8 +36,7 @@ void main() {
   });
 
   group('doc', () {
-    test('asserts that the path does not point to a separate collection',
-        () async {
+    test('asserts that the path does not point to a separate collection', () async {
       rootRef.doc('42');
 
       expect(
@@ -54,7 +53,7 @@ void main() {
   /// test freezed mixed mode classes
   group('freezed mixed mode classes', () {
     test('test freezed simple classes', () {
-      final simpleFreezed = SimpleFreezed(a: 42);
+      const simpleFreezed = SimpleFreezed(a: 42);
       expect(simpleFreezed.toJson(), {'a': 42});
 
       final simpleFreezedFromJson = SimpleFreezed.fromJson({'a': 42});
@@ -65,8 +64,7 @@ void main() {
       final publicRedirected = PublicRedirected(value: 'test');
       expect(publicRedirected.toJson(), {'value': 'test'});
 
-      final publicRedirectedFromJson =
-          PublicRedirected.fromJson({'value': 'test'});
+      final publicRedirectedFromJson = PublicRedirected.fromJson({'value': 'test'});
       expect(publicRedirectedFromJson.value, 'test');
     });
   });

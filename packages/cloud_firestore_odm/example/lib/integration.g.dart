@@ -26,9 +26,8 @@ abstract class AdvancedJsonCollectionReference
     implements
         AdvancedJsonQuery,
         FirestoreCollectionReference<AdvancedJson, AdvancedJsonQuerySnapshot> {
-  factory AdvancedJsonCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$AdvancedJsonCollectionReference;
+  factory AdvancedJsonCollectionReference([FirebaseFirestore? firestore]) =
+      _$AdvancedJsonCollectionReference;
 
   static AdvancedJson fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -61,7 +60,9 @@ class _$AdvancedJsonCollectionReference extends _$AdvancedJsonQuery
     firestore ??= FirebaseFirestore.instance;
 
     return _$AdvancedJsonCollectionReference._(
-      firestore.collection('firestore-example-app/test/advanced').withConverter(
+      firestore
+          .collection('firestore-example-app/test/advanced')
+          .withConverter(
             fromFirestore: AdvancedJsonCollectionReference.fromFirestore,
             toFirestore: AdvancedJsonCollectionReference.toFirestore,
           ),
@@ -84,9 +85,7 @@ class _$AdvancedJsonCollectionReference extends _$AdvancedJsonQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return AdvancedJsonDocumentReference(
-      reference.doc(id),
-    );
+    return AdvancedJsonDocumentReference(reference.doc(id));
   }
 
   @override
@@ -107,11 +106,12 @@ class _$AdvancedJsonCollectionReference extends _$AdvancedJsonQuery
   int get hashCode => Object.hash(runtimeType, reference);
 }
 
-abstract class AdvancedJsonDocumentReference extends FirestoreDocumentReference<
-    AdvancedJson, AdvancedJsonDocumentSnapshot> {
+abstract class AdvancedJsonDocumentReference
+    extends
+        FirestoreDocumentReference<AdvancedJson, AdvancedJsonDocumentSnapshot> {
   factory AdvancedJsonDocumentReference(
-          DocumentReference<AdvancedJson> reference) =
-      _$AdvancedJsonDocumentReference;
+    DocumentReference<AdvancedJson> reference,
+  ) = _$AdvancedJsonDocumentReference;
 
   DocumentReference<AdvancedJson> get reference;
 
@@ -208,9 +208,10 @@ abstract class AdvancedJsonDocumentReference extends FirestoreDocumentReference<
   });
 }
 
-class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
-    AdvancedJson,
-    AdvancedJsonDocumentSnapshot> implements AdvancedJsonDocumentReference {
+class _$AdvancedJsonDocumentReference
+    extends
+        FirestoreDocumentReference<AdvancedJson, AdvancedJsonDocumentSnapshot>
+    implements AdvancedJsonDocumentReference {
   _$AdvancedJsonDocumentReference(this.reference);
 
   @override
@@ -246,6 +247,7 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -268,6 +270,7 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -290,6 +293,7 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -317,13 +321,16 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (firstName != _sentinel)
-        _$AdvancedJsonFieldMap['firstName']!:
-            _$AdvancedJsonPerFieldToJson.firstName(firstName as String?),
+        _$AdvancedJsonFieldMap['firstName']!: _$AdvancedJsonPerFieldToJson
+            .firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$AdvancedJsonFieldMap['lastName']!:
-            _$AdvancedJsonPerFieldToJson.lastName(lastName as String?),
+        _$AdvancedJsonFieldMap['lastName']!: _$AdvancedJsonPerFieldToJson
+            .lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -348,13 +355,16 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (firstName != _sentinel)
-        _$AdvancedJsonFieldMap['firstName']!:
-            _$AdvancedJsonPerFieldToJson.firstName(firstName as String?),
+        _$AdvancedJsonFieldMap['firstName']!: _$AdvancedJsonPerFieldToJson
+            .firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$AdvancedJsonFieldMap['lastName']!:
-            _$AdvancedJsonPerFieldToJson.lastName(lastName as String?),
+        _$AdvancedJsonFieldMap['lastName']!: _$AdvancedJsonPerFieldToJson
+            .lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -379,13 +389,16 @@ class _$AdvancedJsonDocumentReference extends FirestoreDocumentReference<
     );
     final json = {
       if (firstName != _sentinel)
-        _$AdvancedJsonFieldMap['firstName']!:
-            _$AdvancedJsonPerFieldToJson.firstName(firstName as String?),
+        _$AdvancedJsonFieldMap['firstName']!: _$AdvancedJsonPerFieldToJson
+            .firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$AdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
-        _$AdvancedJsonFieldMap['lastName']!:
-            _$AdvancedJsonPerFieldToJson.lastName(lastName as String?),
+        _$AdvancedJsonFieldMap['lastName']!: _$AdvancedJsonPerFieldToJson
+            .lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$AdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -559,17 +572,17 @@ class _$AdvancedJsonQuery
     required Query<AdvancedJson> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
   @override
   Stream<AdvancedJsonQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference
-        .snapshots()
-        .map(AdvancedJsonQuerySnapshot._fromQuerySnapshot);
+    return reference.snapshots().map(
+      AdvancedJsonQuerySnapshot._fromQuerySnapshot,
+    );
   }
 
   @override
@@ -626,7 +639,8 @@ class _$AdvancedJsonQuery
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -658,7 +672,8 @@ class _$AdvancedJsonQuery
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -692,20 +707,24 @@ class _$AdvancedJsonQuery
             ? _$AdvancedJsonPerFieldToJson.firstName(isLessThan as String?)
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$AdvancedJsonPerFieldToJson
-                .firstName(isLessThanOrEqualTo as String?)
+            ? _$AdvancedJsonPerFieldToJson.firstName(
+                isLessThanOrEqualTo as String?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
             ? _$AdvancedJsonPerFieldToJson.firstName(isGreaterThan as String?)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$AdvancedJsonPerFieldToJson
-                .firstName(isGreaterThanOrEqualTo as String?)
+            ? _$AdvancedJsonPerFieldToJson.firstName(
+                isGreaterThanOrEqualTo as String?,
+              )
             : null,
         whereIn: whereIn?.map((e) => _$AdvancedJsonPerFieldToJson.firstName(e)),
-        whereNotIn:
-            whereNotIn?.map((e) => _$AdvancedJsonPerFieldToJson.firstName(e)),
-        isNull: isNull ??
+        whereNotIn: whereNotIn?.map(
+          (e) => _$AdvancedJsonPerFieldToJson.firstName(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -739,20 +758,24 @@ class _$AdvancedJsonQuery
             ? _$AdvancedJsonPerFieldToJson.lastName(isLessThan as String?)
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$AdvancedJsonPerFieldToJson
-                .lastName(isLessThanOrEqualTo as String?)
+            ? _$AdvancedJsonPerFieldToJson.lastName(
+                isLessThanOrEqualTo as String?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
             ? _$AdvancedJsonPerFieldToJson.lastName(isGreaterThan as String?)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$AdvancedJsonPerFieldToJson
-                .lastName(isGreaterThanOrEqualTo as String?)
+            ? _$AdvancedJsonPerFieldToJson.lastName(
+                isGreaterThanOrEqualTo as String?,
+              )
             : null,
         whereIn: whereIn?.map((e) => _$AdvancedJsonPerFieldToJson.lastName(e)),
-        whereNotIn:
-            whereNotIn?.map((e) => _$AdvancedJsonPerFieldToJson.lastName(e)),
-        isNull: isNull ??
+        whereNotIn: whereNotIn?.map(
+          (e) => _$AdvancedJsonPerFieldToJson.lastName(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -773,8 +796,10 @@ class _$AdvancedJsonQuery
     AdvancedJsonDocumentSnapshot? endBeforeDocument,
     AdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -846,8 +871,10 @@ class _$AdvancedJsonQuery
     AdvancedJsonDocumentSnapshot? endBeforeDocument,
     AdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -919,8 +946,10 @@ class _$AdvancedJsonQuery
     AdvancedJsonDocumentSnapshot? endBeforeDocument,
     AdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$AdvancedJsonFieldMap['firstName']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$AdvancedJsonFieldMap['firstName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -952,7 +981,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$AdvancedJsonPerFieldToJson.firstName(startAt as String?)
+          _$AdvancedJsonPerFieldToJson.firstName(startAt as String?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -961,7 +990,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$AdvancedJsonPerFieldToJson.firstName(startAfter as String?)
+          _$AdvancedJsonPerFieldToJson.firstName(startAfter as String?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -970,7 +999,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$AdvancedJsonPerFieldToJson.firstName(endAt as String?)
+          _$AdvancedJsonPerFieldToJson.firstName(endAt as String?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -979,7 +1008,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$AdvancedJsonPerFieldToJson.firstName(endBefore as String?)
+          _$AdvancedJsonPerFieldToJson.firstName(endBefore as String?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1004,8 +1033,10 @@ class _$AdvancedJsonQuery
     AdvancedJsonDocumentSnapshot? endBeforeDocument,
     AdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$AdvancedJsonFieldMap['lastName']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$AdvancedJsonFieldMap['lastName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1037,7 +1068,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$AdvancedJsonPerFieldToJson.lastName(startAt as String?)
+          _$AdvancedJsonPerFieldToJson.lastName(startAt as String?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1046,7 +1077,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$AdvancedJsonPerFieldToJson.lastName(startAfter as String?)
+          _$AdvancedJsonPerFieldToJson.lastName(startAfter as String?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1055,7 +1086,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$AdvancedJsonPerFieldToJson.lastName(endAt as String?)
+          _$AdvancedJsonPerFieldToJson.lastName(endAt as String?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1064,7 +1095,7 @@ class _$AdvancedJsonQuery
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$AdvancedJsonPerFieldToJson.lastName(endBefore as String?)
+          _$AdvancedJsonPerFieldToJson.lastName(endBefore as String?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1097,45 +1128,37 @@ class AdvancedJsonDocumentSnapshot
 
   @override
   AdvancedJsonDocumentReference get reference {
-    return AdvancedJsonDocumentReference(
-      snapshot.reference,
-    );
+    return AdvancedJsonDocumentReference(snapshot.reference);
   }
 
   @override
   final AdvancedJson? data;
 }
 
-class AdvancedJsonQuerySnapshot extends FirestoreQuerySnapshot<AdvancedJson,
-    AdvancedJsonQueryDocumentSnapshot> {
-  AdvancedJsonQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+class AdvancedJsonQuerySnapshot
+    extends
+        FirestoreQuerySnapshot<
+          AdvancedJson,
+          AdvancedJsonQueryDocumentSnapshot
+        > {
+  AdvancedJsonQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory AdvancedJsonQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<AdvancedJson> snapshot,
   ) {
-    final docs =
-        snapshot.docs.map(AdvancedJsonQueryDocumentSnapshot._).toList();
+    final docs = snapshot.docs
+        .map(AdvancedJsonQueryDocumentSnapshot._)
+        .toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        AdvancedJsonDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, AdvancedJsonDocumentSnapshot._);
     }).toList();
 
-    return AdvancedJsonQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return AdvancedJsonQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<AdvancedJsonDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     AdvancedJsonDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -1179,8 +1202,10 @@ class AdvancedJsonQueryDocumentSnapshot
 abstract class _PrivateAdvancedJsonCollectionReference
     implements
         _PrivateAdvancedJsonQuery,
-        FirestoreCollectionReference<_PrivateAdvancedJson,
-            _PrivateAdvancedJsonQuerySnapshot> {
+        FirestoreCollectionReference<
+          _PrivateAdvancedJson,
+          _PrivateAdvancedJsonQuerySnapshot
+        > {
   factory _PrivateAdvancedJsonCollectionReference([
     FirebaseFirestore? firestore,
   ]) = _$_PrivateAdvancedJsonCollectionReference;
@@ -1213,8 +1238,9 @@ abstract class _PrivateAdvancedJsonCollectionReference
 class _$_PrivateAdvancedJsonCollectionReference
     extends _$_PrivateAdvancedJsonQuery
     implements _PrivateAdvancedJsonCollectionReference {
-  factory _$_PrivateAdvancedJsonCollectionReference(
-      [FirebaseFirestore? firestore]) {
+  factory _$_PrivateAdvancedJsonCollectionReference([
+    FirebaseFirestore? firestore,
+  ]) {
     firestore ??= FirebaseFirestore.instance;
 
     return _$_PrivateAdvancedJsonCollectionReference._(
@@ -1244,14 +1270,13 @@ class _$_PrivateAdvancedJsonCollectionReference
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return _PrivateAdvancedJsonDocumentReference(
-      reference.doc(id),
-    );
+    return _PrivateAdvancedJsonDocumentReference(reference.doc(id));
   }
 
   @override
   Future<_PrivateAdvancedJsonDocumentReference> add(
-      _PrivateAdvancedJson value) {
+    _PrivateAdvancedJson value,
+  ) {
     return reference
         .add(value)
         .then((ref) => _PrivateAdvancedJsonDocumentReference(ref));
@@ -1269,11 +1294,14 @@ class _$_PrivateAdvancedJsonCollectionReference
 }
 
 abstract class _PrivateAdvancedJsonDocumentReference
-    extends FirestoreDocumentReference<_PrivateAdvancedJson,
-        _PrivateAdvancedJsonDocumentSnapshot> {
+    extends
+        FirestoreDocumentReference<
+          _PrivateAdvancedJson,
+          _PrivateAdvancedJsonDocumentSnapshot
+        > {
   factory _PrivateAdvancedJsonDocumentReference(
-          DocumentReference<_PrivateAdvancedJson> reference) =
-      _$_PrivateAdvancedJsonDocumentReference;
+    DocumentReference<_PrivateAdvancedJson> reference,
+  ) = _$_PrivateAdvancedJsonDocumentReference;
 
   DocumentReference<_PrivateAdvancedJson> get reference;
 
@@ -1371,8 +1399,11 @@ abstract class _PrivateAdvancedJsonDocumentReference
 }
 
 class _$_PrivateAdvancedJsonDocumentReference
-    extends FirestoreDocumentReference<_PrivateAdvancedJson,
-        _PrivateAdvancedJsonDocumentSnapshot>
+    extends
+        FirestoreDocumentReference<
+          _PrivateAdvancedJson,
+          _PrivateAdvancedJsonDocumentSnapshot
+        >
     implements _PrivateAdvancedJsonDocumentReference {
   _$_PrivateAdvancedJsonDocumentReference(this.reference);
 
@@ -1396,7 +1427,8 @@ class _$_PrivateAdvancedJsonDocumentReference
 
   @override
   Future<_PrivateAdvancedJsonDocumentSnapshot> transactionGet(
-      Transaction transaction) {
+    Transaction transaction,
+  ) {
     return transaction
         .get(reference)
         .then(_PrivateAdvancedJsonDocumentSnapshot._);
@@ -1412,6 +1444,7 @@ class _$_PrivateAdvancedJsonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1434,6 +1467,7 @@ class _$_PrivateAdvancedJsonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1456,6 +1490,7 @@ class _$_PrivateAdvancedJsonDocumentReference
       ...model.toJson(),
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1485,11 +1520,14 @@ class _$_PrivateAdvancedJsonDocumentReference
       if (firstName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['firstName']!:
             _$PrivateAdvancedJsonPerFieldToJson.firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['lastName']!:
             _$PrivateAdvancedJsonPerFieldToJson.lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1516,11 +1554,14 @@ class _$_PrivateAdvancedJsonDocumentReference
       if (firstName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['firstName']!:
             _$PrivateAdvancedJsonPerFieldToJson.firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['lastName']!:
             _$PrivateAdvancedJsonPerFieldToJson.lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1547,11 +1588,14 @@ class _$_PrivateAdvancedJsonDocumentReference
       if (firstName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['firstName']!:
             _$PrivateAdvancedJsonPerFieldToJson.firstName(firstName as String?),
+
       if (firstNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['firstName']!: firstNameFieldValue,
+
       if (lastName != _sentinel)
         _$PrivateAdvancedJsonFieldMap['lastName']!:
             _$PrivateAdvancedJsonPerFieldToJson.lastName(lastName as String?),
+
       if (lastNameFieldValue != null)
         _$PrivateAdvancedJsonFieldMap['lastName']!: lastNameFieldValue,
     };
@@ -1573,8 +1617,10 @@ class _$_PrivateAdvancedJsonDocumentReference
 
 abstract class _PrivateAdvancedJsonQuery
     implements
-        QueryReference<_PrivateAdvancedJson,
-            _PrivateAdvancedJsonQuerySnapshot> {
+        QueryReference<
+          _PrivateAdvancedJson,
+          _PrivateAdvancedJsonQuerySnapshot
+        > {
   @override
   _PrivateAdvancedJsonQuery limit(int limit);
 
@@ -1719,25 +1765,28 @@ abstract class _PrivateAdvancedJsonQuery
   });
 }
 
-class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
-    _PrivateAdvancedJsonQuerySnapshot> implements _PrivateAdvancedJsonQuery {
+class _$_PrivateAdvancedJsonQuery
+    extends
+        QueryReference<_PrivateAdvancedJson, _PrivateAdvancedJsonQuerySnapshot>
+    implements _PrivateAdvancedJsonQuery {
   _$_PrivateAdvancedJsonQuery(
     this._collection, {
     required Query<_PrivateAdvancedJson> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
   @override
-  Stream<_PrivateAdvancedJsonQuerySnapshot> snapshots(
-      [SnapshotOptions? options]) {
-    return reference
-        .snapshots()
-        .map(_PrivateAdvancedJsonQuerySnapshot._fromQuerySnapshot);
+  Stream<_PrivateAdvancedJsonQuerySnapshot> snapshots([
+    SnapshotOptions? options,
+  ]) {
+    return reference.snapshots().map(
+      _PrivateAdvancedJsonQuerySnapshot._fromQuerySnapshot,
+    );
   }
 
   @override
@@ -1794,7 +1843,8 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1826,7 +1876,8 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1851,34 +1902,43 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         _$PrivateAdvancedJsonFieldMap['firstName']!,
         isEqualTo: isEqualTo != _sentinel
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isEqualTo as String?,
+              )
             : null,
         isNotEqualTo: isNotEqualTo != _sentinel
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isNotEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isNotEqualTo as String?,
+              )
             : null,
         isLessThan: isLessThan != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isLessThan as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isLessThan as String?,
+              )
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isLessThanOrEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isLessThanOrEqualTo as String?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isGreaterThan as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isGreaterThan as String?,
+              )
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .firstName(isGreaterThanOrEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.firstName(
+                isGreaterThanOrEqualTo as String?,
+              )
             : null,
-        whereIn: whereIn
-            ?.map((e) => _$PrivateAdvancedJsonPerFieldToJson.firstName(e)),
-        whereNotIn: whereNotIn
-            ?.map((e) => _$PrivateAdvancedJsonPerFieldToJson.firstName(e)),
-        isNull: isNull ??
+        whereIn: whereIn?.map(
+          (e) => _$PrivateAdvancedJsonPerFieldToJson.firstName(e),
+        ),
+        whereNotIn: whereNotIn?.map(
+          (e) => _$PrivateAdvancedJsonPerFieldToJson.firstName(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1906,30 +1966,38 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
             ? _$PrivateAdvancedJsonPerFieldToJson.lastName(isEqualTo as String?)
             : null,
         isNotEqualTo: isNotEqualTo != _sentinel
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .lastName(isNotEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.lastName(
+                isNotEqualTo as String?,
+              )
             : null,
         isLessThan: isLessThan != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .lastName(isLessThan as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.lastName(
+                isLessThan as String?,
+              )
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .lastName(isLessThanOrEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.lastName(
+                isLessThanOrEqualTo as String?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .lastName(isGreaterThan as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.lastName(
+                isGreaterThan as String?,
+              )
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$PrivateAdvancedJsonPerFieldToJson
-                .lastName(isGreaterThanOrEqualTo as String?)
+            ? _$PrivateAdvancedJsonPerFieldToJson.lastName(
+                isGreaterThanOrEqualTo as String?,
+              )
             : null,
-        whereIn: whereIn
-            ?.map((e) => _$PrivateAdvancedJsonPerFieldToJson.lastName(e)),
-        whereNotIn: whereNotIn
-            ?.map((e) => _$PrivateAdvancedJsonPerFieldToJson.lastName(e)),
-        isNull: isNull ??
+        whereIn: whereIn?.map(
+          (e) => _$PrivateAdvancedJsonPerFieldToJson.lastName(e),
+        ),
+        whereNotIn: whereNotIn?.map(
+          (e) => _$PrivateAdvancedJsonPerFieldToJson.lastName(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1950,8 +2018,10 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
     _PrivateAdvancedJsonDocumentSnapshot? endBeforeDocument,
     _PrivateAdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2023,8 +2093,10 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
     _PrivateAdvancedJsonDocumentSnapshot? endBeforeDocument,
     _PrivateAdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2097,8 +2169,9 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
     _PrivateAdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor.orderBy(
-        _$PrivateAdvancedJsonFieldMap['firstName']!,
-        descending: descending);
+      _$PrivateAdvancedJsonFieldMap['firstName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2130,7 +2203,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAt as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAt as String?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -2139,7 +2212,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAfter as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(startAfter as String?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -2148,7 +2221,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$PrivateAdvancedJsonPerFieldToJson.firstName(endAt as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(endAt as String?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -2157,7 +2230,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$PrivateAdvancedJsonPerFieldToJson.firstName(endBefore as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.firstName(endBefore as String?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2183,8 +2256,9 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
     _PrivateAdvancedJsonDocumentSnapshot? startAfterDocument,
   }) {
     final query = $referenceWithoutCursor.orderBy(
-        _$PrivateAdvancedJsonFieldMap['lastName']!,
-        descending: descending);
+      _$PrivateAdvancedJsonFieldMap['lastName']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2216,7 +2290,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAt as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAt as String?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -2225,7 +2299,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAfter as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(startAfter as String?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -2234,7 +2308,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$PrivateAdvancedJsonPerFieldToJson.lastName(endAt as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(endAt as String?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -2243,7 +2317,7 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$PrivateAdvancedJsonPerFieldToJson.lastName(endBefore as String?)
+          _$PrivateAdvancedJsonPerFieldToJson.lastName(endBefore as String?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -2270,24 +2344,26 @@ class _$_PrivateAdvancedJsonQuery extends QueryReference<_PrivateAdvancedJson,
 class _PrivateAdvancedJsonDocumentSnapshot
     extends FirestoreDocumentSnapshot<_PrivateAdvancedJson> {
   _PrivateAdvancedJsonDocumentSnapshot._(this.snapshot)
-      : data = snapshot.data();
+    : data = snapshot.data();
 
   @override
   final DocumentSnapshot<_PrivateAdvancedJson> snapshot;
 
   @override
   _PrivateAdvancedJsonDocumentReference get reference {
-    return _PrivateAdvancedJsonDocumentReference(
-      snapshot.reference,
-    );
+    return _PrivateAdvancedJsonDocumentReference(snapshot.reference);
   }
 
   @override
   final _PrivateAdvancedJson? data;
 }
 
-class _PrivateAdvancedJsonQuerySnapshot extends FirestoreQuerySnapshot<
-    _PrivateAdvancedJson, _PrivateAdvancedJsonQueryDocumentSnapshot> {
+class _PrivateAdvancedJsonQuerySnapshot
+    extends
+        FirestoreQuerySnapshot<
+          _PrivateAdvancedJson,
+          _PrivateAdvancedJsonQueryDocumentSnapshot
+        > {
   _PrivateAdvancedJsonQuerySnapshot._(
     this.snapshot,
     this.docs,
@@ -2297,8 +2373,9 @@ class _PrivateAdvancedJsonQuerySnapshot extends FirestoreQuerySnapshot<
   factory _PrivateAdvancedJsonQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<_PrivateAdvancedJson> snapshot,
   ) {
-    final docs =
-        snapshot.docs.map(_PrivateAdvancedJsonQueryDocumentSnapshot._).toList();
+    final docs = snapshot.docs
+        .map(_PrivateAdvancedJsonQueryDocumentSnapshot._)
+        .toList();
 
     final docChanges = snapshot.docChanges.map((change) {
       return _decodeDocumentChange(
@@ -2307,18 +2384,14 @@ class _PrivateAdvancedJsonQuerySnapshot extends FirestoreQuerySnapshot<
       );
     }).toList();
 
-    return _PrivateAdvancedJsonQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return _PrivateAdvancedJsonQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<_PrivateAdvancedJsonDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     _PrivateAdvancedJsonDocumentSnapshot Function(DocumentSnapshot<T> doc)
-        decodeDoc,
+    decodeDoc,
   ) {
     return FirestoreDocumentChange<_PrivateAdvancedJsonDocumentSnapshot>(
       type: docChange.type,
@@ -2335,14 +2408,14 @@ class _PrivateAdvancedJsonQuerySnapshot extends FirestoreQuerySnapshot<
 
   @override
   final List<FirestoreDocumentChange<_PrivateAdvancedJsonDocumentSnapshot>>
-      docChanges;
+  docChanges;
 }
 
 class _PrivateAdvancedJsonQueryDocumentSnapshot
     extends FirestoreQueryDocumentSnapshot<_PrivateAdvancedJson>
     implements _PrivateAdvancedJsonDocumentSnapshot {
   _PrivateAdvancedJsonQueryDocumentSnapshot._(this.snapshot)
-      : data = snapshot.data();
+    : data = snapshot.data();
 
   @override
   final QueryDocumentSnapshot<_PrivateAdvancedJson> snapshot;
@@ -2363,9 +2436,8 @@ abstract class EmptyModelCollectionReference
     implements
         EmptyModelQuery,
         FirestoreCollectionReference<EmptyModel, EmptyModelQuerySnapshot> {
-  factory EmptyModelCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$EmptyModelCollectionReference;
+  factory EmptyModelCollectionReference([FirebaseFirestore? firestore]) =
+      _$EmptyModelCollectionReference;
 
   static EmptyModel fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -2398,16 +2470,17 @@ class _$EmptyModelCollectionReference extends _$EmptyModelQuery
     firestore ??= FirebaseFirestore.instance;
 
     return _$EmptyModelCollectionReference._(
-      firestore.collection('firestore-example-app/test/config').withConverter(
+      firestore
+          .collection('firestore-example-app/test/config')
+          .withConverter(
             fromFirestore: EmptyModelCollectionReference.fromFirestore,
             toFirestore: EmptyModelCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$EmptyModelCollectionReference._(
-    CollectionReference<EmptyModel> reference,
-  ) : super(reference, $referenceWithoutCursor: reference);
+  _$EmptyModelCollectionReference._(CollectionReference<EmptyModel> reference)
+    : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -2421,9 +2494,7 @@ class _$EmptyModelCollectionReference extends _$EmptyModelQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return EmptyModelDocumentReference(
-      reference.doc(id),
-    );
+    return EmptyModelDocumentReference(reference.doc(id));
   }
 
   @override
@@ -2610,17 +2681,17 @@ class _$EmptyModelQuery
     required Query<EmptyModel> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
   @override
   Stream<EmptyModelQuerySnapshot> snapshots([SnapshotOptions? options]) {
-    return reference
-        .snapshots()
-        .map(EmptyModelQuerySnapshot._fromQuerySnapshot);
+    return reference.snapshots().map(
+      EmptyModelQuerySnapshot._fromQuerySnapshot,
+    );
   }
 
   @override
@@ -2677,7 +2748,8 @@ class _$EmptyModelQuery
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -2709,7 +2781,8 @@ class _$EmptyModelQuery
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -2730,8 +2803,10 @@ class _$EmptyModelQuery
     EmptyModelDocumentSnapshot? endBeforeDocument,
     EmptyModelDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2803,8 +2878,10 @@ class _$EmptyModelQuery
     EmptyModelDocumentSnapshot? endBeforeDocument,
     EmptyModelDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -2883,22 +2960,17 @@ class EmptyModelDocumentSnapshot extends FirestoreDocumentSnapshot<EmptyModel> {
 
   @override
   EmptyModelDocumentReference get reference {
-    return EmptyModelDocumentReference(
-      snapshot.reference,
-    );
+    return EmptyModelDocumentReference(snapshot.reference);
   }
 
   @override
   final EmptyModel? data;
 }
 
-class EmptyModelQuerySnapshot extends FirestoreQuerySnapshot<EmptyModel,
-    EmptyModelQueryDocumentSnapshot> {
-  EmptyModelQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+class EmptyModelQuerySnapshot
+    extends
+        FirestoreQuerySnapshot<EmptyModel, EmptyModelQueryDocumentSnapshot> {
+  EmptyModelQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory EmptyModelQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<EmptyModel> snapshot,
@@ -2906,21 +2978,14 @@ class EmptyModelQuerySnapshot extends FirestoreQuerySnapshot<EmptyModel,
     final docs = snapshot.docs.map(EmptyModelQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        EmptyModelDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, EmptyModelDocumentSnapshot._);
     }).toList();
 
-    return EmptyModelQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return EmptyModelQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<EmptyModelDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     EmptyModelDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -2973,9 +3038,9 @@ Map<String, dynamic> _$EmptyModelToJson(EmptyModel instance) =>
     <String, dynamic>{};
 
 AdvancedJson _$AdvancedJsonFromJson(Map<String, dynamic> json) => AdvancedJson(
-      firstName: json['first_name'] as String?,
-      lastName: json['LAST_NAME'] as String?,
-    );
+  firstName: json['first_name'] as String?,
+  lastName: json['LAST_NAME'] as String?,
+);
 
 const _$AdvancedJsonFieldMap = <String, String>{
   'firstName': 'first_name',
@@ -3016,8 +3081,8 @@ abstract class _$PrivateAdvancedJsonPerFieldToJson {
 }
 
 Map<String, dynamic> _$PrivateAdvancedJsonToJson(
-        _PrivateAdvancedJson instance) =>
-    <String, dynamic>{
-      'first_name': instance.firstName,
-      'LAST_NAME': instance.lastName,
-    };
+  _PrivateAdvancedJson instance,
+) => <String, dynamic>{
+  'first_name': instance.firstName,
+  'LAST_NAME': instance.lastName,
+};

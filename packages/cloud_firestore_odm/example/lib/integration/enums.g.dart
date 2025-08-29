@@ -26,9 +26,8 @@ abstract class EnumsCollectionReference
     implements
         EnumsQuery,
         FirestoreCollectionReference<Enums, EnumsQuerySnapshot> {
-  factory EnumsCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$EnumsCollectionReference;
+  factory EnumsCollectionReference([FirebaseFirestore? firestore]) =
+      _$EnumsCollectionReference;
 
   static Enums fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -37,10 +36,7 @@ abstract class EnumsCollectionReference
     return Enums.fromJson(snapshot.data()!);
   }
 
-  static Map<String, Object?> toFirestore(
-    Enums value,
-    SetOptions? options,
-  ) {
+  static Map<String, Object?> toFirestore(Enums value, SetOptions? options) {
     return value.toJson();
   }
 
@@ -61,16 +57,17 @@ class _$EnumsCollectionReference extends _$EnumsQuery
     firestore ??= FirebaseFirestore.instance;
 
     return _$EnumsCollectionReference._(
-      firestore.collection('firestore-example-app').withConverter(
+      firestore
+          .collection('firestore-example-app')
+          .withConverter(
             fromFirestore: EnumsCollectionReference.fromFirestore,
             toFirestore: EnumsCollectionReference.toFirestore,
           ),
     );
   }
 
-  _$EnumsCollectionReference._(
-    CollectionReference<Enums> reference,
-  ) : super(reference, $referenceWithoutCursor: reference);
+  _$EnumsCollectionReference._(CollectionReference<Enums> reference)
+    : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -84,9 +81,7 @@ class _$EnumsCollectionReference extends _$EnumsQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return EnumsDocumentReference(
-      reference.doc(id),
-    );
+    return EnumsDocumentReference(reference.doc(id));
   }
 
   @override
@@ -272,12 +267,16 @@ class _$EnumsDocumentReference
     final json = {
       ...model.toJson(),
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -302,12 +301,16 @@ class _$EnumsDocumentReference
     final json = {
       ...model.toJson(),
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -332,12 +335,16 @@ class _$EnumsDocumentReference
     final json = {
       ...model.toJson(),
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -384,25 +391,36 @@ class _$EnumsDocumentReference
     final json = {
       if (id != _sentinel)
         _$EnumsFieldMap['id']!: _$EnumsPerFieldToJson.id(id as String),
+
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValue != _sentinel)
-        _$EnumsFieldMap['enumValue']!:
-            _$EnumsPerFieldToJson.enumValue(enumValue as TestEnum),
+        _$EnumsFieldMap['enumValue']!: _$EnumsPerFieldToJson.enumValue(
+          enumValue as TestEnum,
+        ),
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValue != _sentinel)
         _$EnumsFieldMap['nullableEnumValue']!: _$EnumsPerFieldToJson
             .nullableEnumValue(nullableEnumValue as TestEnum?),
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumList != _sentinel)
-        _$EnumsFieldMap['enumList']!:
-            _$EnumsPerFieldToJson.enumList(enumList as List<TestEnum>),
+        _$EnumsFieldMap['enumList']!: _$EnumsPerFieldToJson.enumList(
+          enumList as List<TestEnum>,
+        ),
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumList != _sentinel)
         _$EnumsFieldMap['nullableEnumList']!: _$EnumsPerFieldToJson
             .nullableEnumList(nullableEnumList as List<TestEnum>?),
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -446,25 +464,36 @@ class _$EnumsDocumentReference
     final json = {
       if (id != _sentinel)
         _$EnumsFieldMap['id']!: _$EnumsPerFieldToJson.id(id as String),
+
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValue != _sentinel)
-        _$EnumsFieldMap['enumValue']!:
-            _$EnumsPerFieldToJson.enumValue(enumValue as TestEnum),
+        _$EnumsFieldMap['enumValue']!: _$EnumsPerFieldToJson.enumValue(
+          enumValue as TestEnum,
+        ),
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValue != _sentinel)
         _$EnumsFieldMap['nullableEnumValue']!: _$EnumsPerFieldToJson
             .nullableEnumValue(nullableEnumValue as TestEnum?),
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumList != _sentinel)
-        _$EnumsFieldMap['enumList']!:
-            _$EnumsPerFieldToJson.enumList(enumList as List<TestEnum>),
+        _$EnumsFieldMap['enumList']!: _$EnumsPerFieldToJson.enumList(
+          enumList as List<TestEnum>,
+        ),
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumList != _sentinel)
         _$EnumsFieldMap['nullableEnumList']!: _$EnumsPerFieldToJson
             .nullableEnumList(nullableEnumList as List<TestEnum>?),
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -508,25 +537,36 @@ class _$EnumsDocumentReference
     final json = {
       if (id != _sentinel)
         _$EnumsFieldMap['id']!: _$EnumsPerFieldToJson.id(id as String),
+
       if (idFieldValue != null) _$EnumsFieldMap['id']!: idFieldValue,
+
       if (enumValue != _sentinel)
-        _$EnumsFieldMap['enumValue']!:
-            _$EnumsPerFieldToJson.enumValue(enumValue as TestEnum),
+        _$EnumsFieldMap['enumValue']!: _$EnumsPerFieldToJson.enumValue(
+          enumValue as TestEnum,
+        ),
+
       if (enumValueFieldValue != null)
         _$EnumsFieldMap['enumValue']!: enumValueFieldValue,
+
       if (nullableEnumValue != _sentinel)
         _$EnumsFieldMap['nullableEnumValue']!: _$EnumsPerFieldToJson
             .nullableEnumValue(nullableEnumValue as TestEnum?),
+
       if (nullableEnumValueFieldValue != null)
         _$EnumsFieldMap['nullableEnumValue']!: nullableEnumValueFieldValue,
+
       if (enumList != _sentinel)
-        _$EnumsFieldMap['enumList']!:
-            _$EnumsPerFieldToJson.enumList(enumList as List<TestEnum>),
+        _$EnumsFieldMap['enumList']!: _$EnumsPerFieldToJson.enumList(
+          enumList as List<TestEnum>,
+        ),
+
       if (enumListFieldValue != null)
         _$EnumsFieldMap['enumList']!: enumListFieldValue,
+
       if (nullableEnumList != _sentinel)
         _$EnumsFieldMap['nullableEnumList']!: _$EnumsPerFieldToJson
             .nullableEnumList(nullableEnumList as List<TestEnum>?),
+
       if (nullableEnumListFieldValue != null)
         _$EnumsFieldMap['nullableEnumList']!: nullableEnumListFieldValue,
     };
@@ -770,9 +810,9 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     required Query<Enums> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
@@ -833,7 +873,8 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -865,7 +906,8 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -909,7 +951,8 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$EnumsPerFieldToJson.id(e)),
         whereNotIn: whereNotIn?.map((e) => _$EnumsPerFieldToJson.id(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -949,12 +992,14 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
             ? _$EnumsPerFieldToJson.enumValue(isGreaterThan as TestEnum)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .enumValue(isGreaterThanOrEqualTo as TestEnum)
+            ? _$EnumsPerFieldToJson.enumValue(
+                isGreaterThanOrEqualTo as TestEnum,
+              )
             : null,
         whereIn: whereIn?.map((e) => _$EnumsPerFieldToJson.enumValue(e)),
         whereNotIn: whereNotIn?.map((e) => _$EnumsPerFieldToJson.enumValue(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -988,22 +1033,28 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
             ? _$EnumsPerFieldToJson.nullableEnumValue(isLessThan as TestEnum?)
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumValue(isLessThanOrEqualTo as TestEnum?)
+            ? _$EnumsPerFieldToJson.nullableEnumValue(
+                isLessThanOrEqualTo as TestEnum?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumValue(isGreaterThan as TestEnum?)
+            ? _$EnumsPerFieldToJson.nullableEnumValue(
+                isGreaterThan as TestEnum?,
+              )
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumValue(isGreaterThanOrEqualTo as TestEnum?)
+            ? _$EnumsPerFieldToJson.nullableEnumValue(
+                isGreaterThanOrEqualTo as TestEnum?,
+              )
             : null,
-        whereIn:
-            whereIn?.map((e) => _$EnumsPerFieldToJson.nullableEnumValue(e)),
-        whereNotIn:
-            whereNotIn?.map((e) => _$EnumsPerFieldToJson.nullableEnumValue(e)),
-        isNull: isNull ??
+        whereIn: whereIn?.map(
+          (e) => _$EnumsPerFieldToJson.nullableEnumValue(e),
+        ),
+        whereNotIn: whereNotIn?.map(
+          (e) => _$EnumsPerFieldToJson.nullableEnumValue(e),
+        ),
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1037,26 +1088,29 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
             ? _$EnumsPerFieldToJson.enumList(isLessThan as List<TestEnum>)
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .enumList(isLessThanOrEqualTo as List<TestEnum>)
+            ? _$EnumsPerFieldToJson.enumList(
+                isLessThanOrEqualTo as List<TestEnum>,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
             ? _$EnumsPerFieldToJson.enumList(isGreaterThan as List<TestEnum>)
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .enumList(isGreaterThanOrEqualTo as List<TestEnum>)
+            ? _$EnumsPerFieldToJson.enumList(
+                isGreaterThanOrEqualTo as List<TestEnum>,
+              )
             : null,
         arrayContains: arrayContains != null
             ? (_$EnumsPerFieldToJson.enumList([arrayContains as TestEnum])
-                    as List?)!
-                .single
+                      as List?)!
+                  .single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$EnumsPerFieldToJson.enumList(arrayContainsAny)
-                as Iterable<Object>?
+                  as Iterable<Object>?
             : null,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1081,39 +1135,48 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       $referenceWithoutCursor: $referenceWithoutCursor.where(
         _$EnumsFieldMap['nullableEnumList']!,
         isEqualTo: isEqualTo != _sentinel
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isEqualTo as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isEqualTo as List<TestEnum>?,
+              )
             : null,
         isNotEqualTo: isNotEqualTo != _sentinel
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isNotEqualTo as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isNotEqualTo as List<TestEnum>?,
+              )
             : null,
         isLessThan: isLessThan != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isLessThan as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isLessThan as List<TestEnum>?,
+              )
             : null,
         isLessThanOrEqualTo: isLessThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isLessThanOrEqualTo as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isLessThanOrEqualTo as List<TestEnum>?,
+              )
             : null,
         isGreaterThan: isGreaterThan != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isGreaterThan as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isGreaterThan as List<TestEnum>?,
+              )
             : null,
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo != null
-            ? _$EnumsPerFieldToJson
-                .nullableEnumList(isGreaterThanOrEqualTo as List<TestEnum>?)
+            ? _$EnumsPerFieldToJson.nullableEnumList(
+                isGreaterThanOrEqualTo as List<TestEnum>?,
+              )
             : null,
         arrayContains: arrayContains != null
-            ? (_$EnumsPerFieldToJson
-                    .nullableEnumList([arrayContains as TestEnum]) as List?)!
-                .single
+            ? (_$EnumsPerFieldToJson.nullableEnumList([
+                        arrayContains as TestEnum,
+                      ])
+                      as List?)!
+                  .single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$EnumsPerFieldToJson.nullableEnumList(arrayContainsAny)
-                as Iterable<Object>?
+                  as Iterable<Object>?
             : null,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -1134,8 +1197,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1207,8 +1272,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1280,8 +1347,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$EnumsFieldMap['id']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$EnumsFieldMap['id']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1313,7 +1382,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$EnumsPerFieldToJson.id(startAt as String)
+          _$EnumsPerFieldToJson.id(startAt as String),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1322,7 +1391,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$EnumsPerFieldToJson.id(startAfter as String)
+          _$EnumsPerFieldToJson.id(startAfter as String),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1331,7 +1400,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$EnumsPerFieldToJson.id(endAt as String)
+          _$EnumsPerFieldToJson.id(endAt as String),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1340,7 +1409,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$EnumsPerFieldToJson.id(endBefore as String)
+          _$EnumsPerFieldToJson.id(endBefore as String),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1365,8 +1434,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$EnumsFieldMap['enumValue']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$EnumsFieldMap['enumValue']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1398,7 +1469,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$EnumsPerFieldToJson.enumValue(startAt as TestEnum)
+          _$EnumsPerFieldToJson.enumValue(startAt as TestEnum),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1407,7 +1478,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$EnumsPerFieldToJson.enumValue(startAfter as TestEnum)
+          _$EnumsPerFieldToJson.enumValue(startAfter as TestEnum),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1416,7 +1487,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$EnumsPerFieldToJson.enumValue(endAt as TestEnum)
+          _$EnumsPerFieldToJson.enumValue(endAt as TestEnum),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1425,7 +1496,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$EnumsPerFieldToJson.enumValue(endBefore as TestEnum)
+          _$EnumsPerFieldToJson.enumValue(endBefore as TestEnum),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1450,8 +1521,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$EnumsFieldMap['nullableEnumValue']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$EnumsFieldMap['nullableEnumValue']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1483,7 +1556,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$EnumsPerFieldToJson.nullableEnumValue(startAt as TestEnum?)
+          _$EnumsPerFieldToJson.nullableEnumValue(startAt as TestEnum?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1492,7 +1565,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$EnumsPerFieldToJson.nullableEnumValue(startAfter as TestEnum?)
+          _$EnumsPerFieldToJson.nullableEnumValue(startAfter as TestEnum?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1501,7 +1574,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$EnumsPerFieldToJson.nullableEnumValue(endAt as TestEnum?)
+          _$EnumsPerFieldToJson.nullableEnumValue(endAt as TestEnum?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1510,7 +1583,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$EnumsPerFieldToJson.nullableEnumValue(endBefore as TestEnum?)
+          _$EnumsPerFieldToJson.nullableEnumValue(endBefore as TestEnum?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1535,8 +1608,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$EnumsFieldMap['enumList']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$EnumsFieldMap['enumList']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1568,7 +1643,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$EnumsPerFieldToJson.enumList(startAt as List<TestEnum>)
+          _$EnumsPerFieldToJson.enumList(startAt as List<TestEnum>),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1577,7 +1652,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$EnumsPerFieldToJson.enumList(startAfter as List<TestEnum>)
+          _$EnumsPerFieldToJson.enumList(startAfter as List<TestEnum>),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1586,7 +1661,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$EnumsPerFieldToJson.enumList(endAt as List<TestEnum>)
+          _$EnumsPerFieldToJson.enumList(endAt as List<TestEnum>),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1595,7 +1670,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$EnumsPerFieldToJson.enumList(endBefore as List<TestEnum>)
+          _$EnumsPerFieldToJson.enumList(endBefore as List<TestEnum>),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1620,8 +1695,10 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
     EnumsDocumentSnapshot? endBeforeDocument,
     EnumsDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor
-        .orderBy(_$EnumsFieldMap['nullableEnumList']!, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$EnumsFieldMap['nullableEnumList']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -1653,7 +1730,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$EnumsPerFieldToJson.nullableEnumList(startAt as List<TestEnum>?)
+          _$EnumsPerFieldToJson.nullableEnumList(startAt as List<TestEnum>?),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -1662,7 +1739,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$EnumsPerFieldToJson.nullableEnumList(startAfter as List<TestEnum>?)
+          _$EnumsPerFieldToJson.nullableEnumList(startAfter as List<TestEnum>?),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -1671,7 +1748,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$EnumsPerFieldToJson.nullableEnumList(endAt as List<TestEnum>?)
+          _$EnumsPerFieldToJson.nullableEnumList(endAt as List<TestEnum>?),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -1680,7 +1757,7 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$EnumsPerFieldToJson.nullableEnumList(endBefore as List<TestEnum>?)
+          _$EnumsPerFieldToJson.nullableEnumList(endBefore as List<TestEnum>?),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -1712,9 +1789,7 @@ class EnumsDocumentSnapshot extends FirestoreDocumentSnapshot<Enums> {
 
   @override
   EnumsDocumentReference get reference {
-    return EnumsDocumentReference(
-      snapshot.reference,
-    );
+    return EnumsDocumentReference(snapshot.reference);
   }
 
   @override
@@ -1723,33 +1798,20 @@ class EnumsDocumentSnapshot extends FirestoreDocumentSnapshot<Enums> {
 
 class EnumsQuerySnapshot
     extends FirestoreQuerySnapshot<Enums, EnumsQueryDocumentSnapshot> {
-  EnumsQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+  EnumsQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
-  factory EnumsQuerySnapshot._fromQuerySnapshot(
-    QuerySnapshot<Enums> snapshot,
-  ) {
+  factory EnumsQuerySnapshot._fromQuerySnapshot(QuerySnapshot<Enums> snapshot) {
     final docs = snapshot.docs.map(EnumsQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        EnumsDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, EnumsDocumentSnapshot._);
     }).toList();
 
-    return EnumsQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return EnumsQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<EnumsDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     EnumsDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -1791,19 +1853,22 @@ class EnumsQueryDocumentSnapshot extends FirestoreQueryDocumentSnapshot<Enums>
 // **************************************************************************
 
 Enums _$EnumsFromJson(Map<String, dynamic> json) => Enums(
-      id: json['id'] as String,
-      enumValue: $enumDecodeNullable(_$TestEnumEnumMap, json['enumValue']) ??
-          TestEnum.one,
-      nullableEnumValue:
-          $enumDecodeNullable(_$TestEnumEnumMap, json['nullableEnumValue']),
-      enumList: (json['enumList'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(_$TestEnumEnumMap, e))
-              .toList() ??
-          const [],
-      nullableEnumList: (json['nullableEnumList'] as List<dynamic>?)
+  id: json['id'] as String,
+  enumValue:
+      $enumDecodeNullable(_$TestEnumEnumMap, json['enumValue']) ?? TestEnum.one,
+  nullableEnumValue: $enumDecodeNullable(
+    _$TestEnumEnumMap,
+    json['nullableEnumValue'],
+  ),
+  enumList:
+      (json['enumList'] as List<dynamic>?)
           ?.map((e) => $enumDecode(_$TestEnumEnumMap, e))
-          .toList(),
-    );
+          .toList() ??
+      const [],
+  nullableEnumList: (json['nullableEnumList'] as List<dynamic>?)
+      ?.map((e) => $enumDecode(_$TestEnumEnumMap, e))
+      .toList(),
+);
 
 const _$EnumsFieldMap = <String, String>{
   'id': 'id',
@@ -1831,13 +1896,14 @@ abstract class _$EnumsPerFieldToJson {
 }
 
 Map<String, dynamic> _$EnumsToJson(Enums instance) => <String, dynamic>{
-      'id': instance.id,
-      'enumValue': _$TestEnumEnumMap[instance.enumValue]!,
-      'nullableEnumValue': _$TestEnumEnumMap[instance.nullableEnumValue],
-      'enumList': instance.enumList.map((e) => _$TestEnumEnumMap[e]!).toList(),
-      'nullableEnumList':
-          instance.nullableEnumList?.map((e) => _$TestEnumEnumMap[e]!).toList(),
-    };
+  'id': instance.id,
+  'enumValue': _$TestEnumEnumMap[instance.enumValue]!,
+  'nullableEnumValue': _$TestEnumEnumMap[instance.nullableEnumValue],
+  'enumList': instance.enumList.map((e) => _$TestEnumEnumMap[e]!).toList(),
+  'nullableEnumList': instance.nullableEnumList
+      ?.map((e) => _$TestEnumEnumMap[e]!)
+      .toList(),
+};
 
 const _$TestEnumEnumMap = {
   TestEnum.one: 'one',

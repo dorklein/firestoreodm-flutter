@@ -3,7 +3,7 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:cloud_firestore_odm/annotation.dart';
 import 'package:collection/collection.dart';
@@ -15,9 +15,9 @@ import 'package:source_helper/source_helper.dart';
 import 'collection_generator.dart';
 import 'names.dart';
 
-const collectionChecker = TypeChecker.fromRuntime(Collection);
-const jsonSerializableChecker = TypeChecker.fromRuntime(JsonSerializable);
-const freezedChecker = TypeChecker.fromRuntime(Freezed);
+const collectionChecker = TypeChecker.typeNamed(Collection);
+const jsonSerializableChecker = TypeChecker.typeNamed(JsonSerializable);
+const freezedChecker = TypeChecker.typeNamed(Freezed);
 
 class CollectionGraph {
   CollectionGraph._(this.roots, this.subCollections);
@@ -88,15 +88,15 @@ class CollectionData with Names {
     required this.perFieldToJson,
     required this.idKey,
     required this.libraryElement,
-  }) : collectionName =
-            collectionName ?? ReCase(path.split('/').last).camelCase;
+  }) : collectionName = collectionName ?? ReCase(path.split('/').last).camelCase;
 
   factory CollectionData.fromAnnotation({
-    required LibraryElement libraryElement,
-    required Element annotatedElement,
+    required LibraryElement2 libraryElement,
+    required Element2 annotatedElement,
     required DartObject annotation,
     required GlobalData globalData,
   }) {
+    print('annotation: ${annotation}');
     // TODO find a way to test validation
 
     final name = annotation.getField('name')!.toStringValue();
@@ -118,8 +118,8 @@ class CollectionData with Names {
       );
     }
 
-    final collectionTargetElement = type.element;
-    if (collectionTargetElement is! ClassElement) {
+    final collectionTargetElement = type.element3;
+    if (collectionTargetElement is! ClassElement2) {
       throw InvalidGenerationSourceError(
         'The annotation @Collection can only receive classes as generic argument. ',
         element: annotatedElement,
@@ -127,44 +127,37 @@ class CollectionData with Names {
     }
 
     final hasFreezed = freezedChecker.hasAnnotationOf(collectionTargetElement);
-    final redirectedFreezedConstructors =
-        collectionTargetElement.constructors.where(
-      (element) {
-        return element.isFactory &&
-            // It should be safe to read "redirectedConstructor" as the build.yaml
-            // asks to run the ODM after Freezed
-            element.redirectedConstructor != null;
-      },
-    ).toList();
+    final redirectedFreezedConstructors = collectionTargetElement.constructors2.where((element) {
+      return element.isFactory &&
+          // It should be safe to read "redirectedConstructor" as the build.yaml
+          // asks to run the ODM after Freezed
+          element.redirectedConstructor2 != null;
+    }).toList();
 
-    final hasJsonSerializable =
-        jsonSerializableChecker.hasAnnotationOf(collectionTargetElement);
+    final hasJsonSerializable = jsonSerializableChecker.hasAnnotationOf(collectionTargetElement);
     // Freezed classes are also JsonSerializable
     if (!hasJsonSerializable && !hasFreezed) {
       throw InvalidGenerationSourceError(
-        'Used @Collection with the class ${collectionTargetElement.name}, but '
+        'Used @Collection with the class ${collectionTargetElement.name3}, but '
         'the class has no @JsonSerializable annotation.',
       );
     }
 
-    final annotatedElementSource = annotatedElement.librarySource;
+    final annotatedElementSource = annotatedElement.library2;
     // TODO(rrousselGit) handle parts
     // Whether the model class and the reference variable are defined in the same file
     // This is important because json_serializable generates private code for
     // decoding a Model class.
     final modelAndReferenceInTheSameLibrary =
-        collectionTargetElement.librarySource == annotatedElementSource;
+        collectionTargetElement.library2 == annotatedElementSource;
     if (!modelAndReferenceInTheSameLibrary) {
-      throw InvalidGenerationSourceError(
-        '''
+      throw InvalidGenerationSourceError('''
 When using json_serializable, the `@Collection` annotation and the class that
 represents the content of the collection must be in the same file.
 
 - @Collection is from $annotatedElementSource
-- `$collectionTargetElement` is from ${collectionTargetElement.librarySource}
-''',
-        element: annotatedElement,
-      );
+- `$collectionTargetElement` is from ${collectionTargetElement.library2}
+''', element: annotatedElement);
     }
 
     // TODO test error handling
@@ -175,17 +168,17 @@ represents the content of the collection must be in the same file.
       );
     }
 
-    final collectionTargetElementPublicType =
-        collectionTargetElement.name.public;
-    final fromJson = collectionTargetElement.constructors
-        .firstWhereOrNull((ctor) => ctor.name == 'fromJson');
+    final collectionTargetElementPublicType = collectionTargetElement.name3?.public ?? '';
+    final fromJson = collectionTargetElement.constructors2.firstWhereOrNull(
+      (ctor) => ctor.name3 == 'fromJson',
+    );
     if (fromJson != null) {
-      if (fromJson.parameters.length != 1 ||
-          !fromJson.parameters.first.isRequiredPositional ||
-          !fromJson.parameters.first.type.isDartCoreMap) {
+      if (fromJson.formalParameters.length != 1 ||
+          !fromJson.formalParameters.first.isRequiredPositional ||
+          !fromJson.formalParameters.last.type.isDartCoreMap) {
         // TODO support deserializing generic objects
         throw InvalidGenerationSourceError(
-          '@Collection was used with the class ${collectionTargetElement.name} but '
+          '@Collection was used with the class ${collectionTargetElement.name3} but '
           'its fromJson does not match `Function(Map json)`.',
           element: annotatedElement,
         );
@@ -194,19 +187,19 @@ represents the content of the collection must be in the same file.
     final toJson = collectionTargetElement
         // Looking into fromJson from superTypes too
         .allMethods
-        .firstWhereOrNull((method) => method.name == 'toJson');
-    final redirectedFreezedClass = redirectedFreezedConstructors
-        .singleOrNull?.redirectedConstructor!.enclosingElement3.name;
+        .firstWhereOrNull((method) => method.name3 == 'toJson');
+    final redirectedFreezedClass =
+        redirectedFreezedConstructors.singleOrNull?.redirectedConstructor2!.enclosingElement2.name3;
     final generatedJsonTypePrefix = _generatedJsonTypePrefix(
       hasFreezed: hasFreezed,
       redirectedFreezedClass: redirectedFreezedClass,
       collectionTargetElementPublicType: collectionTargetElementPublicType,
     );
     if (toJson != null) {
-      if (toJson.parameters.isNotEmpty || !toJson.returnType.isDartCoreMap) {
+      if (toJson.formalParameters.isNotEmpty || !toJson.returnType.isDartCoreMap) {
         // TODO support serializing generic objects
         throw InvalidGenerationSourceError(
-          '@Collection was used with the class ${collectionTargetElement.name} but '
+          '@Collection was used with the class ${collectionTargetElement.name3} but '
           'its toJson does not match `Map Function()`.',
           element: annotatedElement,
         );
@@ -226,15 +219,11 @@ represents the content of the collection must be in the same file.
         if (toJson != null) return '$value.toJson()';
         return '${generatedJsonTypePrefix}ToJson($value)';
       },
-      perFieldToJson: (field) =>
-          '${generatedJsonTypePrefix}PerFieldToJson.$field',
+      perFieldToJson: (field) => '${generatedJsonTypePrefix}PerFieldToJson.$field',
       idKey: collectionTargetElement
-          .allFields(
-            hasFreezed: hasFreezed,
-            freezedConstructors: redirectedFreezedConstructors,
-          )
+          .allFields(hasFreezed: hasFreezed, freezedConstructors: redirectedFreezedConstructors)
           .firstWhereOrNull((f) => f.hasId())
-          ?.name,
+          ?.name3,
       queryableFields: [
         QueryingField(
           'fieldPath',
@@ -277,34 +266,31 @@ represents the content of the collection must be in the same file.
   /// ```dart
   /// collection.orderByTitle(startAt: 'title');
   /// ```''',
-          annotatedElement.library!.typeProvider.objectType,
+          annotatedElement.library2!.typeProvider.objectType,
           field: 'fieldPath',
           updatable: false,
         ),
         QueryingField(
           'documentId',
-          annotatedElement.library!.typeProvider.stringType,
+          annotatedElement.library2!.typeProvider.stringType,
           whereDoc: '', // Inherited
           orderByDoc: '', // Inherited
           field: 'FieldPath.documentId',
           updatable: false,
         ),
         ...collectionTargetElement
-            .allFields(
-              hasFreezed: hasFreezed,
-              freezedConstructors: redirectedFreezedConstructors,
-            )
+            .allFields(hasFreezed: hasFreezed, freezedConstructors: redirectedFreezedConstructors)
             .where((f) => f.isPublic)
             .where((f) => !f.hasId())
             .where((f) => !f.isJsonIgnored())
             .map(
               (f) => QueryingField(
-                f.name,
+                f.name3!,
                 f.type,
                 whereDoc: '',
                 orderByDoc: '',
                 updatable: true,
-                field: "${generatedJsonTypePrefix}FieldMap['${f.name}']!",
+                field: "${generatedJsonTypePrefix}FieldMap['${f.name3}']!",
               ),
             )
             .toList(),
@@ -313,8 +299,7 @@ represents the content of the collection must be in the same file.
 
     final classPrefix = data.classPrefix;
 
-    if (globalData.classPrefixesForLibrary[annotatedElementSource]
-            ?.contains(classPrefix) ??
+    if (globalData.classPrefixesForLibrary[annotatedElementSource]?.contains(classPrefix) ??
         false) {
       throw InvalidGenerationSourceError(
         'Defined a collection with duplicate class prefix $classPrefix. '
@@ -323,13 +308,12 @@ represents the content of the collection must be in the same file.
     }
 
     globalData.classPrefixesForLibrary[annotatedElementSource] ??= [];
-    globalData.classPrefixesForLibrary[annotatedElementSource]!
-        .add(classPrefix);
+    globalData.classPrefixesForLibrary[annotatedElementSource]!.add(classPrefix);
 
     return data;
   }
 
-  static void _assertIsValidCollectionPath(String? path, Element element) {
+  static void _assertIsValidCollectionPath(String? path, Element2 element) {
     if (path == null) {
       throw InvalidGenerationSourceError(
         'The annotation @Collection received "$path" as collection path, '
@@ -377,8 +361,7 @@ represents the content of the collection must be in the same file.
     required String collectionTargetElementPublicType,
   }) {
     if (hasFreezed) {
-      final className =
-          redirectedFreezedClass?.public ?? collectionTargetElementPublicType;
+      final className = redirectedFreezedClass?.public ?? collectionTargetElementPublicType;
       // Only support freezed 3.x or higher
       return '_\$$className';
     } else {
@@ -395,10 +378,9 @@ represents the content of the collection must be in the same file.
   final String path;
   final String? idKey;
   final List<QueryingField> queryableFields;
-  final LibraryElement libraryElement;
+  final LibraryElement2 libraryElement;
 
-  late final updatableFields =
-      queryableFields.where((element) => element.updatable).toList();
+  late final updatableFields = queryableFields.where((element) => element.updatable).toList();
 
   CollectionData? _parent;
   CollectionData? get parent => _parent;
@@ -416,18 +398,18 @@ represents the content of the collection must be in the same file.
   }
 }
 
-extension on ClassElement {
-  Iterable<MethodElement> get allMethods sync* {
-    yield* methods;
+extension on ClassElement2 {
+  Iterable<MethodElement2> get allMethods sync* {
+    yield* methods2;
     for (final supertype in allSupertypes) {
       if (supertype.isDartCoreObject) continue;
-      yield* supertype.methods;
+      yield* supertype.methods2;
     }
   }
 
-  Iterable<VariableElement> allFields({
+  Iterable<VariableElement2> allFields({
     required bool hasFreezed,
-    required List<ConstructorElement> freezedConstructors,
+    required List<ConstructorElement2> freezedConstructors,
   }) {
     if (hasFreezed) {
       /// For Freezed 3.x,  support mixed mode classes. There can be the classic freezed way with a factory,
@@ -435,29 +417,26 @@ extension on ClassElement {
       ///
       /// We need to find the factory constructor, or the normal constructor if there is no factory.
       final factoryConstructor = freezedConstructors.firstWhereOrNull(
-        (ctor) =>
-            ctor.isFactory &&
-            !ctor.name.startsWith('_') &&
-            ctor.name != 'fromJson',
+        (ctor) => ctor.isFactory && !ctor.name3!.startsWith('_') && ctor.name3 != 'fromJson',
       );
       if (factoryConstructor == null) {
         // No factory constructor, use the normal constructor
-        return fields;
+        return fields2;
       }
-      return factoryConstructor.parameters;
+      return factoryConstructor.formalParameters;
     } else {
-      final uniqueFields = <String, FieldElement>{};
+      final uniqueFields = <String, FieldElement2>{};
 
-      final allFields = const <FieldElement>[].followedBy(fields).followedBy(
-            allSupertypes
-                .where((e) => !e.isDartCoreObject)
-                .expand((e) => e.element.fields),
+      final allFields = const <FieldElement2>[]
+          .followedBy(fields2)
+          .followedBy(
+            allSupertypes.where((e) => !e.isDartCoreObject).expand((e) => e.element3.fields2),
           );
 
       for (final field in allFields) {
-        if (field.getter != null && !field.getter!.isSynthetic) continue;
+        if (field.getter2 != null && !field.getter2!.isSynthetic) continue;
         if (field.isStatic) continue;
-        uniqueFields[field.name] ??= field;
+        uniqueFields[field.name3!] ??= field;
       }
       return uniqueFields.values;
     }
@@ -475,10 +454,9 @@ const _coreSetChecker = TypeChecker.fromUrl('dart:core#Set');
 
 extension DartTypeExtension on DartType {
   bool get isJsonDocumentReference {
-    return element?.librarySource?.uri.scheme == 'package' &&
-        const {'cloud_firestore'}
-            .contains(element?.librarySource?.uri.pathSegments.first) &&
-        element?.name == 'DocumentReference' &&
+    return element3?.library2?.uri.scheme == 'package' &&
+        const {'cloud_firestore'}.contains(element3?.library2?.uri.pathSegments.first) &&
+        element3?.name3 == 'DocumentReference' &&
         (this as InterfaceType).typeArguments.single.isDartCoreMap;
   }
 
@@ -500,9 +478,9 @@ extension DartTypeExtension on DartType {
   }
 }
 
-extension on Element {
+extension on Element2 {
   bool isJsonIgnored() {
-    const checker = TypeChecker.fromRuntime(JsonKey);
+    const checker = TypeChecker.typeNamed(JsonKey);
     final jsonKeys = checker.annotationsOf(this);
 
     for (final jsonKey in jsonKeys) {
@@ -511,7 +489,7 @@ extension on Element {
       // ignore is deprecated in favor of includeFromJson and includeToJson
       final jsonIncluded =
           (jsonKey.getField('includeFromJson')?.toBoolValue() ?? true) &&
-              (jsonKey.getField('includeToJson')?.toBoolValue() ?? true);
+          (jsonKey.getField('includeToJson')?.toBoolValue() ?? true);
       if (ignore || !jsonIncluded) {
         return true;
       }
@@ -521,7 +499,7 @@ extension on Element {
   }
 
   bool hasId() {
-    const checker = TypeChecker.fromRuntime(Id);
+    const checker = TypeChecker.typeNamed(Id);
     return checker.hasAnnotationOf(this);
   }
 }

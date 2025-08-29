@@ -19,23 +19,6 @@ class _Sentinel {
 
 const _sentinel = _Sentinel();
 
-/// Adds [namedBundleTest4Get] to [FirebaseFirestore].
-extension NamedBundleTest4Extrension on FirebaseFirestore {
-  /// Performs [FirebaseFirestore.namedQueryGet] and decode the result into
-  /// a [Conflict] snashot.
-  Future<ConflictQuerySnapshot> namedBundleTest4Get({
-    GetOptions options = const GetOptions(),
-  }) async {
-    final snapshot = await namedQueryWithConverterGet(
-      r'named-bundle-test-4',
-      fromFirestore: ConflictCollectionReference.fromFirestore,
-      toFirestore: ConflictCollectionReference.toFirestore,
-      options: options,
-    );
-    return ConflictQuerySnapshot._fromQuerySnapshot(snapshot);
-  }
-}
-
 /// A collection reference object can be used for adding documents,
 /// getting document references, and querying for documents
 /// (using the methods inherited from Query).
@@ -43,9 +26,8 @@ abstract class ConflictCollectionReference
     implements
         ConflictQuery,
         FirestoreCollectionReference<Conflict, ConflictQuerySnapshot> {
-  factory ConflictCollectionReference([
-    FirebaseFirestore? firestore,
-  ]) = _$ConflictCollectionReference;
+  factory ConflictCollectionReference([FirebaseFirestore? firestore]) =
+      _$ConflictCollectionReference;
 
   static Conflict fromFirestore(
     DocumentSnapshot<Map<String, Object?>> snapshot,
@@ -54,10 +36,7 @@ abstract class ConflictCollectionReference
     return _$ConflictFromJson(snapshot.data()!);
   }
 
-  static Map<String, Object?> toFirestore(
-    Conflict value,
-    SetOptions? options,
-  ) {
+  static Map<String, Object?> toFirestore(Conflict value, SetOptions? options) {
     return _$ConflictToJson(value);
   }
 
@@ -87,9 +66,8 @@ class _$ConflictCollectionReference extends _$ConflictQuery
     );
   }
 
-  _$ConflictCollectionReference._(
-    CollectionReference<Conflict> reference,
-  ) : super(reference, $referenceWithoutCursor: reference);
+  _$ConflictCollectionReference._(CollectionReference<Conflict> reference)
+    : super(reference, $referenceWithoutCursor: reference);
 
   String get path => reference.path;
 
@@ -103,9 +81,7 @@ class _$ConflictCollectionReference extends _$ConflictQuery
       id == null || id.split('/').length == 1,
       'The document ID cannot be from a different collection',
     );
-    return ConflictDocumentReference(
-      reference.doc(id),
-    );
+    return ConflictDocumentReference(reference.doc(id));
   }
 
   @override
@@ -191,10 +167,7 @@ abstract class ConflictDocumentReference
   /// document data.
   ///
   /// If no document exists yet, the update will fail.
-  Future<void> update({
-    num number,
-    FieldValue numberFieldValue,
-  });
+  Future<void> update({num number, FieldValue numberFieldValue});
 
   /// Updates fields in the current document using the transaction API.
   ///
@@ -208,11 +181,7 @@ abstract class ConflictDocumentReference
   /// Updates fields in the current document using the batch API.
   ///
   /// The update will fail if applied to a document that does not exist.
-  void batchUpdate(
-    WriteBatch batch, {
-    num number,
-    FieldValue numberFieldValue,
-  });
+  void batchUpdate(WriteBatch batch, {num number, FieldValue numberFieldValue});
 }
 
 class _$ConflictDocumentReference
@@ -309,8 +278,10 @@ class _$ConflictDocumentReference
     );
     final json = {
       if (number != _sentinel)
-        _$ConflictFieldMap['number']!:
-            _$ConflictPerFieldToJson.number(number as num),
+        _$ConflictFieldMap['number']!: _$ConflictPerFieldToJson.number(
+          number as num,
+        ),
+
       if (numberFieldValue != null)
         _$ConflictFieldMap['number']!: numberFieldValue,
     };
@@ -329,8 +300,10 @@ class _$ConflictDocumentReference
     );
     final json = {
       if (number != _sentinel)
-        _$ConflictFieldMap['number']!:
-            _$ConflictPerFieldToJson.number(number as num),
+        _$ConflictFieldMap['number']!: _$ConflictPerFieldToJson.number(
+          number as num,
+        ),
+
       if (numberFieldValue != null)
         _$ConflictFieldMap['number']!: numberFieldValue,
     };
@@ -349,8 +322,10 @@ class _$ConflictDocumentReference
     );
     final json = {
       if (number != _sentinel)
-        _$ConflictFieldMap['number']!:
-            _$ConflictPerFieldToJson.number(number as num),
+        _$ConflictFieldMap['number']!: _$ConflictPerFieldToJson.number(
+          number as num,
+        ),
+
       if (numberFieldValue != null)
         _$ConflictFieldMap['number']!: numberFieldValue,
     };
@@ -499,9 +474,9 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
     required Query<Conflict> $referenceWithoutCursor,
     $QueryCursor $queryCursor = const $QueryCursor(),
   }) : super(
-          $referenceWithoutCursor: $referenceWithoutCursor,
-          $queryCursor: $queryCursor,
-        );
+         $referenceWithoutCursor: $referenceWithoutCursor,
+         $queryCursor: $queryCursor,
+       );
 
   final CollectionReference<Object?> _collection;
 
@@ -564,7 +539,8 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
         arrayContainsAny: arrayContainsAny,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -596,7 +572,8 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
         isGreaterThanOrEqualTo: isGreaterThanOrEqualTo,
         whereIn: whereIn,
         whereNotIn: whereNotIn,
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -640,7 +617,8 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
             : null,
         whereIn: whereIn?.map((e) => _$ConflictPerFieldToJson.number(e)),
         whereNotIn: whereNotIn?.map((e) => _$ConflictPerFieldToJson.number(e)),
-        isNull: isNull ??
+        isNull:
+            isNull ??
             (isEqualTo == null ? false : null) ??
             (isNotEqualTo == null ? true : null),
       ),
@@ -661,8 +639,10 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
     ConflictDocumentSnapshot? endBeforeDocument,
     ConflictDocumentSnapshot? startAfterDocument,
   }) {
-    final query =
-        $referenceWithoutCursor.orderBy(fieldPath, descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      fieldPath,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -734,8 +714,10 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
     ConflictDocumentSnapshot? endBeforeDocument,
     ConflictDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(FieldPath.documentId,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      FieldPath.documentId,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -807,8 +789,10 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
     ConflictDocumentSnapshot? endBeforeDocument,
     ConflictDocumentSnapshot? startAfterDocument,
   }) {
-    final query = $referenceWithoutCursor.orderBy(_$ConflictFieldMap['number']!,
-        descending: descending);
+    final query = $referenceWithoutCursor.orderBy(
+      _$ConflictFieldMap['number']!,
+      descending: descending,
+    );
     var queryCursor = $queryCursor;
 
     if (startAtDocument != null) {
@@ -840,7 +824,7 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAt: [
           ...queryCursor.startAt,
-          _$ConflictPerFieldToJson.number(startAt as num)
+          _$ConflictPerFieldToJson.number(startAt as num),
         ],
         startAtDocumentSnapshot: null,
       );
@@ -849,7 +833,7 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         startAfter: [
           ...queryCursor.startAfter,
-          _$ConflictPerFieldToJson.number(startAfter as num)
+          _$ConflictPerFieldToJson.number(startAfter as num),
         ],
         startAfterDocumentSnapshot: null,
       );
@@ -858,7 +842,7 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endAt: [
           ...queryCursor.endAt,
-          _$ConflictPerFieldToJson.number(endAt as num)
+          _$ConflictPerFieldToJson.number(endAt as num),
         ],
         endAtDocumentSnapshot: null,
       );
@@ -867,7 +851,7 @@ class _$ConflictQuery extends QueryReference<Conflict, ConflictQuerySnapshot>
       queryCursor = queryCursor.copyWith(
         endBefore: [
           ...queryCursor.endBefore,
-          _$ConflictPerFieldToJson.number(endBefore as num)
+          _$ConflictPerFieldToJson.number(endBefore as num),
         ],
         endBeforeDocumentSnapshot: null,
       );
@@ -899,9 +883,7 @@ class ConflictDocumentSnapshot extends FirestoreDocumentSnapshot<Conflict> {
 
   @override
   ConflictDocumentReference get reference {
-    return ConflictDocumentReference(
-      snapshot.reference,
-    );
+    return ConflictDocumentReference(snapshot.reference);
   }
 
   @override
@@ -910,11 +892,7 @@ class ConflictDocumentSnapshot extends FirestoreDocumentSnapshot<Conflict> {
 
 class ConflictQuerySnapshot
     extends FirestoreQuerySnapshot<Conflict, ConflictQueryDocumentSnapshot> {
-  ConflictQuerySnapshot._(
-    this.snapshot,
-    this.docs,
-    this.docChanges,
-  );
+  ConflictQuerySnapshot._(this.snapshot, this.docs, this.docChanges);
 
   factory ConflictQuerySnapshot._fromQuerySnapshot(
     QuerySnapshot<Conflict> snapshot,
@@ -922,21 +900,14 @@ class ConflictQuerySnapshot
     final docs = snapshot.docs.map(ConflictQueryDocumentSnapshot._).toList();
 
     final docChanges = snapshot.docChanges.map((change) {
-      return _decodeDocumentChange(
-        change,
-        ConflictDocumentSnapshot._,
-      );
+      return _decodeDocumentChange(change, ConflictDocumentSnapshot._);
     }).toList();
 
-    return ConflictQuerySnapshot._(
-      snapshot,
-      docs,
-      docChanges,
-    );
+    return ConflictQuerySnapshot._(snapshot, docs, docChanges);
   }
 
   static FirestoreDocumentChange<ConflictDocumentSnapshot>
-      _decodeDocumentChange<T>(
+  _decodeDocumentChange<T>(
     DocumentChange<T> docChange,
     ConflictDocumentSnapshot Function(DocumentSnapshot<T> doc) decodeDoc,
   ) {
@@ -978,13 +949,10 @@ class ConflictQueryDocumentSnapshot
 // JsonSerializableGenerator
 // **************************************************************************
 
-Conflict _$ConflictFromJson(Map<String, dynamic> json) => Conflict(
-      json['number'] as num,
-    );
+Conflict _$ConflictFromJson(Map<String, dynamic> json) =>
+    Conflict(json['number'] as num);
 
-const _$ConflictFieldMap = <String, String>{
-  'number': 'number',
-};
+const _$ConflictFieldMap = <String, String>{'number': 'number'};
 
 // ignore: unused_element
 abstract class _$ConflictPerFieldToJson {
@@ -993,5 +961,5 @@ abstract class _$ConflictPerFieldToJson {
 }
 
 Map<String, dynamic> _$ConflictToJson(Conflict instance) => <String, dynamic>{
-      'number': instance.number,
-    };
+  'number': instance.number,
+};

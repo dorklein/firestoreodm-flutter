@@ -35,11 +35,7 @@ class Model {
   final String value;
 }
 
-enum TestEnum {
-  one,
-  two,
-  three;
-}
+enum TestEnum { one, two, three }
 
 @JsonSerializable()
 class Nested {
@@ -85,8 +81,7 @@ final nestedRef = NestedCollectionReference();
 class EmptyModel {
   EmptyModel();
 
-  factory EmptyModel.fromJson(Map<String, dynamic> json) =>
-      _$EmptyModelFromJson(json);
+  factory EmptyModel.fromJson(Map<String, dynamic> json) => _$EmptyModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmptyModelToJson(this);
 }
@@ -136,8 +131,7 @@ final optionalJsonRef = OptionalJsonCollectionReference();
 class MixedJson {
   MixedJson(this.value);
 
-  factory MixedJson.fromJson(Map<String, Object?> json) =>
-      MixedJson(json['foo']! as int);
+  factory MixedJson.fromJson(Map<String, Object?> json) => MixedJson(json['foo']! as int);
 
   final int value;
 
@@ -163,8 +157,7 @@ class Sub {
 class CustomSubName {
   CustomSubName(this.value);
 
-  factory CustomSubName.fromJson(Map<String, Object?> json) =>
-      _$CustomSubNameFromJson(json);
+  factory CustomSubName.fromJson(Map<String, Object?> json) => _$CustomSubNameFromJson(json);
 
   final num value;
 
@@ -175,8 +168,7 @@ class CustomSubName {
 class AsCamelCase {
   AsCamelCase(this.value);
 
-  factory AsCamelCase.fromJson(Map<String, Object?> json) =>
-      _$AsCamelCaseFromJson(json);
+  factory AsCamelCase.fromJson(Map<String, Object?> json) => _$AsCamelCaseFromJson(json);
 
   final num value;
 
@@ -199,18 +191,14 @@ class CustomClassPrefix {
 @Collection<Sub>('root/*/sub')
 @Collection<AsCamelCase>('root/*/as-camel-case')
 @Collection<CustomSubName>('root/*/custom-sub-name', name: 'thisIsACustomName')
-@Collection<CustomClassPrefix>(
-  'root/*/custom-class-prefix',
-  prefix: 'ThisIsACustomPrefix',
-)
+@Collection<CustomClassPrefix>('root/*/custom-class-prefix', prefix: 'ThisIsACustomPrefix')
 final rootRef = RootCollectionReference();
 
 @JsonSerializable()
 class ExplicitPath {
   ExplicitPath(this.value);
 
-  factory ExplicitPath.fromJson(Map<String, Object?> json) =>
-      _$ExplicitPathFromJson(json);
+  factory ExplicitPath.fromJson(Map<String, Object?> json) => _$ExplicitPathFromJson(json);
 
   final num value;
 
@@ -221,8 +209,7 @@ class ExplicitPath {
 class ExplicitSubPath {
   ExplicitSubPath(this.value);
 
-  factory ExplicitSubPath.fromJson(Map<String, Object?> json) =>
-      _$ExplicitSubPathFromJson(json);
+  factory ExplicitSubPath.fromJson(Map<String, Object?> json) => _$ExplicitSubPathFromJson(json);
 
   final num value;
 
@@ -244,8 +231,7 @@ abstract class BaseClass {
 class SubClass extends BaseClass {
   SubClass(super.instanceGetter);
 
-  factory SubClass.fromJson(Map<String, Object?> json) =>
-      _$SubClassFromJson(json);
+  factory SubClass.fromJson(Map<String, Object?> json) => _$SubClassFromJson(json);
 
   Map<String, Object?> toJson() => _$SubClassToJson(this);
 }

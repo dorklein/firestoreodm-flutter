@@ -27,25 +27,28 @@ abstract class Person with _$Person {
 final personRef = PersonCollectionReference();
 
 @Collection<PublicRedirected>('freezed-test')
+final publicRedirectedRef = PublicRedirectedCollectionReference();
+
 @freezed
 abstract class PublicRedirected with _$PublicRedirected {
   factory PublicRedirected({required String value}) = PublicRedirected2;
 
-  factory PublicRedirected.fromJson(Map<String, Object?> json) =>
-      _$PublicRedirectedFromJson(json);
+  factory PublicRedirected.fromJson(Map<String, Object?> json) => _$PublicRedirectedFromJson(json);
 }
 
 /// Freezed 3.x mixed mode
 ///
 /// Simple classes
-@Collection<SimpleFreezed>('freezed-test')
 @freezed
 @JsonSerializable()
 class SimpleFreezed with _$SimpleFreezed {
-  SimpleFreezed({required this.a});
-  final int a;
+  const SimpleFreezed({required this.a});
+  factory SimpleFreezed.fromJson(Map<String, Object?> json) => _$SimpleFreezedFromJson(json);
 
-  factory SimpleFreezed.fromJson(Map<String, Object?> json) =>
-      _$SimpleFreezedFromJson(json);
+  @override
+  final int a;
   Map<String, Object?> toJson() => _$SimpleFreezedToJson(this);
 }
+
+@Collection<SimpleFreezed>('freezed-test')
+final simpleFreezedRef = SimpleFreezedCollectionReference();

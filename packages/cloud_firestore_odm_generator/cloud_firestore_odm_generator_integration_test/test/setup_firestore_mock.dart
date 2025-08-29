@@ -18,9 +18,6 @@ void setupFirestoreMocks() {
 
 class MockFirebasePlatform extends FirebasePlatform {
   @override
-  bool get isAutomaticDataCollectionEnabled => true;
-
-  @override
   Future<FirebaseAppPlatform> initializeApp({
     String? name,
     FirebaseOptions? options,
@@ -37,13 +34,14 @@ class MockFirebasePlatform extends FirebasePlatform {
 class MockFirebaseAppPlatform extends FirebaseAppPlatform {
   MockFirebaseAppPlatform()
       : super(
-            defaultFirebaseAppName,
-            const FirebaseOptions(
-              apiKey: 'mock-api-key',
-              appId: 'mock-app-id',
-              messagingSenderId: 'mock-sender-id',
-              projectId: 'mock-project-id',
-            ));
+          defaultFirebaseAppName,
+          const FirebaseOptions(
+            apiKey: 'mock-api-key',
+            appId: 'mock-app-id',
+            messagingSenderId: 'mock-sender-id',
+            projectId: 'mock-project-id',
+          ),
+        );
 
   @override
   String get name => defaultFirebaseAppName;
