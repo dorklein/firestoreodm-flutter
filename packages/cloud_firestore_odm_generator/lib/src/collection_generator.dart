@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:cloud_firestore_odm/annotation.dart';
@@ -63,13 +63,12 @@ class GlobalData {
 }
 
 @immutable
-class CollectionGenerator
-    extends ParserGenerator<GlobalData, CollectionGraph, Collection<Object?>> {
+class CollectionGenerator extends ParserGenerator<Collection<Object?>> {
   @override
-  GlobalData parseGlobalData(LibraryElement2 library) {
+  GlobalData parseGlobalData(LibraryElement element) {
     final globalData = GlobalData();
 
-    for (final element in library.topLevelVariables) {
+    for (final element in element.topLevelVariables) {
       for (final queryAnnotation in namedQueryChecker.annotationsOf(element)) {
         final queryData = NamedQueryData.fromAnnotation(queryAnnotation);
 
@@ -99,14 +98,14 @@ class CollectionGenerator
   Future<CollectionGraph> parseElement(
     BuildStep buildStep,
     GlobalData globalData,
-    Element2 element,
+    Element element,
   ) async {
-    final library = await buildStep.inputLibrary;
+    final libraryElement = await buildStep.inputLibrary;
     final collectionAnnotations = collectionChecker.annotationsOf(element).map((annotation) {
       return CollectionData.fromAnnotation(
         annotatedElement: element,
         globalData: globalData,
-        libraryElement: library,
+        libraryElement: libraryElement,
         annotation: annotation,
       );
     }).toList();

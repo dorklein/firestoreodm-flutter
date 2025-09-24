@@ -4,7 +4,7 @@
 
 import 'dart:async';
 
-import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -14,19 +14,17 @@ class ValidatorGenerator extends Generator {
     final buffer = StringBuffer();
 
     for (final classElement in library.classes) {
-      final validations = classElement.fields2.expand<String>((field) sync* {
-        final validators = field.metadata2.annotations.where(isValidatorAnnotation);
+      final validations = classElement.fields.expand<String>((field) sync* {
+        final validators = field.metadata.annotations.where(isValidatorAnnotation);
 
         for (final validator in validators) {
-          yield "${validator.toSource().replaceFirst('@', 'const ')}.validate(instance.${field.name3}, '${field.name3}');";
+          yield "${validator.toSource().replaceFirst('@', 'const ')}.validate(instance.${field.name}, '${field.name}');";
         }
       }).toList();
 
       if (validations.isNotEmpty) {
         buffer
-          ..write(
-            'void _\$assert${classElement.name3}(${classElement.name3} instance) {',
-          )
+          ..write('void _\$assert${classElement.name}(${classElement.name} instance) {')
           ..writeAll(validations)
           ..write('}');
       }
@@ -37,12 +35,12 @@ class ValidatorGenerator extends Generator {
 }
 
 bool isValidatorAnnotation(ElementAnnotation annotation) {
-  final element = annotation.element2;
-  if (element == null || element is! ConstructorElement2) return false;
+  final element = annotation.element;
+  if (element == null || element is! ConstructorElement) return false;
 
-  return element.enclosingElement2.allSupertypes.any((superType) {
-    return superType.element3.name3 == 'Validator' &&
-        superType.element3.library2.uri.toString() ==
+  return element.enclosingElement.allSupertypes.any((superType) {
+    return superType.element.name == 'Validator' &&
+        superType.element.library.uri.toString() ==
             'package:cloud_firestore_odm/src/validator.dart';
   });
 }

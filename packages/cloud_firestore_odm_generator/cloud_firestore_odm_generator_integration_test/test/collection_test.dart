@@ -12,26 +12,14 @@ void main() {
   setUpAll(setupFirestoreMocks);
 
   test('can specify @Collection on the model itself', () {
-    expect(
-      ModelCollectionReference().path,
-      'root',
-    );
+    expect(ModelCollectionReference().path, 'root');
   });
 
   group('orderBy', () {
     testWidgets('applies `descending`', (tester) async {
-      expect(
-        rootRef.orderByNullable(descending: true),
-        rootRef.orderByNullable(descending: true),
-      );
-      expect(
-        rootRef.orderByNullable(descending: true),
-        isNot(rootRef.orderByNullable()),
-      );
-      expect(
-        rootRef.orderByNullable(),
-        rootRef.orderByNullable(),
-      );
+      expect(rootRef.orderByNullable(descending: true), rootRef.orderByNullable(descending: true));
+      expect(rootRef.orderByNullable(descending: true), isNot(rootRef.orderByNullable()));
+      expect(rootRef.orderByNullable(), rootRef.orderByNullable());
     });
   });
 
@@ -39,14 +27,8 @@ void main() {
     test('asserts that the path does not point to a separate collection', () async {
       rootRef.doc('42');
 
-      expect(
-        () => rootRef.doc('42/123'),
-        throwsAssertionError,
-      );
-      expect(
-        () => rootRef.doc('42/123/456'),
-        throwsAssertionError,
-      );
+      expect(() => rootRef.doc('42/123'), throwsAssertionError);
+      expect(() => rootRef.doc('42/123/456'), throwsAssertionError);
     });
   });
 

@@ -27,6 +27,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 
 // This doesn't exist yet...! See "Next Steps"
+part 'user.firebase.dart';
 part 'user.g.dart';
 
 /// A custom JsonSerializable annotation that supports decoding objects such

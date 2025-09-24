@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'movie.firebase.dart';
 part 'movie.g.dart';
 
 @JsonSerializable()
@@ -44,10 +45,7 @@ final moviesRef = MovieCollectionReference();
 
 @JsonSerializable()
 class Comment {
-  Comment({
-    required this.authorName,
-    required this.message,
-  });
+  Comment({required this.authorName, required this.message});
 
   final String authorName;
   final String message;

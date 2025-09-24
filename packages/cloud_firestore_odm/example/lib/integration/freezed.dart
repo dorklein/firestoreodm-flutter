@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'freezed.firebase.dart';
 part 'freezed.freezed.dart';
 part 'freezed.g.dart';
 
@@ -31,6 +32,5 @@ final personRef = PersonCollectionReference();
 abstract class PublicRedirected with _$PublicRedirected {
   factory PublicRedirected({required String value}) = PublicRedirected2;
 
-  factory PublicRedirected.fromJson(Map<String, Object?> json) =>
-      _$PublicRedirectedFromJson(json);
+  factory PublicRedirected.fromJson(Map<String, Object?> json) => _$PublicRedirectedFromJson(json);
 }

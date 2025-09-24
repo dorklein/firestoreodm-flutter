@@ -1,3 +1,6 @@
+## 2.0.0
+- **BREAKING**: Must include a "part '<FILENAME>.firebase.dart';" instead of just part "'<FILENAME>.g.dart';". This is because of compatibilty with Riverpod ^3.
+
 ## 1.3.0
 - **CHORE**: upgraded packages to support analyzer ^8 and min sdk to 3.8.0
 

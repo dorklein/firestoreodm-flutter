@@ -1,7 +1,16 @@
 targets:
   $default:
     builders:
+      freezed:
+        enabled: true
+      cloud_firestore_odm_generator:
+        enabled: true
       json_serializable:
+        enabled: true
         options:
           create_field_map: true
           create_per_field_to_json: true
+      riverpod_generator:
+        enabled: true
+        options:
+          # Riverpod generator options can be configured here if needed

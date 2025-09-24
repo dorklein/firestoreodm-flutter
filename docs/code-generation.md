@@ -22,12 +22,13 @@ generated code:
 dart run build_runner watch --delete-conflicting-outputs
 ```
 
-This will generate files with the postfix of `.g.dart`, corresponding to the
+This will generate files with the postfix of `.firebase.dart`, corresponding to the
 file name of your model. For example:
 
 - A model is defined within a file named `product.dart`.
-- Code generation will create a file in the same directory named `product.g.dart`.
-- Within the `product.dart` file, apply the part declaration (`part 'product.g.dart'`).
+- Code generation will create a file in the same directory named `product.firebase.dart`.
+- Within the `product.dart` file, apply the part declaration (`part 'product.firebase.dart'`).
+- You should also have a `.g.dart` for the json serilizer (`part 'product.g.dart'`).
 
 ## Next steps
 

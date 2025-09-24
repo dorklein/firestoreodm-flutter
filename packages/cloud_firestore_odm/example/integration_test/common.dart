@@ -9,14 +9,10 @@ import 'package:cloud_firestore_odm_example/movie.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mockito/mockito.dart';
 
-Future<T> initializeTest<T extends FirestoreCollectionReference<Object?, Object?>>(
-  T ref,
-) async {
+Future<T> initializeTest<T extends FirestoreCollectionReference<Object?, Object?>>(T ref) async {
   final snapshot = await ref.reference.get();
 
-  await Future.wait<void>(
-    snapshot.docs.map((e) => e.reference.delete()),
-  );
+  await Future.wait<void>(snapshot.docs.map((e) => e.reference.delete()));
 
   return ref;
 }

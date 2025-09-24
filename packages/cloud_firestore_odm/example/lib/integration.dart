@@ -6,14 +6,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore_odm/cloud_firestore_odm.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+part 'integration.firebase.dart';
 part 'integration.g.dart';
 
 @JsonSerializable()
 class EmptyModel {
   EmptyModel();
 
-  factory EmptyModel.fromJson(Map<String, dynamic> json) =>
-      _$EmptyModelFromJson(json);
+  factory EmptyModel.fromJson(Map<String, dynamic> json) => _$EmptyModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$EmptyModelToJson(this);
 }
