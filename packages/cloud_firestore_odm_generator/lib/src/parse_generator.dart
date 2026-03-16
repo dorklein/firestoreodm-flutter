@@ -15,6 +15,9 @@ abstract class ParserGenerator<AnnotationT> extends GeneratorForAnnotation<Annot
   @override
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     final element = library.element;
+    final superGenerated = await super.generate(library, buildStep);
+    if (superGenerated.trim().isEmpty) return '';
+
     final generationBuffer = StringBuffer();
     // A set used to remove duplicate generations. This is for scenarios where
     // two annotations within the library want to generate the same code
@@ -28,7 +31,6 @@ abstract class ParserGenerator<AnnotationT> extends GeneratorForAnnotation<Annot
       }
     }
 
-    final superGenerated = await super.generate(library, buildStep);
     return '$generationBuffer\n\n$superGenerated';
   }
 

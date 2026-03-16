@@ -1,3 +1,6 @@
+## 2.0.1
+- **FIX**: Avoid printing missing `.firebase.dart` part warnings for unrelated libraries when the generator has no ODM output.
+
 ## 2.0.0
 - **BREAKING**: Must include a "part '<FILENAME>.firebase.dart';" instead of just part "'<FILENAME>.g.dart';". This is because of compatibilty with Riverpod ^3.
 

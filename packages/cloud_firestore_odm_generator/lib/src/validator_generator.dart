@@ -30,6 +30,8 @@ class ValidatorGenerator extends Generator {
       }
     }
 
+    if (buffer.isEmpty) return null;
+
     return buffer.toString();
   }
 }
