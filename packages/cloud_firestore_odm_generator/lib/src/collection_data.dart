@@ -126,11 +126,11 @@ class CollectionData with Names {
     }
 
     final hasFreezed = freezedChecker.hasAnnotationOf(collectionTargetElement);
-    final redirectedFreezedConstructors = collectionTargetElement.constructors2.where((element) {
+    final redirectedFreezedConstructors = collectionTargetElement.constructors.where((element) {
       return element.isFactory &&
           // It should be safe to read "redirectedConstructor" as the build.yaml
           // asks to run the ODM after Freezed
-          element.redirectedConstructor2 != null;
+          element.redirectedConstructor != null;
     }).toList();
 
     final hasJsonSerializable = jsonSerializableChecker.hasAnnotationOf(collectionTargetElement);
@@ -168,7 +168,7 @@ represents the content of the collection must be in the same file.
     }
 
     final collectionTargetElementPublicType = collectionTargetElement.name?.public ?? '';
-    final fromJson = collectionTargetElement.constructors2.firstWhereOrNull(
+    final fromJson = collectionTargetElement.constructors.firstWhereOrNull(
       (ctor) => ctor.name == 'fromJson',
     );
     if (fromJson != null) {
@@ -188,7 +188,7 @@ represents the content of the collection must be in the same file.
         .allMethods
         .firstWhereOrNull((method) => method.name == 'toJson');
     final redirectedFreezedClass =
-        redirectedFreezedConstructors.singleOrNull?.redirectedConstructor2!.enclosingElement.name;
+        redirectedFreezedConstructors.singleOrNull?.redirectedConstructor!.enclosingElement.name;
     final generatedJsonTypePrefix = _generatedJsonTypePrefix(
       hasFreezed: hasFreezed,
       redirectedFreezedClass: redirectedFreezedClass,
@@ -399,10 +399,10 @@ represents the content of the collection must be in the same file.
 
 extension on ClassElement {
   Iterable<MethodElement> get allMethods sync* {
-    yield* methods2;
+    yield* methods;
     for (final supertype in allSupertypes) {
       if (supertype.isDartCoreObject) continue;
-      yield* supertype.methods2;
+      yield* supertype.methods;
     }
   }
 
@@ -420,20 +420,20 @@ extension on ClassElement {
       );
       if (factoryConstructor == null) {
         // No factory constructor, use the normal constructor
-        return fields2;
+        return fields;
       }
       return factoryConstructor.formalParameters;
     } else {
       final uniqueFields = <String, FieldElement>{};
 
       final allFields = const <FieldElement>[]
-          .followedBy(fields2)
+          .followedBy(fields)
           .followedBy(
-            allSupertypes.where((e) => !e.isDartCoreObject).expand((e) => e.element.fields2),
+            allSupertypes.where((e) => !e.isDartCoreObject).expand((e) => e.element.fields),
           );
 
       for (final field in allFields) {
-        if (field.getter2 != null && !field.getter2!.isSynthetic) continue;
+        if (field.getter != null && !field.getter!.isSynthetic) continue;
         if (field.isStatic) continue;
         uniqueFields[field.name!] ??= field;
       }

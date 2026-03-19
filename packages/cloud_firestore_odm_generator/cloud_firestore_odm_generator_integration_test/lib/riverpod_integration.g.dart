@@ -137,7 +137,7 @@ Map<String, dynamic> _$PersonToJson(_Person instance) => <String, dynamic>{
 /// Riverpod provider for user profiles collection
 
 @ProviderFor(userProfilesCollection)
-const userProfilesCollectionProvider = UserProfilesCollectionProvider._();
+final userProfilesCollectionProvider = UserProfilesCollectionProvider._();
 
 /// Riverpod provider for user profiles collection
 
@@ -145,7 +145,7 @@ final class UserProfilesCollectionProvider
     extends $FunctionalProvider<_$Person, _$Person, _$Person>
     with $Provider<_$Person> {
   /// Riverpod provider for user profiles collection
-  const UserProfilesCollectionProvider._()
+  UserProfilesCollectionProvider._()
     : super(
         from: null,
         argument: null,
@@ -184,7 +184,7 @@ String _$userProfilesCollectionHash() =>
 /// Riverpod provider for a specific user profile
 
 @ProviderFor(userProfile)
-const userProfileProvider = UserProfileFamily._();
+final userProfileProvider = UserProfileFamily._();
 
 /// Riverpod provider for a specific user profile
 
@@ -197,7 +197,7 @@ final class UserProfileProvider
         >
     with $FutureModifier<UserProfile?>, $StreamProvider<UserProfile?> {
   /// Riverpod provider for a specific user profile
-  const UserProfileProvider._({
+  UserProfileProvider._({
     required UserProfileFamily super.from,
     required String super.argument,
   }) : super(
@@ -247,7 +247,7 @@ String _$userProfileHash() => r'cb26738228ef2c452d5c2b231f6898251f9af62b';
 
 final class UserProfileFamily extends $Family
     with $FunctionalFamilyOverride<Stream<UserProfile?>, String> {
-  const UserProfileFamily._()
+  UserProfileFamily._()
     : super(
         retry: null,
         name: r'userProfileProvider',
@@ -268,7 +268,7 @@ final class UserProfileFamily extends $Family
 /// Riverpod provider for all user profiles
 
 @ProviderFor(allUserProfiles)
-const allUserProfilesProvider = AllUserProfilesProvider._();
+final allUserProfilesProvider = AllUserProfilesProvider._();
 
 /// Riverpod provider for all user profiles
 
@@ -283,7 +283,7 @@ final class AllUserProfilesProvider
         $FutureModifier<List<UserProfile>>,
         $StreamProvider<List<UserProfile>> {
   /// Riverpod provider for all user profiles
-  const AllUserProfilesProvider._()
+  AllUserProfilesProvider._()
     : super(
         from: null,
         argument: null,
@@ -314,7 +314,7 @@ String _$allUserProfilesHash() => r'd835ea11db48e7bac7a438884a6d55ad47844ac0';
 /// Riverpod provider for posts by author
 
 @ProviderFor(postsByAuthor)
-const postsByAuthorProvider = PostsByAuthorFamily._();
+final postsByAuthorProvider = PostsByAuthorFamily._();
 
 /// Riverpod provider for posts by author
 
@@ -327,7 +327,7 @@ final class PostsByAuthorProvider
         >
     with $FutureModifier<List<Post>>, $StreamProvider<List<Post>> {
   /// Riverpod provider for posts by author
-  const PostsByAuthorProvider._({
+  PostsByAuthorProvider._({
     required PostsByAuthorFamily super.from,
     required String super.argument,
   }) : super(
@@ -376,7 +376,7 @@ String _$postsByAuthorHash() => r'd5b51c409a22865278b51231c0ccf9a37747a71e';
 
 final class PostsByAuthorFamily extends $Family
     with $FunctionalFamilyOverride<Stream<List<Post>>, String> {
-  const PostsByAuthorFamily._()
+  PostsByAuthorFamily._()
     : super(
         retry: null,
         name: r'postsByAuthorProvider',
@@ -397,7 +397,7 @@ final class PostsByAuthorFamily extends $Family
 /// Riverpod provider for recent posts
 
 @ProviderFor(recentPosts)
-const recentPostsProvider = RecentPostsFamily._();
+final recentPostsProvider = RecentPostsFamily._();
 
 /// Riverpod provider for recent posts
 
@@ -410,7 +410,7 @@ final class RecentPostsProvider
         >
     with $FutureModifier<List<Post>>, $StreamProvider<List<Post>> {
   /// Riverpod provider for recent posts
-  const RecentPostsProvider._({
+  RecentPostsProvider._({
     required RecentPostsFamily super.from,
     required String super.argument,
   }) : super(
@@ -459,7 +459,7 @@ String _$recentPostsHash() => r'84d6adf0820593b072f217342208cf7310809d81';
 
 final class RecentPostsFamily extends $Family
     with $FunctionalFamilyOverride<Stream<List<Post>>, String> {
-  const RecentPostsFamily._()
+  RecentPostsFamily._()
     : super(
         retry: null,
         name: r'recentPostsProvider',
@@ -480,13 +480,13 @@ final class RecentPostsFamily extends $Family
 /// Riverpod provider for app settings
 
 @ProviderFor(AppSettingsNotifier)
-const appSettingsProvider = AppSettingsNotifierProvider._();
+final appSettingsProvider = AppSettingsNotifierProvider._();
 
 /// Riverpod provider for app settings
 final class AppSettingsNotifierProvider
     extends $NotifierProvider<AppSettingsNotifier, AppSettings> {
   /// Riverpod provider for app settings
-  const AppSettingsNotifierProvider._()
+  AppSettingsNotifierProvider._()
     : super(
         from: null,
         argument: null,
@@ -523,7 +523,6 @@ abstract class _$AppSettingsNotifier extends $Notifier<AppSettings> {
   @$mustCallSuper
   @override
   void runBuild() {
-    final created = build();
     final ref = this.ref as $Ref<AppSettings, AppSettings>;
     final element =
         ref.element
@@ -533,6 +532,6 @@ abstract class _$AppSettingsNotifier extends $Notifier<AppSettings> {
               Object?,
               Object?
             >;
-    element.handleValue(ref, created);
+    element.handleCreate(ref, build);
   }
 }

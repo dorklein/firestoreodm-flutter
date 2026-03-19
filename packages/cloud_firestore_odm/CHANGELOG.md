@@ -1,3 +1,6 @@
+## 2.0.2
+- **CHORE**: Publish the stable runtime package needed by the analyzer ^9 compatible generator release. No runtime API changes.
+
 ## 2.0.0
 - **BREAKING**: Must include a "part '<FILENAME>.firebase.dart';" instead of just part "'<FILENAME>.g.dart';". This is because of compatibilty with Riverpod ^3.
 

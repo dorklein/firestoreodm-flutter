@@ -1,3 +1,7 @@
+## 2.0.2
+- **FIX**: Restore compatibility with `analyzer: ^9.0.0` by migrating away from removed analyzer element APIs.
+- **CHORE**: Keep local monorepo development working against the sibling `cloud_firestore_odm` package while preserving a publishable pub.dev dependency constraint.
+
 ## 2.0.1
 - **FIX**: Avoid printing missing `.firebase.dart` part warnings for unrelated libraries when the generator has no ODM output.
 
