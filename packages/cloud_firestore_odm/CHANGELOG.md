@@ -1,3 +1,6 @@
+## 2.0.3
+- **CHORE**: Publish a coordinated release with the analyzer `^10.0.0` compatible generator. No runtime API changes.
+
 ## 2.0.2
 - **CHORE**: Publish the stable runtime package needed by the analyzer ^9 compatible generator release. No runtime API changes.
 

@@ -6,7 +6,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^6.0.0
-  cloud_firestore_odm: ^2.0.2
+  cloud_firestore_odm: ^2.0.3
   flutter:
     sdk: flutter
   flutter_riverpod: 3.3.1
@@ -30,6 +30,36 @@ dev_dependencies:
 dependency_overrides:
   cloud_firestore_odm:
     path: ../../cloud_firestore_odm
+  flutter_riverpod:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/flutter_riverpod
+  hooks_riverpod:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/hooks_riverpod
+  riverpod_analyzer_utils:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/riverpod_analyzer_utils
+  riverpod_annotation:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/riverpod_annotation
+  riverpod_generator:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/riverpod_generator
+  riverpod_sqflite:
+    git:
+      url: https://github.com/rrousselGit/riverpod.git
+      ref: analyzer10
+      path: packages/riverpod_sqflite
   test_api: ^0.7.7
 
 flutter:

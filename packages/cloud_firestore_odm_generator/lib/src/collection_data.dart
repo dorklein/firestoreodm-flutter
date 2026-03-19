@@ -433,7 +433,7 @@ extension on ClassElement {
           );
 
       for (final field in allFields) {
-        if (field.getter != null && !field.getter!.isSynthetic) continue;
+        if (field.getter != null && field.getter!.isOriginDeclaration) continue;
         if (field.isStatic) continue;
         uniqueFields[field.name!] ??= field;
       }

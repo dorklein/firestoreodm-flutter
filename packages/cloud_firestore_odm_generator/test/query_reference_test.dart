@@ -21,19 +21,19 @@ import 'simple.dart';
 
 void main() {
   ignoredGetterRef.whereValue();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   ignoredGetterRef.whereCount();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   ignoredGetterRef.whereCount2();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   ignoredGetterRef.whereCount3();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   ignoredGetterRef.whereHashCode();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   ignoredGetterRef.whereStaticGetter();
 
   subClassRef.whereInstanceGetter();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   subClassRef.whereStaticGetter();
 }
 ''',
@@ -49,22 +49,22 @@ void main() {
 import 'simple.dart';
 
 void main() {
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNullable(startAt: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNullable(startAfter: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNullable(endAt: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNullable(endBefore: true);
 
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNonNullable(startAt: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNonNullable(startAfter: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNonNullable(endAt: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.limit(0).orderByNonNullable(endBefore: null);
 }
 ''',
@@ -85,12 +85,12 @@ void main() {
 
   personRef.doc('42').update(firstName: 'foo');
   personRef.doc('42')
-    // expect-error: UNDEFINED_NAMED_PARAMETER
+    // expect-error: undefined_named_parameter
     .update(ignored: 42);
 
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   personRef.orderByIgnored();
-  // expect-error: UNDEFINED_METHOD
+  // expect-error: undefined_method
   personRef.whereIgnored();
 }
 ''',

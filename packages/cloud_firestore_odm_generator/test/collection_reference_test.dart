@@ -20,7 +20,7 @@ Future<void> main() async {
 import 'simple.dart';
 
 void main() {
-  // expect-error: UNDEFINED_GETTER
+  // expect-error: undefined_getter
   rootRef.parent;
 }
 ''',
@@ -36,22 +36,22 @@ void main() {
 import 'simple.dart';
 
 void main() {
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNullable(startAt: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNullable(startAfter: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNullable(endAt: true);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNullable(endBefore: true);
 
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNonNullable(startAt: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNonNullable(startAfter: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNonNullable(endAt: null);
-  // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+  // expect-error: argument_type_not_assignable
   rootRef.orderByNonNullable(endBefore: null);
 }
 ''',

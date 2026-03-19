@@ -22,14 +22,14 @@ import 'simple.dart';
 void main() {
   nestedRef.whereValue();
   nestedRef.whereSimple(
-    // expect-error: UNDEFINED_NAMED_PARAMETER
+    // expect-error: undefined_named_parameter
     arrayContains: null,
   );
   nestedRef.whereValueList();
 
   nestedRef.whereNumList(arrayContains: 42);
   nestedRef.whereNumList(
-    // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+    // expect-error: argument_type_not_assignable
     arrayContains: 'string',
   );
 }
@@ -90,19 +90,19 @@ void main() {
     nullable: 42,
   );
   rootRef.doc('42').update(
-    // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+    // expect-error: argument_type_not_assignable
     nullable: 'string',
   );
 
   rootRef.doc('42').update(
-    // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+    // expect-error: argument_type_not_assignable
     nonNullable: null,
   );
   rootRef.doc('42').update(
     nonNullable: '42',
   );
   rootRef.doc('42').update(
-    // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+    // expect-error: argument_type_not_assignable
     nonNullable: 42,
   );
 }
@@ -126,7 +126,7 @@ void main() {
   rootRef.doc('42').set(root);
 
   rootRef.doc('42')
-    // expect-error: ARGUMENT_TYPE_NOT_ASSIGNABLE
+    // expect-error: argument_type_not_assignable
     .set(42);
 }
 ''',
