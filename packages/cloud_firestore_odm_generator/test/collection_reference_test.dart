@@ -20,7 +20,7 @@ Future<void> main() async {
 import 'simple.dart';
 
 void main() {
-  // expect-error: undefined_getter
+  // expect-error: undefined_instance_member_read
   rootRef.parent;
 }
 ''',

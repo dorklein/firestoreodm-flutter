@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // coverage:ignore-file
-// ignore_for_file: type=lint
+// ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'freezed.dart';
@@ -9,6 +9,7 @@ part of 'freezed.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// GENERATED CODE - DO NOT MODIFY BY HAND
 // dart format off
 T _$identity<T>(T value) => value;
 
@@ -28,16 +29,21 @@ $PersonCopyWith<Person> get copyWith => _$PersonCopyWithImpl<Person>(this as Per
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Person&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.ignored, ignored) || other.ignored == ignored));
+  final _this = this as Person;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Person&&(identical(other.firstName, _this.firstName) || other.firstName == _this.firstName)&&(identical(other.lastName, _this.lastName) || other.lastName == _this.lastName)&&(identical(other.ignored, _this.ignored) || other.ignored == _this.ignored));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,ignored);
+int get hashCode {
+  final _this = this as Person;
+  return Object.hash(runtimeType,_this.firstName,_this.lastName,_this.ignored);
+}
 
 @override
 String toString() {
-  return 'Person(firstName: $firstName, lastName: $lastName, ignored: $ignored)';
+  final _this = this as Person;
+  return 'Person(firstName: ${_this.firstName}, lastName: ${_this.lastName}, ignored: ${_this.ignored})';
 }
 
 
@@ -66,7 +72,7 @@ class _$PersonCopyWithImpl<$Res>
 /// Create a copy of Person
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? firstName = null,Object? lastName = null,Object? ignored = freezed,}) {
-  return _then(_self.copyWith(
+  return _then(Person(
 firstName: null == firstName ? _self.firstName : firstName // ignore: cast_nullable_to_non_nullable
 as String,lastName: null == lastName ? _self.lastName : lastName // ignore: cast_nullable_to_non_nullable
 as String,ignored: freezed == ignored ? _self.ignored : ignored // ignore: cast_nullable_to_non_nullable
@@ -231,16 +237,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Person&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.ignored, ignored) || other.ignored == ignored));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Person&&(identical(other.firstName, firstName) || other.firstName == firstName)&&(identical(other.lastName, lastName) || other.lastName == lastName)&&(identical(other.ignored, ignored) || other.ignored == ignored));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,firstName,lastName,ignored);
+int get hashCode {
+    return Object.hash(runtimeType,firstName,lastName,ignored);
+}
 
 @override
 String toString() {
-  return 'Person(firstName: $firstName, lastName: $lastName, ignored: $ignored)';
+    return 'Person(firstName: $firstName, lastName: $lastName, ignored: $ignored)';
 }
 
 
@@ -304,16 +312,21 @@ $PublicRedirectedCopyWith<PublicRedirected> get copyWith => _$PublicRedirectedCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicRedirected&&(identical(other.value, value) || other.value == value));
+  final _this = this as PublicRedirected;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicRedirected&&(identical(other.value, _this.value) || other.value == _this.value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode {
+  final _this = this as PublicRedirected;
+  return Object.hash(runtimeType,_this.value);
+}
 
 @override
 String toString() {
-  return 'PublicRedirected(value: $value)';
+  final _this = this as PublicRedirected;
+  return 'PublicRedirected(value: ${_this.value})';
 }
 
 
@@ -342,7 +355,7 @@ class _$PublicRedirectedCopyWithImpl<$Res>
 /// Create a copy of PublicRedirected
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? value = null,}) {
-  return _then(_self.copyWith(
+  return _then(PublicRedirected(
 value: null == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -503,16 +516,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicRedirected2&&(identical(other.value, value) || other.value == value));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PublicRedirected2&&(identical(other.value, value) || other.value == value));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,value);
+int get hashCode {
+    return Object.hash(runtimeType,value);
+}
 
 @override
 String toString() {
-  return 'PublicRedirected(value: $value)';
+    return 'PublicRedirected(value: $value)';
 }
 
 
@@ -554,7 +569,7 @@ as String,
 /// @nodoc
 mixin _$SimpleFreezed {
 
- int get a;
+
 /// Create a copy of SimpleFreezed
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -565,16 +580,21 @@ $SimpleFreezedCopyWith<SimpleFreezed> get copyWith => _$SimpleFreezedCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SimpleFreezed&&(identical(other.a, a) || other.a == a));
+  final _this = this as SimpleFreezed;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SimpleFreezed&&(identical(other.a, _this.a) || other.a == _this.a));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,a);
+int get hashCode {
+  final _this = this as SimpleFreezed;
+  return Object.hash(runtimeType,_this.a);
+}
 
 @override
 String toString() {
-  return 'SimpleFreezed(a: $a)';
+  final _this = this as SimpleFreezed;
+  return 'SimpleFreezed(a: ${_this.a})';
 }
 
 
