@@ -1,3 +1,7 @@
+## 2.0.4
+- **FEAT**: Support `analyzer` 13 and 14 (`>=10.0.0 <15.0.0`) and `build` 5 (`>=4.0.0 <6.0.0`).
+- **CHORE**: Move integration fixtures and the example to pub.dev releases of Riverpod, Freezed 4 and json_serializable, and update `expect-error` codes for analyzer 14.6's `undefined_instance_member_read`.
+
 ## 2.0.3
 - **FEAT**: Support `analyzer: ^10.0.0`.
 - **CHORE**: Update generator tests and local Riverpod integration fixtures for analyzer 10 compatibility.

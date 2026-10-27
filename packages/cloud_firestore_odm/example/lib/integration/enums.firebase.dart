@@ -1100,9 +1100,9 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
               )
             : null,
         arrayContains: arrayContains != null
-            ? (_$EnumsPerFieldToJson.enumList([arrayContains as TestEnum])
-                      as List?)!
-                  .single
+            ? (_$EnumsPerFieldToJson.enumList([
+                arrayContains as TestEnum,
+              ]) as List?)!.single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$EnumsPerFieldToJson.enumList(arrayContainsAny)
@@ -1165,10 +1165,8 @@ class _$EnumsQuery extends QueryReference<Enums, EnumsQuerySnapshot>
             : null,
         arrayContains: arrayContains != null
             ? (_$EnumsPerFieldToJson.nullableEnumList([
-                        arrayContains as TestEnum,
-                      ])
-                      as List?)!
-                  .single
+                arrayContains as TestEnum,
+              ]) as List?)!.single
             : null,
         arrayContainsAny: arrayContainsAny != null
             ? _$EnumsPerFieldToJson.nullableEnumList(arrayContainsAny)

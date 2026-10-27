@@ -21,19 +21,19 @@ import 'simple.dart';
 
 void main() {
   ignoredGetterRef.whereValue();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   ignoredGetterRef.whereCount();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   ignoredGetterRef.whereCount2();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   ignoredGetterRef.whereCount3();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   ignoredGetterRef.whereHashCode();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   ignoredGetterRef.whereStaticGetter();
 
   subClassRef.whereInstanceGetter();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   subClassRef.whereStaticGetter();
 }
 ''',
@@ -88,9 +88,9 @@ void main() {
     // expect-error: undefined_named_parameter
     .update(ignored: 42);
 
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   personRef.orderByIgnored();
-  // expect-error: undefined_method
+  // expect-error: undefined_instance_member_read
   personRef.whereIgnored();
 }
 ''',
